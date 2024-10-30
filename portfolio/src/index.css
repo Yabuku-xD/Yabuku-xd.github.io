@@ -73,10 +73,3 @@ code {
 .bgtext h1{
   margin: 0%;
 }
-
-.gif{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Center the GIF */
-}

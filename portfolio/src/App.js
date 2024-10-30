@@ -13,7 +13,7 @@ function App() {
       <div className="bgtext">
         <h1>Shyamalan</h1>
         <h1>Kannan</h1>
-        <img src= "https://github.com/Yabuku-xD/Yabuku-xd.github.io/blob/main/portfolio/src/assets/me.gif" alt="ME" />
+        <img src= "https://github.com/Yabuku-xD/Yabuku-xd.github.io/blob/main/portfolio/src/assets/me.gif"/>
       </div>
     </>
   );
