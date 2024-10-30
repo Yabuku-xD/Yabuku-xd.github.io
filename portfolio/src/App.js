@@ -1,6 +1,7 @@
 import './App.css';
 import Image from './assets/me.gif';
 import BG from './assets/bg.png';
+import React from 'react';
 
 function App() {
   return (
