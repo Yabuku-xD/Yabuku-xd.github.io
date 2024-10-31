@@ -27,6 +27,7 @@ code {
   align-items: center;
   border-bottom: 3px solid black;
   border-top: 3px solid black;
+  padding: 5px 0 5px 0;
 }
 
 .navbar a{
