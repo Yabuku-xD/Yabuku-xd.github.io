@@ -26,8 +26,8 @@ function App() {
               <div className="main">
                 <p>
                   On a mission to crack the code hidden within data, I thrive as both a data scientist and a machine learning engineer.
-                  I love the thrill of the hunt – uncovering those hidden gems of insight and using them to build real-world solutions that make a difference.
-                  If you're looking for someone who can bridge the gap between technical expertise and visual storytelling, let's connect!
+                  I love the thrill of the hunt * uncovering those hidden gems of insight and using them to build real-world solutions that make a difference.
+                  If you're looking for someone who can bridge the gap between technical expertise and visual storytelling, let's connect*
                 </p>
                 <img src={Image} alt="ME" />
               </div>
