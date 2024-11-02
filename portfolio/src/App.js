@@ -5,7 +5,6 @@ import Contact from './pages/Contact'
 import Experiences from './pages/Experiences'
 import Projects from './pages/Projects'
 import Front from './assets/front.png'
-import BG from './assets/bg.png'
 
 function App() {
   return (
