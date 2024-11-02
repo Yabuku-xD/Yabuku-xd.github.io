@@ -1,35 +1,40 @@
 import './App.css';
-import Image from './assets/me.gif';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import About from './pages/About';
 import Contact from './pages/Contact'
 import Experiences from './pages/Experiences'
 import Projects from './pages/Projects'
+import Front from './assets/front.png'
 
 function App() {
   return (
     <BrowserRouter>
-      <nav className="navbar">
+    <nav className='navv'>
+      <div className='seek'>
+        <p>Shyamalan Kannan</p>
+      </div>
+      <div className='link'>
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
         <Link to="/experiences">Experiences</Link>
         <Link to="/projects">Projects</Link>
-        <Link to="/contact">
-          <button>Contact</button>
-        </Link>
-      </nav>
-      
+        <Link to="/contact">Contact</Link>
+      </div>
+    </nav>
       <Routes>
         <Route path="/" element={
             <>
-              <h1 className="name">Shyamalan Kannan*</h1>
-              <div className="main">
-                <p>
-                  On a mission to crack the code hidden within data, I thrive as both a data scientist and a machine learning engineer.
-                  I love the thrill of the hunt* uncovering those hidden gems of insight and using them to build real-world solutions that make a difference.
-                  If you're looking for someone who can bridge the gap between technical expertise and visual storytelling, let's connect*
-                </p>
-                <img src={Image} alt="ME" />
+              <div className='whole'>
+              <h1 className='txt1'>Driven</h1>
+              <div className='txt2-whole'>
+                <h1 className='txt2'>by self*</h1>
+                <img src={Front} alt="art" />
+              </div>
+              <h1 className='txt3'>Blind</h1>
+              </div>
+              <div className='bod'>
+                <p>Seattle University 2024//2026</p>
+                <p>(01/05)</p>
               </div>
             </>
           }
