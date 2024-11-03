@@ -25,12 +25,12 @@ function App() {
         <Route path="/" element={
             <>
               <div className='whole'>
-              <h1 className='txt1'>Driven</h1>
-              <div className='txt2-whole'>
-                <h1 className='txt2'>by self*</h1>
+                <h1 className='txt1'>Driven</h1>
+                <div className='txt2-whole'>
+                  <h1 className='txt2'>by self*</h1>
                 <img src={Front} alt="art" />
               </div>
-              <h1 className='txt3'>Blind</h1>
+                <h1 className='txt3'>Blind</h1>
               </div>
               <div className='bod'>
                 <p>Seattle University 2024//2026</p>
