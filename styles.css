@@ -283,10 +283,16 @@ img {
 }
 
 .header__tagline {
-  margin-top: 1rem;
+  margin-top: 0.9rem;
   font-size: 1rem;
-  max-width: 320px;
+  line-height: 1.6;
+  max-width: 460px;
   color: var(--color-text);
+  text-wrap: pretty;
+}
+
+.header__tagline + .header__tagline {
+  margin-top: 0.4rem;
 }
 
 .nav {
@@ -584,15 +590,15 @@ img {
 
 .writing-card {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0 1rem;
+  grid-template-columns: 84px 1fr;
+  gap: 0.2rem 1rem;
   padding: 1rem 1.25rem;
   border-radius: 0.75rem;
   border: 1px solid transparent;
   transition: all var(--transition-default);
   text-decoration: none;
   color: inherit;
-  align-items: baseline;
+  align-items: start;
 }
 
 .writing-card:hover {
@@ -611,8 +617,11 @@ img {
 .writing-card__year {
   font-size: 0.75rem;
   font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--color-text-muted);
   white-space: nowrap;
+  padding-top: 0.2rem;
 }
 
 .writing-card__title {
@@ -636,7 +645,8 @@ img {
   grid-column: 2;
   font-size: 0.8rem;
   color: var(--color-text-muted);
-  margin-top: 0.25rem;
+  margin-top: 0;
+  line-height: 1.5;
 }
 
 .skills-group {
@@ -812,6 +822,19 @@ img {
   }
 }
 
+/* Keep education/certification cards compact; avoid oversized date gutter */
+#education .experience-card,
+#certifications .experience-card {
+  grid-template-columns: 1fr;
+  gap: 0.35rem 1rem;
+}
+
+#education .experience-card__date,
+#certifications .experience-card__date {
+  padding-top: 0;
+  margin-bottom: 0.15rem;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -866,5 +889,15 @@ button:focus-visible {
 
   .header__tagline {
     max-width: 100%;
+  }
+
+  .writing-card {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+    align-items: start;
+  }
+
+  .writing-card__source {
+    grid-column: auto;
   }
 }
