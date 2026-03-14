@@ -214,6 +214,7 @@ initMiniGame();
   function updateTimeline() {
     const sectionRect = experienceSection.getBoundingClientRect();
     const windowHeight = window.innerHeight;
+    const isCompactViewport = window.innerWidth <= 768;
     
     // Compress the reveal window so the section completes earlier
     const sectionTop = sectionRect.top;
@@ -221,8 +222,11 @@ initMiniGame();
     
     // Start just before the section fully enters the viewport and
     // finish around the time the middle/lower portion is in view.
-    const startOffset = windowHeight * 0.92;
-    const scrollRange = Math.max(sectionHeight * 0.65, windowHeight * 0.4);
+    const startOffset = windowHeight * (isCompactViewport ? 0.98 : 0.92);
+    const scrollRange = Math.max(
+      sectionHeight * (isCompactViewport ? 0.48 : 0.65),
+      windowHeight * (isCompactViewport ? 0.28 : 0.4)
+    );
     const currentScroll = startOffset - sectionTop;
     
     const progress = Math.max(0, Math.min(1, currentScroll / scrollRange));
@@ -232,9 +236,11 @@ initMiniGame();
     
     // Reveal items based on progress (only add, never remove)
     expItems.forEach((item, index) => {
+      const thresholdStart = isCompactViewport ? 0.08 : 0.15;
+      const thresholdSpread = isCompactViewport ? 0.42 : 0.55;
       const itemThreshold = expItems.length === 1
-        ? 0.15
-        : 0.15 + (index / (expItems.length - 1)) * 0.55;
+        ? thresholdStart
+        : thresholdStart + (index / (expItems.length - 1)) * thresholdSpread;
 
       if (progress >= itemThreshold) {
         item.classList.add('is-visible');

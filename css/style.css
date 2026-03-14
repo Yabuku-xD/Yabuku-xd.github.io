@@ -1383,6 +1383,10 @@ footer p {
     gap: var(--space-sm);
   }
 
+  .experience__list {
+    gap: var(--space-lg);
+  }
+
   .skill-item {
     padding: var(--space-sm);
   }
@@ -1532,6 +1536,7 @@ footer p {
 
   /* Experience items */
   .experience__list {
+    gap: var(--space-md);
     padding-left: 25px;
   }
   
