@@ -215,17 +215,14 @@ initMiniGame();
     const sectionRect = experienceSection.getBoundingClientRect();
     const windowHeight = window.innerHeight;
     
-    // Calculate progress based on how far the section has been scrolled
-    // 0 = section just entering from bottom
-    // 1 = section fully scrolled past
+    // Compress the reveal window so the section completes earlier
     const sectionTop = sectionRect.top;
     const sectionHeight = sectionRect.height;
     
-    // Start animation when section top reaches 80% of viewport
-    // End animation when section bottom reaches 20% of viewport
-    const startOffset = windowHeight * 0.8;
-    const endOffset = windowHeight * 0.2;
-    const scrollRange = sectionHeight + startOffset - endOffset;
+    // Start just before the section fully enters the viewport and
+    // finish around the time the middle/lower portion is in view.
+    const startOffset = windowHeight * 0.92;
+    const scrollRange = Math.max(sectionHeight * 0.65, windowHeight * 0.4);
     const currentScroll = startOffset - sectionTop;
     
     const progress = Math.max(0, Math.min(1, currentScroll / scrollRange));
@@ -235,7 +232,10 @@ initMiniGame();
     
     // Reveal items based on progress (only add, never remove)
     expItems.forEach((item, index) => {
-      const itemThreshold = (index + 0.5) / expItems.length;
+      const itemThreshold = expItems.length === 1
+        ? 0.15
+        : 0.15 + (index / (expItems.length - 1)) * 0.55;
+
       if (progress >= itemThreshold) {
         item.classList.add('is-visible');
       }
@@ -256,4 +256,3 @@ initMiniGame();
   
   observer.observe(experienceSection);
 })();
-

@@ -953,7 +953,7 @@ section {
   position: relative;
   opacity: 0.3;
   transform: translateX(-10px);
-  transition: opacity 0.4s ease, transform 0.3s ease;
+  transition: opacity 0.22s ease-out, transform 0.22s var(--ease-expo-out);
   z-index: 1;
 }
 
