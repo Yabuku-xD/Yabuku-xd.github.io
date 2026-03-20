@@ -77,10 +77,10 @@ const miniTerminalOutput = document.getElementById('miniTerminalOutput');
 
 const miniCommands = {
   help: 'Commands: about, skills, contact, hire, joke',
-  about: 'Shyamalan Kannan - Software Engineer\nSeattle University M.S. CS \'26',
-  skills: 'Python, Django, React, SQL, Docker',
-  contact: 'shyamalankannan@gmail.com',
-  hire: 'Open to Junior SWE/SDE-1 roles!',
+  about: 'Shyamalan Kannan - Software Engineer\nM.S. Computer Science (Data Science), Seattle University \'26',
+  skills: 'Python, Rust, Django, FastAPI, React, Next.js, SQL, Docker',
+  contact: 'shyamalankannan@gmail.com | (206) 837-3570',
+  hire: 'Open to Junior SWE / SDE-1 roles. Seattle-based and relocation ready.',
   joke: () => ['Why do programmers prefer dark mode? Light attracts bugs!', 'I would tell you a UDP joke but you might not get it.'][Math.floor(Math.random() * 2)]
 };
 
