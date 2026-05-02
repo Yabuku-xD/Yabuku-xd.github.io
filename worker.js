@@ -64,23 +64,12 @@ export default {
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const data = await res.json();
-        const genreCount = {};
-        data.items.forEach(a => {
-          a.genres.forEach(g => {
-            genreCount[g] = (genreCount[g] || 0) + 1;
-          });
-        });
-        const topGenre = Object.entries(genreCount)
-          .sort((a, b) => b[1] - a[1])[0]?.[0] || 'varied';
-        return Response.json({
-          artists: data.items.map(a => ({
-            name: a.name,
-            image: a.images[1]?.url,
-            genres: a.genres,
-            url: a.external_urls.spotify,
-          })),
-          topGenre,
-        }, { headers });
+        return Response.json(data.items.map(a => ({
+          name: a.name,
+          image: a.images[1]?.url,
+          genres: a.genres,
+          url: a.external_urls.spotify,
+        })), { headers });
       }
 
       if (url.pathname === '/api/spotify/recently-played') {
