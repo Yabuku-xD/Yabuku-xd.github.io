@@ -1,0 +1,20 @@
+#!/bin/bash
+DIR="$(cd "$(dirname "$0")" && pwd)"
+PORT=${1:-8080}
+
+echo "Serving from: $DIR"
+echo "Open: http://localhost:$PORT"
+echo "Press Ctrl+C to stop"
+
+python3 -m http.server "$PORT" --directory "$DIR" 2>/dev/null || python3 -c "
+import http.server, socketserver, os, webbrowser
+os.chdir('$DIR')
+port = $PORT
+handler = http.server.SimpleHTTPRequestHandler
+# Fix for Next.js static export: serve .html files without extension
+class Handler(handler):
+    pass
+with socketserver.TCPServer(('', port), Handler) as httpd:
+    print(f'Serving at http://localhost:{port}')
+    httpd.serve_forever()
+"
