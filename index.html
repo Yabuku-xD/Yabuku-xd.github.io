@@ -352,7 +352,7 @@ section.reveal.visible, hr.reveal.visible, article.reveal.visible {
                                         <div class="border-b border-border border-dashed"></div>
                                         <div>
                                             <div class="text-sm text-secondary mb-2">top artists</div>
-                                            <div id="spotify-top-artists" class="flex gap-2 flex-wrap">
+                                            <div id="spotify-top-artists" class="grid grid-cols-5 gap-1">
                                                 <div class="text-sm text-secondary animate-pulse">loading...</div>
                                             </div>
                                         </div>
@@ -444,8 +444,8 @@ section.reveal.visible, hr.reveal.visible, article.reveal.visible {
             var h = '';
             artists.slice(0,5).forEach(function(a) {
                 h += '<a href="'+a.url+'" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-1 group hover:opacity-80 transition-opacity shrink-0">'
-                    + '<img src="'+a.image+'" alt="" width="40" height="40" class="w-10 h-10 rounded-full object-cover group-hover:scale-105 transition-transform" loading="lazy" />'
-                    + '<span class="text-xs text-foreground text-center max-w-[60px] truncate">'+esc(a.name)+'</span></a>';
+                    + '<img src="'+a.image+'" alt="" width="36" height="36" class="w-9 h-9 rounded-full object-cover group-hover:scale-105 transition-transform" loading="lazy" />'
+                    + '<span class="text-[10px] text-foreground text-center max-w-[48px] truncate leading-tight">'+esc(a.name)+'</span></a>';
             });
             ta.innerHTML = h;
         }
@@ -472,7 +472,8 @@ section.reveal.visible, hr.reveal.visible, article.reveal.visible {
                     fetch('/api/spotify/top-tracks?range=short_term').then(function(r) { return r.ok ? r.json() : null; }),
                 ]);
 
-                if (topArtists && topArtists.artists && topArtists.artists.length) renderArtists(topArtists.artists);
+                var artistList = Array.isArray(topArtists) ? topArtists : (topArtists && topArtists.artists);
+                if (artistList && artistList.length) renderArtists(artistList);
                 else fail('spotify-top-artists', 'unavailable');
 
                 if (topTracks && topTracks.length) renderTracks(topTracks);

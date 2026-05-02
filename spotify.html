@@ -34,6 +34,10 @@
   from { opacity: 0; filter: blur(8px); transform: translateY(20px); }
   to { opacity: 1; filter: blur(0); transform: translateY(0); }
 }
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
 section.reveal, hr.reveal, article.reveal {
   animation: fadeReveal 0.7s ease-out forwards;
   animation-play-state: paused;
@@ -131,13 +135,13 @@ section.reveal.visible, hr.reveal.visible, article.reveal.visible {
 
         function renderNowPlaying(data) {
             var indicator = data.isPlaying
-                ? '<span class="inline-flex items-center gap-1.5 text-xs text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>now playing</span>'
+                ? '<span class="inline-flex items-center gap-1.5 text-xs text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span><span class="animate-blink">now playing</span></span>'
                 : '<span class="text-xs text-secondary">last played</span>';
             np.innerHTML = '<a href="'+data.songUrl+'" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 hover:opacity-80 transition-opacity group">'
                 + '<img src="'+data.albumArt+'" alt="" width="64" height="64" class="w-16 h-16 flex-shrink-0 rounded object-cover group-hover:scale-105 transition-transform" loading="lazy" />'
                 + '<div class="min-w-0"><div class="text-sm font-medium text-foreground truncate">'+esc(data.title)+'</div>'
-                + '<div class="text-xs text-secondary truncate mt-0.5">'+esc(data.artist)+'</div>'
-                + indicator+'</div></a>';
+                + '<div class="flex items-center gap-2 text-xs text-secondary truncate mt-0.5"><span>'+esc(data.artist)+'</span>'
+                + indicator+'</div></div></a>';
         }
 
         function renderRecentlyPlayed(tracks) {
@@ -152,16 +156,38 @@ section.reveal.visible, hr.reveal.visible, article.reveal.visible {
             rp.innerHTML = h;
         }
 
-        function renderStats(topArtists, recentlyPlayed) {
-            var totalMs = 0;
-            (recentlyPlayed || []).forEach(function(t) { if (t.duration) totalMs += t.duration; });
-            var totalMins = Math.round(totalMs / 60000);
+        function renderStats(recentlyPlayed) {
+            if (!recentlyPlayed || !recentlyPlayed.length) {
+                st.innerHTML = '<div class="text-sm text-secondary">no recent data.</div>';
+                return;
+            }
 
-            var topGenre = (topArtists && topArtists.topGenre) ? topArtists.topGenre : 'n/a';
+            var totalMs = recentlyPlayed.reduce(function(s, t) { return s + (t.duration || 0); }, 0);
+            var totalH = Math.floor(totalMs / 3600000);
+            var totalM = Math.round((totalMs % 3600000) / 60000);
+            var timeStr = totalH > 0 ? totalH+'h '+totalM+'m' : totalM+'m';
 
-            var h = '<div class="grid grid-cols-2 gap-4">'
-                + '<div class="flex flex-col gap-1"><span class="text-xs text-secondary">top genre</span><span class="text-sm text-foreground">'+esc(topGenre)+'</span></div>'
-                + '<div class="flex flex-col gap-1"><span class="text-xs text-secondary">total mins (recent)</span><span class="text-sm text-foreground">'+totalMins+'m</span></div>'
+            var totalTracks = recentlyPlayed.length;
+            var uniqueTracks = new Set(recentlyPlayed.map(function(t) { return t.name; })).size;
+            var avgLen = Math.round(totalMs / totalTracks / 60000 * 10) / 10;
+
+            var uniqueArtists = new Set(recentlyPlayed.map(function(t) { return t.artist; })).size;
+
+            var artistCount = {};
+            recentlyPlayed.forEach(function(t) { artistCount[t.artist] = (artistCount[t.artist] || 0) + 1; });
+            var fav = Object.entries(artistCount).sort(function(a, b) { return b[1] - a[1]; })[0][0];
+
+            var trackCount = {};
+            recentlyPlayed.forEach(function(t) { trackCount[t.name] = (trackCount[t.name] || 0) + 1; });
+            var replays = Object.entries(trackCount).sort(function(a, b) { return b[1] - a[1]; })[0][1];
+
+            var h = '<div class="grid grid-cols-2 gap-x-4 gap-y-3">'
+                + '<div class="flex flex-col gap-1"><span class="text-lg font-medium text-foreground">'+timeStr+'</span><span class="text-xs text-secondary">listened recently</span></div>'
+                + '<div class="flex flex-col gap-1"><span class="text-sm font-medium text-foreground">'+totalTracks+' <span class="text-xs text-secondary font-normal">tracks</span></span><span class="text-xs text-secondary">'+uniqueTracks+' unique</span></div>'
+                + '<div class="flex flex-col gap-1"><span class="text-sm font-medium text-foreground">~'+avgLen+'m</span><span class="text-xs text-secondary">avg length</span></div>'
+                + '<div class="flex flex-col gap-1"><span class="text-sm font-medium text-foreground">'+uniqueArtists+'</span><span class="text-xs text-secondary">artists explored</span></div>'
+                + '<div class="flex flex-col gap-1"><span class="text-sm font-medium text-foreground truncate">'+esc(fav)+'</span><span class="text-xs text-secondary">fav artist</span></div>'
+                + '<div class="flex flex-col gap-1"><span class="text-sm font-medium text-foreground">'+replays+'</span><span class="text-xs text-secondary">top replay</span></div>'
                 + '</div>';
             st.innerHTML = h;
         }
@@ -184,7 +210,7 @@ section.reveal.visible, hr.reveal.visible, article.reveal.visible {
                 if (recentlyPlayed && recentlyPlayed.length) renderRecentlyPlayed(recentlyPlayed);
                 else fail('spotify-recently-played', 'no recent data.');
 
-                renderStats(topArtists, recentlyPlayed);
+                renderStats(recentlyPlayed);
             } catch(e) {
                 fail('spotify-now-playing', 'spotify unavailable right now.');
                 fail('spotify-recently-played', '');
