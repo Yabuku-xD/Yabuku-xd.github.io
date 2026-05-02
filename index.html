@@ -468,12 +468,11 @@ section.reveal.visible, hr.reveal.visible, article.reveal.visible {
         async function loadData() {
             try {
                 var [topArtists, topTracks] = await Promise.all([
-                    fetch('/api/spotify/top-artists?range=short_term').then(function(r) { return r.ok ? r.json() : null; }),
+                    fetch('/api/spotify/top-artists?range=short_term').then(function(r) { return r.ok ? r.json().then(function(d) { return d.artists || d; }) : null; }),
                     fetch('/api/spotify/top-tracks?range=short_term').then(function(r) { return r.ok ? r.json() : null; }),
                 ]);
 
-                var artistList = Array.isArray(topArtists) ? topArtists : (topArtists && topArtists.artists);
-                if (artistList && artistList.length) renderArtists(artistList);
+                if (topArtists && topArtists.length) renderArtists(topArtists);
                 else fail('spotify-top-artists', 'unavailable');
 
                 if (topTracks && topTracks.length) renderTracks(topTracks);
