@@ -472,7 +472,7 @@ section.reveal.visible, hr.reveal.visible, article.reveal.visible {
                     fetch('/api/spotify/top-tracks?range=short_term').then(function(r) { return r.ok ? r.json() : null; }),
                 ]);
 
-                if (topArtists && topArtists.length) renderArtists(topArtists);
+                if (topArtists && topArtists.artists && topArtists.artists.length) renderArtists(topArtists.artists);
                 else fail('spotify-top-artists', 'unavailable');
 
                 if (topTracks && topTracks.length) renderTracks(topTracks);

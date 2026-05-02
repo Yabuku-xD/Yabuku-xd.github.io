@@ -152,20 +152,16 @@ section.reveal.visible, hr.reveal.visible, article.reveal.visible {
             rp.innerHTML = h;
         }
 
-        function renderStats(topArtists, topTracks) {
-            var totalMins = 0;
-            (topTracks || []).forEach(function(t) { if (t.duration) totalMins += t.duration; });
-            totalMins = Math.round(totalMins / 60000);
+        function renderStats(topArtists, recentlyPlayed) {
+            var totalMs = 0;
+            (recentlyPlayed || []).forEach(function(t) { if (t.duration) totalMs += t.duration; });
+            var totalMins = Math.round(totalMs / 60000);
 
-            var topGenre = '';
-            (topArtists || []).some(function(a) {
-                if (a.genres && a.genres.length) { topGenre = a.genres[0]; return true; }
-                return false;
-            });
+            var topGenre = (topArtists && topArtists.topGenre) ? topArtists.topGenre : 'n/a';
 
             var h = '<div class="grid grid-cols-2 gap-4">'
-                + '<div class="flex flex-col gap-1"><span class="text-xs text-secondary">top genre</span><span class="text-sm text-foreground">'+(topGenre || 'n/a')+'</span></div>'
-                + '<div class="flex flex-col gap-1"><span class="text-xs text-secondary">total mins (top 10)</span><span class="text-sm text-foreground">'+totalMins+'m</span></div>'
+                + '<div class="flex flex-col gap-1"><span class="text-xs text-secondary">top genre</span><span class="text-sm text-foreground">'+esc(topGenre)+'</span></div>'
+                + '<div class="flex flex-col gap-1"><span class="text-xs text-secondary">total mins (recent)</span><span class="text-sm text-foreground">'+totalMins+'m</span></div>'
                 + '</div>';
             st.innerHTML = h;
         }
@@ -188,7 +184,7 @@ section.reveal.visible, hr.reveal.visible, article.reveal.visible {
                 if (recentlyPlayed && recentlyPlayed.length) renderRecentlyPlayed(recentlyPlayed);
                 else fail('spotify-recently-played', 'no recent data.');
 
-                renderStats(topArtists, topTracks);
+                renderStats(topArtists, recentlyPlayed);
             } catch(e) {
                 fail('spotify-now-playing', 'spotify unavailable right now.');
                 fail('spotify-recently-played', '');

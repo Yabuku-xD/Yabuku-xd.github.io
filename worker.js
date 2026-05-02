@@ -64,17 +64,28 @@ export default {
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const data = await res.json();
-        return Response.json(data.items.map(a => ({
-          name: a.name,
-          image: a.images[1]?.url,
-          genres: a.genres,
-          url: a.external_urls.spotify,
-        })), { headers });
+        const genreCount = {};
+        data.items.forEach(a => {
+          a.genres.forEach(g => {
+            genreCount[g] = (genreCount[g] || 0) + 1;
+          });
+        });
+        const topGenre = Object.entries(genreCount)
+          .sort((a, b) => b[1] - a[1])[0]?.[0] || 'varied';
+        return Response.json({
+          artists: data.items.map(a => ({
+            name: a.name,
+            image: a.images[1]?.url,
+            genres: a.genres,
+            url: a.external_urls.spotify,
+          })),
+          topGenre,
+        }, { headers });
       }
 
       if (url.pathname === '/api/spotify/recently-played') {
         const res = await fetch(
-          'https://api.spotify.com/v1/me/player/recently-played?limit=8',
+          'https://api.spotify.com/v1/me/player/recently-played?limit=50',
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const data = await res.json();
@@ -83,6 +94,7 @@ export default {
           artist: track.artists.map(a => a.name).join(', '),
           albumArt: track.album.images[2]?.url,
           url: track.external_urls.spotify,
+          duration: track.duration_ms,
         })), { headers });
       }
     }
