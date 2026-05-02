@@ -9,12 +9,12 @@
     <meta name="description" content="Currently playing and recent favorites from my Spotify. Live music stats." />
     <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
-    <link rel="canonical" href="bookshelf.html" />
+    <link rel="canonical" href="spotify.html" />
     <meta property="og:title" content="listening | Shyamalan Kannan" />
     <meta property="og:description" content="Currently playing and recent favorites from my Spotify. Live music stats." />
     <meta property="og:image:alt" content="listening" />
     <meta property="og:image:type" content="image/png" />
-    <meta property="og:image" content="https://shyamalankannan.com/bookshelf/opengraph-image?f82053a64fd3cf0e" />
+    <meta property="og:image" content="https://shyamalankannan.com/spotify/opengraph-image?f82053a64fd3cf0e" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:type" content="website" />
@@ -67,7 +67,7 @@ section.reveal.visible, hr.reveal.visible, article.reveal.visible {
                     </div>
                     <div class="flex flex-col gap-3 max-w-prose">
                         <h1 class="text-foreground font-medium text-base">what i&#x27;m listening to.</h1>
-                        <p class="text-secondary text-sm">currently playing and recent favorites, live from my spotify.</p>
+                        <p class="text-secondary text-sm">live from my spotify.</p>
                         <div class="flex items-center gap-4">
                             <a class="inline text-foreground group/link transition-all duration-300"
                                 href="https://open.spotify.com/user/6vm2uqjrdydqo5qvzh83eyrfp" target="_blank" rel="noopener noreferrer">
@@ -101,27 +101,6 @@ section.reveal.visible, hr.reveal.visible, article.reveal.visible {
 
             <section class="reveal">
                 <div class="flex flex-col gap-4">
-                    <div class="text-secondary font-mono text-xs">top artists</div>
-                    <div id="spotify-top-artists" class="flex flex-col">
-                        <div class="text-sm text-secondary animate-pulse">loading...</div>
-                    </div>
-                </div>
-            </section>
-
-            <hr class="border-px reveal" />
-
-            <section class="reveal">
-                <div class="flex flex-col gap-4">
-                    <div class="text-secondary font-mono text-xs">top tracks</div>
-                    <div id="spotify-top-tracks" class="flex flex-col">
-                        <div class="text-sm text-secondary animate-pulse">loading...</div>
-                    </div>
-                </div>
-            </section>
-            <hr class="border-px reveal" />
-
-            <section class="reveal">
-                <div class="flex flex-col gap-4">
                     <div class="text-secondary font-mono text-xs">recently played</div>
                     <div id="spotify-recently-played" class="flex flex-col">
                         <div class="text-sm text-secondary animate-pulse">loading...</div>
@@ -129,15 +108,24 @@ section.reveal.visible, hr.reveal.visible, article.reveal.visible {
                 </div>
             </section>
 
+            <hr class="border-px reveal" />
+
+            <section class="reveal">
+                <div class="flex flex-col gap-4">
+                    <div class="text-secondary font-mono text-xs">listening stats</div>
+                    <div id="spotify-stats" class="flex flex-col gap-3">
+                        <div class="text-sm text-secondary animate-pulse">loading...</div>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
     <script>
     (function() {
         var np = document.getElementById('spotify-now-playing');
-        var ta = document.getElementById('spotify-top-artists');
-        var tt = document.getElementById('spotify-top-tracks');
         var rp = document.getElementById('spotify-recently-played');
+        var st = document.getElementById('spotify-stats');
 
         function msToMin(ms) { var m = Math.floor(ms/60000); var s = Math.floor((ms%60000)/1000); return m+':'+(s<10?'0':'')+s; }
 
@@ -152,32 +140,6 @@ section.reveal.visible, hr.reveal.visible, article.reveal.visible {
                 + indicator+'</div></a>';
         }
 
-        function renderArtists(artists) {
-            var h = '<div class="grid grid-cols-3 sm:grid-cols-5 gap-4">';
-            artists.slice(0,5).forEach(function(a) {
-                var genres = a.genres && a.genres.length ? '<span class="text-xs text-zinc-400 mt-0.5 line-clamp-1 text-center">'+esc(a.genres.slice(0,1).join(', '))+'</span>' : '';
-                h += '<a href="'+a.url+'" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-2 group hover:opacity-80 transition-opacity">'
-                    + '<img src="'+a.image+'" alt="" width="72" height="72" class="w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-full object-cover group-hover:scale-105 transition-transform" loading="lazy" />'
-                    + '<span class="text-sm text-foreground text-center leading-tight">'+esc(a.name)+'</span>'
-                    + genres+'</a>';
-            });
-            h += '</div>';
-            ta.innerHTML = h;
-        }
-
-        function renderTracks(tracks) {
-            var h = '';
-            tracks.slice(0,5).forEach(function(t, i) {
-                h += '<a href="'+t.url+'" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 py-3 hover:opacity-80 transition-opacity">'
-                    + '<span class="text-xs text-secondary w-5 shrink-0 text-right font-mono">'+(i+1)+'</span>'
-                    + '<div class="min-w-0 flex-1"><div class="text-sm text-foreground truncate">'+esc(t.name)+'</div>'
-                    + '<div class="text-xs text-secondary truncate mt-0.5">'+esc(t.artist)+'</div></div>'
-                    + '<span class="text-xs text-secondary font-mono shrink-0 w-10 text-right">'+(t.duration ? msToMin(t.duration) : '')+'</span></a>'
-                    + '<div class="border-b border-border border-dashed"></div>';
-            });
-            tt.innerHTML = h;
-        }
-
         function renderRecentlyPlayed(tracks) {
             var h = '';
             tracks.slice(0,8).forEach(function(t) {
@@ -190,34 +152,47 @@ section.reveal.visible, hr.reveal.visible, article.reveal.visible {
             rp.innerHTML = h;
         }
 
+        function renderStats(topArtists, topTracks) {
+            var totalMins = 0;
+            (topTracks || []).forEach(function(t) { if (t.duration) totalMins += t.duration; });
+            totalMins = Math.round(totalMins / 60000);
+
+            var topGenre = '';
+            (topArtists || []).some(function(a) {
+                if (a.genres && a.genres.length) { topGenre = a.genres[0]; return true; }
+                return false;
+            });
+
+            var h = '<div class="grid grid-cols-2 gap-4">'
+                + '<div class="flex flex-col gap-1"><span class="text-xs text-secondary">top genre</span><span class="text-sm text-foreground">'+(topGenre || 'n/a')+'</span></div>'
+                + '<div class="flex flex-col gap-1"><span class="text-xs text-secondary">total mins (top 10)</span><span class="text-sm text-foreground">'+totalMins+'m</span></div>'
+                + '</div>';
+            st.innerHTML = h;
+        }
+
         function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
         function fail(id, msg) { document.getElementById(id).innerHTML = '<div class="text-sm text-secondary">'+msg+'</div>'; }
 
         async function loadSpotifyData() {
             try {
-                var [nowPlaying, topArtists, topTracks, recentlyPlayed] = await Promise.all([
-                    fetch('/api/spotify/now-playing').then(function(r) { return r.ok ? r.json() : null; }),
+                var [topArtists, topTracks, nowPlaying, recentlyPlayed] = await Promise.all([
                     fetch('/api/spotify/top-artists?range=short_term').then(function(r) { return r.ok ? r.json() : null; }),
                     fetch('/api/spotify/top-tracks?range=short_term').then(function(r) { return r.ok ? r.json() : null; }),
+                    fetch('/api/spotify/now-playing').then(function(r) { return r.ok ? r.json() : null; }),
                     fetch('/api/spotify/recently-played').then(function(r) { return r.ok ? r.json() : null; }),
                 ]);
 
                 if (nowPlaying) renderNowPlaying(nowPlaying);
                 else fail('spotify-now-playing', 'couldn\'t load now playing.');
 
-                if (topArtists && topArtists.length) renderArtists(topArtists);
-                else fail('spotify-top-artists', 'no recent data.');
-
-                if (topTracks && topTracks.length) renderTracks(topTracks);
-                else fail('spotify-top-tracks', 'no recent data.');
-
                 if (recentlyPlayed && recentlyPlayed.length) renderRecentlyPlayed(recentlyPlayed);
                 else fail('spotify-recently-played', 'no recent data.');
+
+                renderStats(topArtists, topTracks);
             } catch(e) {
                 fail('spotify-now-playing', 'spotify unavailable right now.');
-                fail('spotify-top-artists', '');
-                fail('spotify-top-tracks', '');
                 fail('spotify-recently-played', '');
+                fail('spotify-stats', '');
             }
         }
 
