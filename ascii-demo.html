@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ASCII jellyfish</title>
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: #0a0a12;
+    color: #8b7dff;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    overflow: hidden;
+  }
+  body {
+    display: grid;
+    place-items: center;
+  }
+  pre#art {
+    margin: 0;
+    font-size: 11px;
+    line-height: 0.95;
+    letter-spacing: 0;
+    white-space: pre;
+    user-select: none;
+    text-shadow: 0 0 6px rgba(139, 125, 255, 0.35);
+  }
+</style>
+</head>
+<body>
+<pre id="art" aria-hidden="true"></pre>
+<script>
+(() => {
+  const pre  = document.getElementById('art');
+  const COLS = 90;
+  const ROWS = 50;
+  const RAMP = '01';
+
+  const TWO_PI = Math.PI * 2;
+
+  // Returns 0..1 brightness for a jellyfish living in normalized space.
+  // jx, jy: jellyfish center (0..1).  t: seconds.
+  function jellyBrightness(nx, ny, jx, jy, t) {
+    // Aspect compensation — character cells aren't square.
+    const ax = (nx - jx) * 1.0;
+    const ay = (ny - jy) * 0.55;
+
+    // --- Bell (upper hemisphere of an ellipse) ---
+    const bellRx = 0.18;
+    const bellRy = 0.10 + 0.012 * Math.sin(t * 1.6); // gentle pulse
+    let bell = 0;
+    if (ay <= 0) {
+      const d = (ax * ax) / (bellRx * bellRx) + (ay * ay) / (bellRy * bellRy);
+      // Soft ring: brightest near the rim of the bell.
+      bell = Math.max(0, 1 - Math.abs(d - 0.85) * 4.5);
+      // Cap (fill the dome a little).
+      if (d < 0.85) bell = Math.max(bell, 0.35 * (1 - d));
+    }
+
+    // --- Tentacles (wavy vertical strands hanging below the bell) ---
+    let tent = 0;
+    if (ay > 0 && ay < 0.34) {
+      const fade = 1 - ay / 0.34;
+      // Five tentacles spread across the bell width.
+      for (let i = -2; i <= 2; i++) {
+        const baseX = i * 0.055;
+        // Each strand sways with its own phase.
+        const sway = 0.025 * Math.sin(t * 2.2 + i * 0.9 + ay * 8);
+        const dx = ax - (baseX + sway);
+        // Thin strand: gaussian falloff in x.
+        const strand = Math.exp(-(dx * dx) / 0.00035) * fade;
+        if (strand > tent) tent = strand;
+      }
+      // Dotted texture along the tentacles.
+      tent *= 0.55 + 0.45 * Math.abs(Math.sin(ay * 50 + t * 3));
+    }
+
+    return Math.min(1, bell + tent * 0.9);
+  }
+
+  function render(tMs) {
+    const t = tMs * 0.001;
+
+    // Jellyfish drifts upward, wraps around, with a gentle horizontal wobble.
+    const driftPeriod = 14;            // seconds per loop
+    const phase = (t % driftPeriod) / driftPeriod;
+    const jy = 1.15 - phase * 1.4;     // start below screen, rise off the top
+    const jx = 0.5 + 0.06 * Math.sin(t * 0.7);
+
+    let out = '';
+    for (let r = 0; r < ROWS; r++) {
+      const ny = r / ROWS;
+      for (let c = 0; c < COLS; c++) {
+        const nx = c / COLS;
+        const b = jellyBrightness(nx, ny, jx, jy, t);
+        if (b < 0.18) {
+          out += ' ';
+        } else {
+          // Pick 0 vs 1 with a stable per-cell hash so the texture doesn't flicker.
+          const h = ((c * 928371) ^ (r * 12345)) & 1;
+          out += RAMP[h];
+        }
+      }
+      out += '\n';
+    }
+    pre.textContent = out;
+    requestAnimationFrame(render);
+  }
+
+  requestAnimationFrame(render);
+})();
+</script>
+</body>
+</html>
