@@ -6500,6 +6500,20 @@
         }
       }
     </style>
+    <link
+      rel="preload"
+      href="/fonts/66f30814ff6d7cdf.p.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="/fonts/e11418ac562b8ac1-s.p.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
   </head>
 
   <body class="antialiased mt-14">
@@ -6513,7 +6527,8 @@
           href="index.html"
           class="flex items-center gap-2 text-foreground font-medium text-sm hover:text-foreground/70 transition-colors"
         >
-          <img decoding="async"
+          <img
+            decoding="async"
             src="favicon.ico"
             alt=""
             width="18"
@@ -6529,7 +6544,8 @@
         <section class="reveal">
           <div class="flex flex-col gap-4">
             <div class="text-muted-foreground w-full overflow-hidden">
-              <img decoding="async"
+              <img
+                decoding="async"
                 alt="about me"
                 loading="lazy"
                 width="3276"
@@ -6561,7 +6577,8 @@
                 ><span
                   class="inline link relative pb-px bg-gradient-to-r from-foreground to-foreground bg-no-repeat bg-[length:0%_1px] bg-[left_bottom_-1px] group-hover/link:bg-[length:100%_1px] transition-[background-size] duration-300 ease-out border-b border-secondary border-dotted"
                   ><span class="whitespace-nowrap"
-                    ><img decoding="async"
+                    ><img
+                      decoding="async"
                       alt=""
                       loading="lazy"
                       width="14"
@@ -6593,7 +6610,8 @@
                 ><span
                   class="inline link relative pb-px bg-gradient-to-r from-foreground to-foreground bg-no-repeat bg-[length:0%_1px] bg-[left_bottom_-1px] group-hover/link:bg-[length:100%_1px] transition-[background-size] duration-300 ease-out border-b border-secondary border-dotted"
                   ><span class="whitespace-nowrap"
-                    ><img decoding="async"
+                    ><img
+                      decoding="async"
                       alt=""
                       loading="lazy"
                       width="14"
@@ -6681,7 +6699,8 @@
                   ><span
                     class="inline link relative pb-px bg-gradient-to-r from-foreground to-foreground bg-no-repeat bg-[length:0%_1px] bg-[left_bottom_-1px] group-hover/link:bg-[length:100%_1px] transition-[background-size] duration-300 ease-out border-b border-secondary border-dotted"
                     ><span class="whitespace-nowrap"
-                      ><img decoding="async"
+                      ><img
+                        decoding="async"
                         alt=""
                         loading="lazy"
                         width="14"
@@ -6969,26 +6988,37 @@
     </div>
     <!--$--><!--/$-->
     <script>
-document.addEventListener('DOMContentLoaded', function () {
-  var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
-  var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.addEventListener("DOMContentLoaded", function () {
+        var revealEls = Array.prototype.slice.call(
+          document.querySelectorAll(".reveal"),
+        );
+        var reducedMotion =
+          window.matchMedia &&
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  if (reducedMotion || !('IntersectionObserver' in window)) {
-    revealEls.forEach(function (el) { el.classList.add('visible'); });
-    return;
-  }
+        if (reducedMotion || !("IntersectionObserver" in window)) {
+          revealEls.forEach(function (el) {
+            el.classList.add("visible");
+          });
+          return;
+        }
 
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+        );
 
-  revealEls.forEach(function (el) { observer.observe(el); });
-});
-</script>
+        revealEls.forEach(function (el) {
+          observer.observe(el);
+        });
+      });
+    </script>
   </body>
 </html>
