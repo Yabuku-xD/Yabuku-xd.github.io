@@ -7,7 +7,7 @@
     <title>projects | shyamalan kannan</title>
     <meta
       name="description"
-      content="agent-first systems, ai infrastructure, and full-stack tools."
+      content="backend systems, agent evaluation tools, data platforms, and full-stack products."
     />
     <meta name="robots" content="index, follow" />
     <meta
@@ -18,7 +18,7 @@
     <meta property="og:title" content="projects | shyamalan kannan" />
     <meta
       property="og:description"
-      content="agent-first systems, ai infrastructure, and full-stack tools."
+      content="backend systems, agent evaluation tools, data platforms, and full-stack products."
     />
     <meta property="og:image:alt" content="projects" />
     <meta property="og:image:type" content="image/png" />
@@ -33,7 +33,7 @@
     <meta name="twitter:title" content="projects | shyamalan kannan" />
     <meta
       name="twitter:description"
-      content="agent-first systems, ai infrastructure, and full-stack tools."
+      content="backend systems, agent evaluation tools, data platforms, and full-stack products."
     />
     <meta name="twitter:image:alt" content="shyamalan kannan" />
     <meta name="twitter:image:type" content="image/png" />
@@ -3320,17 +3320,6 @@
           );
         }
         .transition-colors {
-          transition-property: all;
-          transition-timing-function: var(
-            --tw-ease,
-            var(--default-transition-timing-function)
-          );
-          transition-duration: var(
-            --tw-duration,
-            var(--default-transition-duration)
-          );
-        }
-        .transition-colors {
           transition-property:
             color, background-color, border-color, outline-color,
             text-decoration-color, fill, stroke, --tw-gradient-from,
@@ -6466,6 +6455,10 @@
       img {
         max-width: 100%;
       }
+      img.object-cover {
+        outline: 1px solid rgba(0, 0, 0, 0.1);
+        outline-offset: -1px;
+      }
       article a,
       nav a {
         min-height: 40px;
@@ -6498,6 +6491,29 @@
           transform: none !important;
           filter: none !important;
         }
+      }
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: color-mix(in oklab, var(--foreground) 45%, var(--background))
+          var(--background);
+      }
+      *::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      *::-webkit-scrollbar-track {
+        background: var(--background);
+      }
+      *::-webkit-scrollbar-thumb {
+        background: color-mix(in oklab, var(--foreground) 32%, var(--background));
+        border: 3px solid var(--background);
+        border-radius: 999px;
+      }
+      *::-webkit-scrollbar-thumb:hover {
+        background: color-mix(in oklab, var(--foreground) 48%, var(--background));
+      }
+      *::-webkit-scrollbar-corner {
+        background: var(--background);
       }
     </style>
     <link
@@ -6547,8 +6563,9 @@
             <div class="text-muted-foreground w-full overflow-hidden">
               <img
                 decoding="async"
-                alt="about me"
-                loading="lazy"
+                alt=""
+                loading="eager"
+                fetchpriority="high"
                 width="3276"
                 height="2331"
                 class="w-full object-cover"
@@ -6569,7 +6586,8 @@
                 selected projects
               </h1>
               <p class="text-secondary text-sm">
-                agent-first systems, ai infrastructure, and full-stack tools.
+                backend systems, agent evaluation tools, data platforms, and
+                full-stack products.
               </p>
             </div>
           </div>
@@ -6585,6 +6603,85 @@
             </div>
             <a
               class="group inline-flex items-center gap-2 w-fit"
+              href="https://github.com/Yabuku-xD/Feedt"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <h2
+                class="text-base font-medium text-foreground group-hover:text-foreground/70 transition-colors"
+              >
+                feedt: personal internet feed workspace
+              </h2>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-arrow-right w-4 h-4 text-secondary opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </a>
+            <div
+              class="text-secondary font-mono text-xs flex items-center gap-2"
+            >
+              <time>ongoing</time>
+            </div>
+            <p class="text-foreground/70 text-sm">
+              built feedt, a personal feed workspace for organizing rss,
+              substack, reddit/hacker news, product hunt, coingecko, and youtube
+              sources on persistent boards.
+            </p>
+            <p class="text-foreground/70 text-sm">
+              implemented supabase auth/postgresql/rls, feed-proxy edge
+              functions, youtube oauth/api, signed state, token refresh, rate
+              limits, and durable caching.
+            </p>
+            <p class="text-foreground/70 text-sm">
+              react · typescript · vite · supabase auth/postgresql/rls · edge
+              functions · youtube oauth
+            </p>
+            <div class="flex flex-wrap gap-1.5 mt-1">
+              <a
+                class="inline-flex items-center justify-center rounded-none text-xs select-none whitespace-nowrap transition-colors ring-1 ring-transparent px-2 py-0.5 cursor-pointer suppress-row-hover hover:ring-zinc-400 hover:text-zinc-900 focus:ring-zinc-500 active:scale-95 active:ring-zinc-600 bg-white text-zinc-800 active:bg-zinc-100 hover:bg-zinc-300 active:bg-zinc-400"
+                href="https://github.com/Yabuku-xD/Feedt"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><span>private repo</span
+                ><span class="whitespace-nowrap">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                    data-slot="icon"
+                    class="inline h-3.5 w-3.5 text-secondary"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z"
+                      clip-rule="evenodd"
+                    ></path></svg></span
+              ></a>
+            </div>
+          </article>
+          <article class="py-5 flex flex-col gap-2">
+            <div class="flex items-center gap-3 mb-1">
+              <span
+                class="font-mono text-[10px] tracking-[0.2em] text-secondary"
+                >002</span
+              >
+              <div class="flex-1 border-t border-border"></div>
+            </div>
+            <a
+              class="group inline-flex items-center gap-2 w-fit"
               href="https://ozark-iota.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
@@ -6592,7 +6689,7 @@
               <h2
                 class="text-base font-medium text-foreground group-hover:text-foreground/70 transition-colors"
               >
-                ozark: local-first ai agent simulation lab
+                ozark: local-first agent evaluation lab
               </h2>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -6617,23 +6714,17 @@
               <time>may 2026</time>
             </div>
             <p class="text-foreground/70 text-sm">
-              built a local-first ai agent simulation lab producing weighted
-              deployment confidence scores across safety, task completion,
-              guardrails, security, and latency, with no api keys or hosted
-              services required.
+              created a local-first agent evaluation lab for
+              deployment-readiness scoring across safety, task completion,
+              guardrails, security, and latency.
             </p>
             <p class="text-foreground/70 text-sm">
-              engineered a python backend for scenario generation, runtime
-              guardrail checks, trace replay/diffing, and http/stdio adapters to
-              test live agent endpoints before rollout.
+              built a python backend for adversarial scenarios, guardrail
+              checks, trace replay/diffing, and live http/stdio agent endpoint
+              tests.
             </p>
             <p class="text-foreground/70 text-sm">
-              shipped a react web ui and native macos swiftui runner for agent
-              config import, scenario execution, and scoring review, with a
-              terminal server fallback for non-macos environments.
-            </p>
-            <p class="text-foreground/70 text-sm">
-              python · react · swiftui · vite · agent evaluation
+              python · react · swiftui · vite · vercel · agent evaluation
             </p>
             <div class="flex flex-wrap gap-1.5 mt-1">
               <a
@@ -6663,103 +6754,20 @@
             <div class="flex items-center gap-3 mb-1">
               <span
                 class="font-mono text-[10px] tracking-[0.2em] text-secondary"
-                >002</span
-              >
-              <div class="flex-1 border-t border-border"></div>
-            </div>
-            <a
-              class="group inline-flex items-center gap-2 w-fit"
-              href="https://github.com/Yabuku-xD/contextforge"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h2
-                class="text-base font-medium text-foreground group-hover:text-foreground/70 transition-colors"
-              >
-                contextforge: repository intelligence for ai agents
-              </h2>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-arrow-right w-4 h-4 text-secondary opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </a>
-            <div
-              class="text-secondary font-mono text-xs flex items-center gap-2"
-            >
-              <time>apr 2026</time><span class="text-border">·</span
-              ><span>33 releases</span>
-            </div>
-            <p class="text-foreground/70 text-sm">
-              shipped a production open-source claude code marketplace plugin —
-              a repository intelligence layer giving ai agents persistent
-              memory, project-level understanding, and durable cross-session
-              continuity; 33 tagged releases serving active users.
-            </p>
-            <p class="text-foreground/70 text-sm">
-              engineered a batched warm indexer, hybrid keyword/embedding
-              retrieval layer, and forge_* routing hooks steering agents away
-              from broad crawls toward compact targeted flows, measurably
-              reducing context window waste. built an evaluation pipeline with a
-              benchmark suite tracking retrieval recall accuracy and indexing
-              performance across releases to catch regressions before shipping.
-            </p>
-            <p class="text-foreground/70 text-sm">
-              typescript · python · mcp · claude code marketplace
-            </p>
-            <div class="flex flex-wrap gap-1.5 mt-1">
-              <a
-                class="inline-flex items-center justify-center rounded-none text-xs select-none whitespace-nowrap transition-colors ring-1 ring-transparent px-2 py-0.5 cursor-pointer suppress-row-hover hover:ring-zinc-400 hover:text-zinc-900 focus:ring-zinc-500 active:scale-95 active:ring-zinc-600 bg-white text-zinc-800 active:bg-zinc-100 hover:bg-zinc-300 active:bg-zinc-400"
-                href="https://github.com/Yabuku-xD/contextforge"
-                target="_blank"
-                rel="noopener noreferrer"
-                ><span>github</span
-                ><span class="whitespace-nowrap">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    data-slot="icon"
-                    class="inline h-3.5 w-3.5 text-secondary"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z"
-                      clip-rule="evenodd"
-                    ></path></svg></span
-              ></a>
-            </div>
-          </article>
-          <article class="py-5 flex flex-col gap-2">
-            <div class="flex items-center gap-3 mb-1">
-              <span
-                class="font-mono text-[10px] tracking-[0.2em] text-secondary"
                 >003</span
               >
               <div class="flex-1 border-t border-border"></div>
             </div>
             <a
               class="group inline-flex items-center gap-2 w-fit"
-              href="https://github.com/Yabuku-xD/ghosted"
+              href="https://github.com/Yabuku-xD/Ghosted"
               target="_blank"
               rel="noopener noreferrer"
             >
               <h2
                 class="text-base font-medium text-foreground group-hover:text-foreground/70 transition-colors"
               >
-                ghosted: visa-aware job intelligence platform
+                ghosted: h-1b and job-market intelligence app
               </h2>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -6784,25 +6792,22 @@
               <time>mar 2026</time>
             </div>
             <p class="text-foreground/70 text-sm">
-              built a full-stack data intelligence platform end-to-end — rest
-              api, async job infrastructure, and react frontend — unifying 119k+
-              h-1b records, 23k+ company profiles, 9k+ salary entries, and 4.4k+
-              live job postings.
+              built an h-1b and job-market intelligence app serving 119k+ h-1b
+              records, 23k+ company profiles, 9k+ salary entries, and 4.4k+
+              live jobs.
             </p>
             <p class="text-foreground/70 text-sm">
-              shipped celery + redis async infrastructure for ats ingestion,
-              deduplication, tf-idf resume matching, cached pagination, and pdf
-              generation, dockerized throughout and configured for vercel
-              deployment.
+              implemented celery + redis jobs for ats ingestion, deduplication,
+              tf-idf resume matching, cached pagination, and pdf generation.
             </p>
             <p class="text-foreground/70 text-sm">
-              django · drf · react · typescript · vite · postgresql · redis ·
+              django · react · typescript · postgresql · redis ·
               celery · docker
             </p>
             <div class="flex flex-wrap gap-1.5 mt-1">
               <a
                 class="inline-flex items-center justify-center rounded-none text-xs select-none whitespace-nowrap transition-colors ring-1 ring-transparent px-2 py-0.5 cursor-pointer suppress-row-hover hover:ring-zinc-400 hover:text-zinc-900 focus:ring-zinc-500 active:scale-95 active:ring-zinc-600 bg-white text-zinc-800 active:bg-zinc-100 hover:bg-zinc-300 active:bg-zinc-400"
-                href="https://github.com/Yabuku-xD/ghosted"
+                href="https://github.com/Yabuku-xD/Ghosted"
                 target="_blank"
                 rel="noopener noreferrer"
                 ><span>github</span
@@ -6833,14 +6838,14 @@
             </div>
             <a
               class="group inline-flex items-center gap-2 w-fit"
-              href="https://github.com/Yabuku-xD/sounduncloud"
+              href="https://github.com/Yabuku-xD/SoundunCloud"
               target="_blank"
               rel="noopener noreferrer"
             >
               <h2
                 class="text-base font-medium text-foreground group-hover:text-foreground/70 transition-colors"
               >
-                sounduncloud: windows desktop music app
+                sounduncloud: windows desktop music client
               </h2>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -6865,18 +6870,17 @@
               <time>mar 2026</time>
             </div>
             <p class="text-foreground/70 text-sm">
-              built a windows desktop app with tauri + react and a rust/axum
-              oauth 2.1 broker — pkce, deep-link callbacks, encrypted one-time
-              tickets, refresh-token rotation, and in-app updates with installer
-              fallback; zero third-party auth dependencies.
+              built a tauri/react windows client with a rust/axum oauth 2.1
+              broker for pkce, deep-link callbacks, encrypted one-time tickets,
+              refresh-token rotation, and in-app updates.
             </p>
             <p class="text-foreground/70 text-sm">
-              rust · tauri · react · typescript · axum · oauth 2.1/pkce
+              rust · tauri · react · typescript · axum
             </p>
             <div class="flex flex-wrap gap-1.5 mt-1">
               <a
                 class="inline-flex items-center justify-center rounded-none text-xs select-none whitespace-nowrap transition-colors ring-1 ring-transparent px-2 py-0.5 cursor-pointer suppress-row-hover hover:ring-zinc-400 hover:text-zinc-900 focus:ring-zinc-500 active:scale-95 active:ring-zinc-600 bg-white text-zinc-800 active:bg-zinc-100 hover:bg-zinc-300 active:bg-zinc-400"
-                href="https://github.com/Yabuku-xD/sounduncloud"
+                href="https://github.com/Yabuku-xD/SoundunCloud"
                 target="_blank"
                 rel="noopener noreferrer"
                 ><span>github</span

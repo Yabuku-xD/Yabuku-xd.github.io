@@ -7,7 +7,7 @@
     <title>about me | shyamalan kannan</title>
     <meta
       name="description"
-      content="hey! i&#x27;m shyamalan kannan. i&#x27;m currently figuring out what&#x27;s next for me."
+      content="hey! i&#x27;m shyamalan kannan. i build backend, ai systems, data platforms, and devops workflows."
     />
     <meta name="robots" content="index, follow" />
     <meta
@@ -18,7 +18,7 @@
     <meta property="og:title" content="about me | shyamalan kannan" />
     <meta
       property="og:description"
-      content="hey! i&#x27;m shyamalan kannan. i&#x27;m currently figuring out what&#x27;s next for me."
+      content="hey! i&#x27;m shyamalan kannan. i build backend, ai systems, data platforms, and devops workflows."
     />
     <meta property="og:image:alt" content="about me" />
     <meta property="og:image:type" content="image/png" />
@@ -33,7 +33,7 @@
     <meta name="twitter:title" content="about me | shyamalan kannan" />
     <meta
       name="twitter:description"
-      content="hey! i&#x27;m shyamalan kannan. i&#x27;m currently figuring out what&#x27;s next for me."
+      content="hey! i&#x27;m shyamalan kannan. i build backend, ai systems, data platforms, and devops workflows."
     />
     <meta name="twitter:image:alt" content="about me" />
     <meta name="twitter:image:type" content="image/png" />
@@ -3320,17 +3320,6 @@
           );
         }
         .transition-colors {
-          transition-property: all;
-          transition-timing-function: var(
-            --tw-ease,
-            var(--default-transition-timing-function)
-          );
-          transition-duration: var(
-            --tw-duration,
-            var(--default-transition-duration)
-          );
-        }
-        .transition-colors {
           transition-property:
             color, background-color, border-color, outline-color,
             text-decoration-color, fill, stroke, --tw-gradient-from,
@@ -6466,6 +6455,10 @@
       img {
         max-width: 100%;
       }
+      img.object-cover {
+        outline: 1px solid rgba(0, 0, 0, 0.1);
+        outline-offset: -1px;
+      }
       article a,
       nav a {
         min-height: 40px;
@@ -6498,6 +6491,29 @@
           transform: none !important;
           filter: none !important;
         }
+      }
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: color-mix(in oklab, var(--foreground) 45%, var(--background))
+          var(--background);
+      }
+      *::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      *::-webkit-scrollbar-track {
+        background: var(--background);
+      }
+      *::-webkit-scrollbar-thumb {
+        background: color-mix(in oklab, var(--foreground) 32%, var(--background));
+        border: 3px solid var(--background);
+        border-radius: 999px;
+      }
+      *::-webkit-scrollbar-thumb:hover {
+        background: color-mix(in oklab, var(--foreground) 48%, var(--background));
+      }
+      *::-webkit-scrollbar-corner {
+        background: var(--background);
       }
     </style>
     <link
@@ -6546,17 +6562,20 @@
             <div class="text-muted-foreground w-full overflow-hidden">
               <img
                 decoding="async"
-                alt="about me"
-                loading="lazy"
-                width="3276"
-                height="2184"
+                alt=""
+                loading="eager"
+                fetchpriority="high"
+                width="1200"
+                height="853"
                 class="w-full object-cover"
                 style="
                   color: transparent;
+                  width: 100%;
                   height: 120px;
-                  object-position: center 65%;
+                  object-fit: cover;
+                  object-position: center center;
                 "
-                src="assets/woah.jpeg"
+                src="assets/more_sand.jpeg"
               />
             </div>
             <div class="flex flex-col gap-4">
@@ -6570,7 +6589,8 @@
           </h2>
           <div class="text-secondary flex flex-col gap-2">
             <p>
-              completed my masters in computer science at seattle university,
+              i&#x27;m a backend, ai systems, and devops engineer in seattle.
+              outside code:
               <a
                 class="inline text-foreground group/link transition-colors duration-300"
                 href="spotify.html"
@@ -6638,15 +6658,14 @@
               >!
             </p>
             <p>
-              i build systems that make ai reliable — not just functional.
-              i&#x27;m open to all problem spaces, but for now i know these
-              things:
+              i build agent evaluation tools, data pipelines, auth flows, and
+              desktop/web apps. these are the patterns i keep coming back to:
             </p>
             <ul class="space-y-2 list-disc ml-4">
               <li>
-                i love creating and building. only recently did I realize
-                it&#x27;s the same sense of wonder that draws me to art, gaming,
-                and code.
+                i like products with real moving parts: background jobs, oauth
+                flows, data sync, evaluation harnesses, and interfaces people
+                can keep open all day.
               </li>
               <li>
                 for better or
@@ -6672,14 +6691,14 @@
                         d="M8.25 3.75H19.5a.75.75 0 0 1 .75.75v11.25a.75.75 0 0 1-1.5 0V6.31L5.03 20.03a.75.75 0 0 1-1.06-1.06L17.69 5.25H8.25a.75.75 0 0 1 0-1.5Z"
                         clip-rule="evenodd"
                       ></path></svg></span></a
-                >, i want to work on really hard technical problems.
+                >, i want hard technical problems with clear product stakes.
               </li>
               <li>
-                i love collaboration and the exchange of guidance and
-                mentorship. few things feel more beautiful.
+                i work best with people who trade context, reviews, and
+                mentorship without ego.
               </li>
             </ul>
-            <p>currently on OPT, actively job searching. open to relocation.</p>
+            <p>currently on OPT and looking for software engineering roles. open to relocation.</p>
           </div>
         </section>
         <hr class="border-px reveal" />
@@ -6690,7 +6709,7 @@
           <div class="text-secondary flex flex-col gap-4">
             <div class="flex flex-col gap-2">
               <p class="text-primary">
-                technical operations engineer @
+                software engineer @
                 <a
                   href="https://www.seattleu.edu/"
                   target="_blank"
@@ -6710,7 +6729,7 @@
                         src="assets/svg/seattle-university.svg"
                       />seattle u</span
                     >
-                    facilities</span
+                    </span
                   ><span class="whitespace-nowrap"
                     >&nbsp;<svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -6729,10 +6748,14 @@
               </p>
               <ul class="list-disc ml-4 space-y-2">
                 <li>
-                  reduced operational downtime by ~20% across facilities serving
-                  500+ users through structured root-cause analysis, proactive
-                  inspection workflows, and authored runbooks that standardized
-                  incident response across the team.
+                  improved ci/cd deployment for c# application workflows and
+                  added security scanning, cutting release time by 20% and
+                  flagging vulnerabilities before release.
+                </li>
+                <li>
+                  automated build setup and operational workflows with aws,
+                  typescript, and shell commands, reducing delivery time from
+                  weeks to hours and cutting manual errors.
                 </li>
               </ul>
             </div>
@@ -6871,8 +6894,7 @@
                       d="M8.25 3.75H19.5a.75.75 0 0 1 .75.75v11.25a.75.75 0 0 1-1.5 0V6.31L5.03 20.03a.75.75 0 0 1-1.06-1.06L17.69 5.25H8.25a.75.75 0 0 1 0-1.5Z"
                       clip-rule="evenodd"
                     ></path></svg></span></a
-              >, play table tennis, and build things that makes me lazy. i like
-              cats.
+              >, play table tennis, and build small tools that save me clicks.
             </p>
           </div>
         </section>

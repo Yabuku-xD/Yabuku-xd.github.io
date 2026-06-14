@@ -3321,17 +3321,6 @@
           );
         }
         .transition-colors {
-          transition-property: all;
-          transition-timing-function: var(
-            --tw-ease,
-            var(--default-transition-timing-function)
-          );
-          transition-duration: var(
-            --tw-duration,
-            var(--default-transition-duration)
-          );
-        }
-        .transition-colors {
           transition-property:
             color, background-color, border-color, outline-color,
             text-decoration-color, fill, stroke, --tw-gradient-from,
@@ -6476,6 +6465,10 @@
       img {
         max-width: 100%;
       }
+      img.object-cover {
+        outline: 1px solid rgba(0, 0, 0, 0.1);
+        outline-offset: -1px;
+      }
       article a,
       nav a {
         min-height: 40px;
@@ -6508,6 +6501,29 @@
           transform: none !important;
           filter: none !important;
         }
+      }
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: color-mix(in oklab, var(--foreground) 45%, var(--background))
+          var(--background);
+      }
+      *::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      *::-webkit-scrollbar-track {
+        background: var(--background);
+      }
+      *::-webkit-scrollbar-thumb {
+        background: color-mix(in oklab, var(--foreground) 32%, var(--background));
+        border: 3px solid var(--background);
+        border-radius: 999px;
+      }
+      *::-webkit-scrollbar-thumb:hover {
+        background: color-mix(in oklab, var(--foreground) 48%, var(--background));
+      }
+      *::-webkit-scrollbar-corner {
+        background: var(--background);
       }
     </style>
     <link
@@ -6557,8 +6573,9 @@
             <div class="text-muted-foreground w-full overflow-hidden">
               <img
                 decoding="async"
-                alt="about me"
-                loading="lazy"
+                alt=""
+                loading="eager"
+                fetchpriority="high"
                 width="3276"
                 height="2184"
                 class="w-full object-cover"
