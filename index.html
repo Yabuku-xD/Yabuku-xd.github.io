@@ -8090,6 +8090,7 @@
       type="font/woff2"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="assets/mobile.css" />
   </head>
 
   <body class="antialiased mt-14">
@@ -8124,9 +8125,9 @@
             <div>
               <section class="reveal">
                 <div
-                  class="flex sm:flex-row flex-col items-center w-full p-5 md:p-7 gap-3 sm:gap-0"
+                  class="section-split flex flex-col sm:flex-row items-stretch sm:items-center w-full p-4 sm:p-5 md:p-7 gap-6 sm:gap-0"
                 >
-                  <div class="w-full sm:w-1/2 flex justify-center">
+                  <div class="section-visual w-full sm:w-1/2 flex justify-center shrink-0">
                     <a
                       aria-label="about me"
                       class="ascii-host"
@@ -8142,7 +8143,7 @@
                       ></pre>
                     </a>
                   </div>
-                  <div class="w-full sm:w-1/2 flex flex-col items-start gap-6">
+                  <div class="section-copy w-full sm:w-1/2 flex flex-col items-start gap-6">
                     <div class="flex flex-col gap-4 w-full">
                       <div class="text-secondary">01</div>
                       <h2 class="text-foreground font-medium">
@@ -8213,9 +8214,9 @@
             <div>
               <section class="reveal">
                 <div
-                  class="flex sm:flex-row flex-col items-center w-full p-5 md:p-7 gap-3 sm:gap-0"
+                  class="section-split flex flex-col sm:flex-row items-stretch sm:items-center w-full p-4 sm:p-5 md:p-7 gap-6 sm:gap-0"
                 >
-                  <div class="w-full sm:w-1/2 flex justify-center">
+                  <div class="section-visual w-full sm:w-1/2 flex justify-center shrink-0">
                     <a
                       aria-label="writing"
                       class="ascii-host"
@@ -8231,7 +8232,7 @@
                       ></pre>
                     </a>
                   </div>
-                  <div class="w-full sm:w-1/2 flex flex-col items-start gap-6">
+                  <div class="section-copy w-full sm:w-1/2 flex flex-col items-start gap-6">
                     <div class="flex flex-col gap-4 w-full">
                       <div class="text-secondary">02</div>
                       <h2 class="text-foreground font-medium">
@@ -8300,29 +8301,58 @@
                             </div>
                           </a>
                         </div>
-                        <div class="sm:hidden flex flex-col">
-                          <div>
-                            <a
-                              class="flex items-center gap-3 py-6 hover:opacity-80 transition-opacity w-full"
-                              href="contributions.html"
-                            >
-                              <div class="w-16 h-16 flex-shrink-0">
-                                <img
-                                  decoding="async"
-                                  alt="returning to stanford"
-                                  loading="lazy"
-                                  width="48"
-                                  height="48"
-                                  class="w-full h-full object-contain"
-                                  style="color: transparent"
-                                  src="assets/svg/nousresearch.svg"
-                                />
-                              </div>
-                            </a>
-                            <div
-                              class="border-b border-border border-dashed"
-                            ></div>
-                          </div>
+                        <div class="sm:hidden mobile-logo-row">
+                          <a
+                            class="hover:opacity-80 transition-opacity"
+                            href="https://github.com/NousResearch/hermes-agent"
+                          >
+                            <div class="w-14 h-14">
+                              <img
+                                decoding="async"
+                                alt="hermes-agent"
+                                loading="lazy"
+                                width="56"
+                                height="56"
+                                class="w-full h-full object-contain"
+                                style="color: transparent"
+                                src="assets/svg/nousresearch.svg"
+                              />
+                            </div>
+                          </a>
+                          <a
+                            class="hover:opacity-80 transition-opacity"
+                            href="https://github.com/openchamber/openchamber"
+                          >
+                            <div class="w-14 h-14">
+                              <img
+                                decoding="async"
+                                alt="openchamber"
+                                loading="lazy"
+                                width="56"
+                                height="56"
+                                class="w-full h-full object-contain"
+                                style="color: transparent"
+                                src="assets/svg/openchamber-logo-light.svg"
+                              />
+                            </div>
+                          </a>
+                          <a
+                            class="hover:opacity-80 transition-opacity"
+                            href="https://github.com/Glass-HQ/Glass"
+                          >
+                            <div class="w-14 h-14">
+                              <img
+                                decoding="async"
+                                alt="glass"
+                                loading="lazy"
+                                width="56"
+                                height="56"
+                                class="w-full h-full object-contain"
+                                style="color: transparent"
+                                src="assets/svg/glass_logo_light.png"
+                              />
+                            </div>
+                          </a>
                         </div>
                       </div>
                       <a class="group" href="contributions.html">
@@ -8356,9 +8386,9 @@
             <div>
               <section class="reveal">
                 <div
-                  class="flex sm:flex-row flex-col items-center w-full p-5 md:p-7 gap-3 sm:gap-0"
+                  class="section-split flex flex-col sm:flex-row items-stretch sm:items-center w-full p-4 sm:p-5 md:p-7 gap-6 sm:gap-0"
                 >
-                  <div class="w-full sm:w-1/2 flex justify-center">
+                  <div class="section-visual w-full sm:w-1/2 flex justify-center shrink-0">
                     <a
                       aria-label="projects"
                       class="ascii-host"
@@ -8374,7 +8404,7 @@
                       ></pre>
                     </a>
                   </div>
-                  <div class="w-full sm:w-1/2 flex flex-col items-start gap-6">
+                  <div class="section-copy w-full sm:w-1/2 flex flex-col items-start gap-6">
                     <div class="flex flex-col gap-4 w-full">
                       <div class="text-secondary">03</div>
                       <h2 class="text-foreground font-medium">
@@ -8410,7 +8440,7 @@
                                 >
                               </div>
                               <span
-                                class="text-sm text-secondary lg:ml-auto lg:text-right pl-[calc(1.5rem+0.75rem)] lg:pl-0"
+                                class="project-desc text-sm text-secondary lg:ml-auto lg:text-right pl-[calc(1.5rem+0.75rem)] lg:pl-0"
                                 >ai agent simulation lab</span
                               >
                             </a>
@@ -8444,7 +8474,7 @@
                                 >
                               </div>
                               <span
-                                class="text-sm text-secondary lg:ml-auto lg:text-right pl-[calc(1.5rem+0.75rem)] lg:pl-0"
+                                class="project-desc text-sm text-secondary lg:ml-auto lg:text-right pl-[calc(1.5rem+0.75rem)] lg:pl-0"
                                 >ai repository intelligence layer</span
                               >
                             </a>
@@ -8480,7 +8510,7 @@
                                 >
                               </div>
                               <span
-                                class="text-sm text-secondary lg:ml-auto lg:text-right pl-[calc(1.5rem+0.75rem)] lg:pl-0"
+                                class="project-desc text-sm text-secondary lg:ml-auto lg:text-right pl-[calc(1.5rem+0.75rem)] lg:pl-0"
                                 >visa-aware job intelligence platform</span
                               >
                             </a>
@@ -8514,7 +8544,7 @@
                                 >
                               </div>
                               <span
-                                class="text-sm text-secondary lg:ml-auto lg:text-right pl-[calc(1.5rem+0.75rem)] lg:pl-0"
+                                class="project-desc text-sm text-secondary lg:ml-auto lg:text-right pl-[calc(1.5rem+0.75rem)] lg:pl-0"
                                 >windows desktop music app</span
                               >
                             </a>
@@ -8522,7 +8552,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="flex items-center gap-6">
+                    <div class="section-actions flex items-center gap-6">
                       <a class="group" href="projects.html">
                         <div
                           class="text-foreground font-medium hover:text-foreground/70 transition-colors flex items-center gap-2 py-1 cursor-pointer"
@@ -8579,9 +8609,9 @@
             <div>
               <section class="reveal">
                 <div
-                  class="flex sm:flex-row flex-col items-center w-full p-5 md:p-7 gap-3 sm:gap-0"
+                  class="section-split flex flex-col sm:flex-row items-stretch sm:items-center w-full p-4 sm:p-5 md:p-7 gap-6 sm:gap-0"
                 >
-                  <div class="w-full sm:w-1/2 flex justify-center">
+                  <div class="section-visual w-full sm:w-1/2 flex justify-center shrink-0">
                     <a
                       aria-label="spotify"
                       class="ascii-host"
@@ -8597,7 +8627,7 @@
                       ></pre>
                     </a>
                   </div>
-                  <div class="w-full sm:w-1/2 flex flex-col items-start gap-4">
+                  <div class="section-copy w-full sm:w-1/2 flex flex-col items-start gap-4">
                     <div class="flex flex-col gap-3 w-full">
                       <div class="text-secondary">04</div>
                       <h2 class="text-foreground font-medium">
@@ -8659,9 +8689,9 @@
             <div>
               <section class="reveal">
                 <div
-                  class="flex sm:flex-row flex-col items-center w-full p-5 md:p-7 gap-3 sm:gap-0"
+                  class="section-split flex flex-col sm:flex-row items-stretch sm:items-center w-full p-4 sm:p-5 md:p-7 gap-6 sm:gap-0"
                 >
-                  <div class="w-full sm:w-1/2 flex justify-center">
+                  <div class="section-visual w-full sm:w-1/2 flex justify-center shrink-0">
                     <pre
                       class="ascii-art text-foreground"
                       data-ascii
@@ -8671,7 +8701,7 @@
                       aria-hidden="true"
                     ></pre>
                   </div>
-                  <div class="w-full sm:w-1/2 flex flex-col items-start gap-6">
+                  <div class="section-copy w-full sm:w-1/2 flex flex-col items-start gap-6">
                     <div class="flex flex-col gap-4 w-full">
                       <div class="text-secondary">05</div>
                       <h2 class="text-foreground font-medium">

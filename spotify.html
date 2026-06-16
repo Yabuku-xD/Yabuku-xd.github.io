@@ -6540,6 +6540,7 @@
       type="font/woff2"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="assets/mobile.css" />
   </head>
 
   <body class="antialiased mt-14">
@@ -6566,8 +6567,8 @@
       </div>
     </nav>
 
-    <div class="w-full p-5 md:p-7">
-      <main id="main-content" class="flex flex-col gap-8 w-full">
+    <div class="page-shell w-full p-4 sm:p-5 md:p-7">
+      <main id="main-content" class="page-main flex flex-col gap-8 w-full mx-auto">
         <section class="reveal">
           <div class="flex flex-col gap-4 max-w-prose">
             <div class="text-muted-foreground w-full overflow-hidden">
@@ -6578,7 +6579,7 @@
                 fetchpriority="high"
                 width="3276"
                 height="2184"
-                class="w-full object-cover"
+                class="hero-crop w-full object-cover"
                 style="
                   color: transparent;
                   height: 120px;

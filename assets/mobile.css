@@ -1,0 +1,140 @@
+/* Mobile layout — keeps the existing theme, fixes small-screen usability */
+
+@keyframes fadeRevealMobile {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 639px) {
+  section.reveal,
+  hr.reveal,
+  article.reveal {
+    animation-name: fadeRevealMobile;
+    animation-duration: 0.5s;
+  }
+
+  body {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  nav > div {
+    padding-left: max(1.25rem, env(safe-area-inset-left));
+    padding-right: max(1.25rem, env(safe-area-inset-right));
+  }
+
+  /* Index sections: copy only on mobile */
+  .section-split {
+    gap: 0;
+  }
+
+  .section-split > .section-visual {
+    display: none;
+  }
+
+  .section-split > .section-copy {
+    width: 100%;
+  }
+
+  /* Contribution logos on the home page */
+  .mobile-logo-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    padding-block: 0.75rem;
+  }
+
+  .mobile-logo-row a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.5rem;
+    border-radius: var(--radius, 0.625rem);
+    transition: opacity 200ms ease-out;
+  }
+
+  .mobile-logo-row a:active {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+
+  /* Spotify artist avatars */
+  #spotify-top-artists {
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.5rem;
+    justify-items: center;
+  }
+
+  #spotify-top-artists a {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #spotify-top-artists a span {
+    max-width: 100%;
+  }
+
+  /* Project rows: full-width descriptions on narrow screens */
+  .project-desc {
+    padding-left: 0 !important;
+    text-align: left;
+  }
+
+  /* Bottom action rows */
+  .section-actions {
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
+  }
+
+  /* Subpage shells */
+  .page-shell {
+    width: 100%;
+    max-width: 100%;
+    margin-inline: auto;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  .page-main {
+    width: 100%;
+    max-width: 42rem;
+    margin-inline: auto;
+  }
+
+  /* Hero crops breathe a bit more on phones */
+  .hero-crop {
+    height: 9.5rem !important;
+  }
+
+  /* Contribution PR links: easier to tap */
+  .contrib-link {
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+  }
+
+  /* Long PR titles wrap cleanly */
+  .contrib-link span {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 374px) {
+  .mobile-logo-row {
+    gap: 0.5rem;
+  }
+
+  #spotify-top-artists {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 0.75rem;
+  }
+}
