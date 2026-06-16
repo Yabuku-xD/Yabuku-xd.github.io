@@ -1,3 +1,45 @@
+/* Shared subpage layout — centered like index */
+
+.page-shell {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.page-main {
+  width: 100%;
+  max-width: 42rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.page-main .text-left,
+.page-main .contrib-link,
+.page-main [id^="spotify-"] {
+  text-align: left;
+}
+
+.page-main ul,
+.page-main ol {
+  text-align: left;
+}
+
+.page-main article {
+  text-align: left;
+}
+
+.page-main .max-w-prose,
+.page-main .hero-wrap {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.page-main .hero-crop {
+  display: block;
+  width: 100%;
+  margin-inline: auto;
+}
+
 /* Mobile layout — keeps the existing theme, fixes small-screen usability */
 
 @keyframes fadeRevealMobile {
@@ -85,17 +127,8 @@
 
   /* Subpage shells */
   .page-shell {
-    width: 100%;
-    max-width: 100%;
-    margin-inline: auto;
     padding-left: max(1rem, env(safe-area-inset-left));
     padding-right: max(1rem, env(safe-area-inset-right));
-  }
-
-  .page-main {
-    width: 100%;
-    max-width: 42rem;
-    margin-inline: auto;
   }
 
   /* Hero crops breathe a bit more on phones */
