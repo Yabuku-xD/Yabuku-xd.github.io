@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en" class="__variable_3a0388 __variable_c1e5c9">
   <head>
+    <script>document.documentElement.classList.add("js");</script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#ffffff" />
@@ -22,29 +23,13 @@
     <meta property="og:url" content="https://shyamalankannan.com" />
     <meta property="og:site_name" content="shyamalan kannan" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:image:alt" content="shyamalan kannan" />
-    <meta property="og:image:type" content="image/png" />
-    <meta
-      property="og:image"
-      content="https://shyamalankannan.com/assets/og-index.png"
-    />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="shyamalan kannan" />
     <meta
       name="twitter:description"
       content="backend and ai infrastructure engineer focused on agent-first system design. built contextforge — open-source repository intelligence for ai agents."
     />
-    <meta name="twitter:image:alt" content="shyamalan kannan" />
-    <meta name="twitter:image:type" content="image/png" />
-    <meta
-      name="twitter:image"
-      content="https://shyamalankannan.com/assets/twitter-card.png"
-    />
-    <meta name="twitter:image:width" content="1200" />
-    <meta name="twitter:image:height" content="630" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" sizes="16x16" />
 
     <style>
@@ -7927,13 +7912,22 @@
       section.reveal,
       hr.reveal,
       article.reveal {
+        opacity: 1;
+        transform: none;
+        filter: none;
+      }
+
+      html.js section.reveal,
+      html.js hr.reveal,
+      html.js article.reveal {
+        opacity: 0;
         animation: fadeReveal 0.7s ease-out forwards;
         animation-play-state: paused;
       }
 
-      section.reveal.visible,
-      hr.reveal.visible,
-      article.reveal.visible {
+      html.js section.reveal.visible,
+      html.js hr.reveal.visible,
+      html.js article.reveal.visible {
         animation-play-state: running;
       }
 
@@ -8125,25 +8119,9 @@
             <div>
               <section class="reveal">
                 <div
-                  class="section-split flex flex-col sm:flex-row items-stretch sm:items-center w-full p-4 sm:p-5 md:p-7 gap-6 sm:gap-0"
+                  class="w-full p-4 sm:p-5 md:p-7 max-w-2xl mx-auto"
                 >
-                  <div class="section-visual w-full sm:w-1/2 flex justify-center shrink-0">
-                    <a
-                      aria-label="about me"
-                      class="ascii-host"
-                      href="about-me.html"
-                    >
-                      <pre
-                        class="ascii-art text-foreground"
-                        data-ascii
-                        data-src="assets/svg/boy.png"
-                        data-cols="54"
-                        data-rows="36"
-                        aria-hidden="true"
-                      ></pre>
-                    </a>
-                  </div>
-                  <div class="section-copy w-full sm:w-1/2 flex flex-col items-start gap-6">
+                  <div class="flex flex-col items-start gap-6 w-full">
                     <div class="flex flex-col gap-4 w-full">
                       <div class="text-secondary">01</div>
                       <h2 class="text-foreground font-medium">
@@ -8214,25 +8192,9 @@
             <div>
               <section class="reveal">
                 <div
-                  class="section-split flex flex-col sm:flex-row items-stretch sm:items-center w-full p-4 sm:p-5 md:p-7 gap-6 sm:gap-0"
+                  class="w-full p-4 sm:p-5 md:p-7 max-w-2xl mx-auto"
                 >
-                  <div class="section-visual w-full sm:w-1/2 flex justify-center shrink-0">
-                    <a
-                      aria-label="writing"
-                      class="ascii-host"
-                      href="contributions.html"
-                    >
-                      <pre
-                        class="ascii-art text-foreground"
-                        data-ascii
-                        data-src="assets/svg/share-owners.png"
-                        data-cols="54"
-                        data-rows="36"
-                        aria-hidden="true"
-                      ></pre>
-                    </a>
-                  </div>
-                  <div class="section-copy w-full sm:w-1/2 flex flex-col items-start gap-6">
+                  <div class="flex flex-col items-start gap-6 w-full">
                     <div class="flex flex-col gap-4 w-full">
                       <div class="text-secondary">02</div>
                       <h2 class="text-foreground font-medium">
@@ -8386,25 +8348,9 @@
             <div>
               <section class="reveal">
                 <div
-                  class="section-split flex flex-col sm:flex-row items-stretch sm:items-center w-full p-4 sm:p-5 md:p-7 gap-6 sm:gap-0"
+                  class="w-full p-4 sm:p-5 md:p-7 max-w-2xl mx-auto"
                 >
-                  <div class="section-visual w-full sm:w-1/2 flex justify-center shrink-0">
-                    <a
-                      aria-label="projects"
-                      class="ascii-host"
-                      href="projects.html"
-                    >
-                      <pre
-                        class="ascii-art text-foreground"
-                        data-ascii
-                        data-shape="built"
-                        data-cols="54"
-                        data-rows="36"
-                        aria-hidden="true"
-                      ></pre>
-                    </a>
-                  </div>
-                  <div class="section-copy w-full sm:w-1/2 flex flex-col items-start gap-6">
+                  <div class="flex flex-col items-start gap-6 w-full">
                     <div class="flex flex-col gap-4 w-full">
                       <div class="text-secondary">03</div>
                       <h2 class="text-foreground font-medium">
@@ -8609,25 +8555,9 @@
             <div>
               <section class="reveal">
                 <div
-                  class="section-split flex flex-col sm:flex-row items-stretch sm:items-center w-full p-4 sm:p-5 md:p-7 gap-6 sm:gap-0"
+                  class="w-full p-4 sm:p-5 md:p-7 max-w-2xl mx-auto"
                 >
-                  <div class="section-visual w-full sm:w-1/2 flex justify-center shrink-0">
-                    <a
-                      aria-label="spotify"
-                      class="ascii-host"
-                      href="spotify.html"
-                    >
-                      <pre
-                        class="ascii-art text-foreground"
-                        data-ascii
-                        data-src="assets/svg/musical-notes.png"
-                        data-cols="54"
-                        data-rows="36"
-                        aria-hidden="true"
-                      ></pre>
-                    </a>
-                  </div>
-                  <div class="section-copy w-full sm:w-1/2 flex flex-col items-start gap-4">
+                  <div class="flex flex-col items-start gap-4 w-full">
                     <div class="flex flex-col gap-3 w-full">
                       <div class="text-secondary">04</div>
                       <h2 class="text-foreground font-medium">
@@ -8689,19 +8619,9 @@
             <div>
               <section class="reveal">
                 <div
-                  class="section-split flex flex-col sm:flex-row items-stretch sm:items-center w-full p-4 sm:p-5 md:p-7 gap-6 sm:gap-0"
+                  class="w-full p-4 sm:p-5 md:p-7 max-w-2xl mx-auto"
                 >
-                  <div class="section-visual w-full sm:w-1/2 flex justify-center shrink-0">
-                    <pre
-                      class="ascii-art text-foreground"
-                      data-ascii
-                      data-shape="speechbubble"
-                      data-cols="54"
-                      data-rows="36"
-                      aria-hidden="true"
-                    ></pre>
-                  </div>
-                  <div class="section-copy w-full sm:w-1/2 flex flex-col items-start gap-6">
+                  <div class="flex flex-col items-start gap-6 w-full">
                     <div class="flex flex-col gap-4 w-full">
                       <div class="text-secondary">05</div>
                       <h2 class="text-foreground font-medium">
@@ -8772,15 +8692,33 @@
         var ta = document.getElementById("spotify-top-artists");
         var tt = document.getElementById("spotify-top-tracks");
 
+        function esc(s) {
+          return String(s)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;");
+        }
+
+        function safeUrl(url) {
+          try {
+            var u = new URL(url);
+            if (u.protocol === "https:" || u.protocol === "http:") {
+              return esc(u.href);
+            }
+          } catch (e) {}
+          return "#";
+        }
+
         function renderArtists(artists) {
           var h = "";
           artists.slice(0, 5).forEach(function (a) {
             h +=
               '<a href="' +
-              a.url +
+              safeUrl(a.url) +
               '" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-1 group hover:opacity-80 transition-opacity shrink-0">' +
               '<img decoding="async" src="' +
-              a.image +
+              safeUrl(a.image) +
               '" alt="" width="36" height="36" class="w-9 h-9 rounded-full object-cover group-hover:scale-105 transition-transform" loading="lazy" />' +
               '<span class="text-[10px] text-foreground text-center max-w-[48px] truncate leading-tight">' +
               esc(a.name) +
@@ -8794,7 +8732,7 @@
           tracks.slice(0, 5).forEach(function (t, i) {
             h +=
               '<a href="' +
-              t.url +
+              safeUrl(t.url) +
               '" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 py-1.5 hover:opacity-80 transition-opacity">' +
               '<span class="text-xs text-secondary w-4 shrink-0 text-right font-mono">' +
               (i + 1) +
@@ -8810,17 +8748,9 @@
           tt.innerHTML = h;
         }
 
-        function esc(s) {
-          return s
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;");
-        }
-
         function fail(id, msg) {
           document.getElementById(id).innerHTML =
-            '<div class="text-sm text-secondary">' + msg + "</div>";
+            '<div class="text-sm text-secondary">' + esc(msg) + "</div>";
         }
 
         async function loadData() {
@@ -8901,248 +8831,6 @@
           observer.observe(el);
         });
       });
-    </script>
-
-    <style>
-      .ascii-host {
-        display: inline-block;
-      }
-
-      .ascii-art {
-        margin: 0;
-        padding: 0;
-        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-        font-size: clamp(6px, 1.45vw, 10px);
-        line-height: 0.95;
-        letter-spacing: 0;
-        white-space: pre;
-        user-select: none;
-        display: block;
-      }
-    </style>
-    <script>
-      (function () {
-        if (
-          window.matchMedia &&
-          window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        )
-          return;
-
-        var CACHE = new Map();
-        var CELL_ASPECT = 0.63; // monospace char width / height
-
-        // Shapes are drawn into a canvas sized (cols * S) x (rows * S) and then
-        // downsampled. We compensate for the cell aspect by scaling y, so that
-        // the visible (rendered) silhouette has the proportions you draw here.
-        var SHAPES = {
-          // "things i've built" — a small stacked-block structure
-          built: function (ctx, w, h) {
-            ctx.fillStyle = "#000";
-            // Helper: draw a block in display-normalized coords (0..1 each axis).
-            function block(x, y, bw, bh) {
-              ctx.fillRect(x * w, y * h, bw * w, bh * h);
-            }
-            // Foundation row (3 blocks)
-            block(0.1, 0.74, 0.22, 0.14);
-            block(0.36, 0.74, 0.22, 0.14);
-            block(0.62, 0.74, 0.22, 0.14);
-            // Middle row (offset, 2 blocks)
-            block(0.23, 0.55, 0.22, 0.14);
-            block(0.49, 0.55, 0.22, 0.14);
-            // Top block
-            block(0.36, 0.36, 0.22, 0.14);
-            // Cap / spire
-            block(0.45, 0.2, 0.04, 0.14);
-            block(0.4, 0.12, 0.14, 0.06);
-          },
-
-          // "say hi" — speech bubble with typing dots
-          speechbubble: function (ctx, w, h) {
-            ctx.fillStyle = "#000";
-            var bx = 0.1 * w,
-              by = 0.16 * h;
-            var bw = 0.8 * w,
-              bh = 0.46 * h;
-            var br = Math.min(0.1 * w, 0.18 * h);
-
-            ctx.beginPath();
-            ctx.moveTo(bx + br, by);
-            ctx.lineTo(bx + bw - br, by);
-            ctx.quadraticCurveTo(bx + bw, by, bx + bw, by + br);
-            ctx.lineTo(bx + bw, by + bh - br);
-            ctx.quadraticCurveTo(bx + bw, by + bh, bx + bw - br, by + bh);
-            // Triangular tail hanging down-left
-            ctx.lineTo(bx + bw * 0.46, by + bh);
-            ctx.lineTo(bx + bw * 0.3, by + bh + 0.22 * h);
-            ctx.lineTo(bx + bw * 0.38, by + bh);
-            ctx.lineTo(bx + br, by + bh);
-            ctx.quadraticCurveTo(bx, by + bh, bx, by + bh - br);
-            ctx.lineTo(bx, by + br);
-            ctx.quadraticCurveTo(bx, by, bx + br, by);
-            ctx.closePath();
-            ctx.fill();
-
-            // Punch out three "typing" dots inside the bubble.
-            ctx.globalCompositeOperation = "destination-out";
-            var cy = by + bh / 2;
-            var dotR = Math.min(0.045 * w, 0.075 * h);
-            [0.32, 0.5, 0.68].forEach(function (fx) {
-              ctx.beginPath();
-              ctx.arc(bx + bw * fx, cy, dotR, 0, Math.PI * 2);
-              ctx.fill();
-            });
-            ctx.globalCompositeOperation = "source-over";
-          },
-        };
-
-        function gridFromCanvasSource(key, cols, rows, draw) {
-          if (CACHE.has(key)) return CACHE.get(key);
-          var S = 4;
-          var hi = document.createElement("canvas");
-          hi.width = cols * S;
-          hi.height = rows * S;
-          var hctx = hi.getContext("2d");
-          // Cell-aspect compensation: the rendered grid has cells that are
-          // CELL_ASPECT wide as they are tall. Scale the y-axis so shapes
-          // drawn in display-proportional space land correctly after sampling.
-          hctx.translate(0, hi.height / 2);
-          hctx.scale(1, CELL_ASPECT);
-          hctx.translate(0, -hi.height / 2);
-          draw(hctx, hi.width, hi.height);
-
-          var can = document.createElement("canvas");
-          can.width = cols;
-          can.height = rows;
-          var ctx = can.getContext("2d");
-          ctx.drawImage(hi, 0, 0, cols, rows);
-          var data = ctx.getImageData(0, 0, cols, rows).data;
-          var g = new Uint8Array(cols * rows);
-          for (var i = 0; i < cols * rows; i++) {
-            g[i] = data[i * 4 + 3] > 80 ? 1 : 0;
-          }
-          var slot = {
-            ready: true,
-            grid: g,
-          };
-          CACHE.set(key, slot);
-          return slot;
-        }
-
-        function loadShape(name, cols, rows) {
-          return gridFromCanvasSource(
-            "shape:" + name + "|" + cols + "|" + rows,
-            cols,
-            rows,
-            SHAPES[name],
-          );
-        }
-
-        function loadImage(src, cols, rows) {
-          var key = "img:" + src + "|" + cols + "|" + rows;
-          if (CACHE.has(key)) return CACHE.get(key);
-          var slot = {
-            ready: false,
-            grid: null,
-          };
-          CACHE.set(key, slot);
-          var img = new Image();
-          img.onload = function () {
-            var can = document.createElement("canvas");
-            can.width = cols;
-            can.height = rows;
-            var ctx = can.getContext("2d");
-            var imgAr = img.width / img.height;
-            var gridAr = (cols * CELL_ASPECT) / rows;
-            var dw, dh, dx, dy;
-            if (imgAr > gridAr) {
-              dw = cols;
-              dh = (cols * CELL_ASPECT) / imgAr;
-              dx = 0;
-              dy = (rows - dh) / 2;
-            } else {
-              dh = rows;
-              dw = (rows * imgAr) / CELL_ASPECT;
-              dx = (cols - dw) / 2;
-              dy = 0;
-            }
-            ctx.drawImage(img, dx, dy, dw, dh);
-            var data = ctx.getImageData(0, 0, cols, rows).data;
-            var g = new Uint8Array(cols * rows);
-            for (var i = 0; i < cols * rows; i++) {
-              g[i] = data[i * 4 + 3] > 80 ? 1 : 0;
-            }
-            slot.grid = g;
-            slot.ready = true;
-          };
-          img.src = src;
-          return slot;
-        }
-
-        function setup(el) {
-          var src = el.dataset.src;
-          var shape = el.dataset.shape;
-          var cols = parseInt(el.dataset.cols, 10) || 54;
-          var rows = parseInt(el.dataset.rows, 10) || 36;
-          var slot = shape
-            ? loadShape(shape, cols, rows)
-            : loadImage(src, cols, rows);
-
-          // Bits rising up the empty space around the figure.
-          var rising = [];
-          // Start invisible until first paint to avoid a layout flash.
-          el.textContent = (" ".repeat(cols) + "\n").repeat(rows);
-
-          function step() {
-            requestAnimationFrame(step);
-            if (!slot.ready) return;
-
-            // Spawn rate tuned for ~30-40 simultaneous bits.
-            if (Math.random() < 0.18) {
-              rising.push({
-                x: Math.floor(Math.random() * cols),
-                y: rows + Math.random() * 2,
-                v: 0.06 + Math.random() * 0.12,
-                ch: Math.random() < 0.5 ? "0" : "1",
-              });
-            }
-            for (var i = rising.length - 1; i >= 0; i--) {
-              rising[i].y -= rising[i].v;
-              if (rising[i].y < -1) rising.splice(i, 1);
-            }
-
-            var s = "";
-            for (var r = 0; r < rows; r++) {
-              for (var c = 0; c < cols; c++) {
-                var inFig = slot.grid[r * cols + c] === 1;
-
-                var drop = null;
-                for (var k = 0; k < rising.length; k++) {
-                  var d = rising[k];
-                  if (d.x === c && Math.floor(d.y) === r) {
-                    drop = d.ch;
-                    break;
-                  }
-                }
-
-                if (inFig) {
-                  // Stable per-cell choice so the silhouette doesn't flicker.
-                  var h = ((c * 73856093) ^ (r * 19349663)) & 1;
-                  s += h ? "1" : "0";
-                } else if (drop !== null) {
-                  s += drop;
-                } else {
-                  s += " ";
-                }
-              }
-              s += "\n";
-            }
-            el.textContent = s;
-          }
-          requestAnimationFrame(step);
-        }
-
-        document.querySelectorAll("[data-ascii]").forEach(setup);
-      })();
     </script>
   </body>
 </html>

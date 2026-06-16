@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en" class="__variable_3a0388 __variable_c1e5c9">
   <head>
+    <script>document.documentElement.classList.add("js");</script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#ffffff" />
@@ -17,29 +18,13 @@
       property="og:description"
       content="tweaks, changes, and contributions."
     />
-    <meta property="og:image:alt" content="contributions" />
-    <meta property="og:image:type" content="image/png" />
-    <meta
-      property="og:image"
-      content="https://shyamalankannan.com/assets/og-contributions.png"
-    />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="contributions | shyamalan kannan" />
     <meta
       name="twitter:description"
       content="tweaks, changes, and contributions."
     />
-    <meta name="twitter:image:alt" content="contributions" />
-    <meta name="twitter:image:type" content="image/png" />
-    <meta
-      name="twitter:image"
-      content="https://shyamalankannan.com/assets/twitter-card.png"
-    />
-    <meta name="twitter:image:width" content="1200" />
-    <meta name="twitter:image:height" content="630" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" sizes="16x16" />
 
     <style>
@@ -6393,12 +6378,22 @@
       section.reveal,
       hr.reveal,
       article.reveal {
+        opacity: 1;
+        transform: none;
+        filter: none;
+      }
+
+      html.js section.reveal,
+      html.js hr.reveal,
+      html.js article.reveal {
+        opacity: 0;
         animation: fadeReveal 0.7s ease-out forwards;
         animation-play-state: paused;
       }
-      section.reveal.visible,
-      hr.reveal.visible,
-      article.reveal.visible {
+
+      html.js section.reveal.visible,
+      html.js hr.reveal.visible,
+      html.js article.reveal.visible {
         animation-play-state: running;
       }
 

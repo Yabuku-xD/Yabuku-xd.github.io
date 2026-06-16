@@ -13,9 +13,9 @@
 }
 
 @media (max-width: 639px) {
-  section.reveal,
-  hr.reveal,
-  article.reveal {
+  html.js section.reveal,
+  html.js hr.reveal,
+  html.js article.reveal {
     animation-name: fadeRevealMobile;
     animation-duration: 0.5s;
   }
@@ -27,19 +27,6 @@
   nav > div {
     padding-left: max(1.25rem, env(safe-area-inset-left));
     padding-right: max(1.25rem, env(safe-area-inset-right));
-  }
-
-  /* Index sections: copy only on mobile */
-  .section-split {
-    gap: 0;
-  }
-
-  .section-split > .section-visual {
-    display: none;
-  }
-
-  .section-split > .section-copy {
-    width: 100%;
   }
 
   /* Contribution logos on the home page */
