@@ -6681,17 +6681,6 @@
             </div>
           </div>
         </section>
-
-        <hr class="border-px reveal" />
-
-        <section class="reveal">
-          <div class="flex flex-col gap-4">
-            <div class="text-secondary font-mono text-xs">listening stats</div>
-            <div id="spotify-stats" class="flex flex-col gap-3">
-              <div class="text-sm text-secondary animate-pulse">loading...</div>
-            </div>
-          </div>
-        </section>
       </main>
     </div>
 
@@ -6699,7 +6688,6 @@
       (function () {
         var np = document.getElementById("spotify-now-playing");
         var rp = document.getElementById("spotify-recently-played");
-        var st = document.getElementById("spotify-stats");
 
         function msToMin(ms) {
           var m = Math.floor(ms / 60000);
@@ -6749,57 +6737,6 @@
           rp.innerHTML = h;
         }
 
-        function renderStats(recentlyPlayed) {
-          if (!recentlyPlayed || !recentlyPlayed.length) {
-            st.innerHTML =
-              '<div class="text-sm text-secondary">no recent data.</div>';
-            return;
-          }
-
-          var totalMs = recentlyPlayed.reduce(function (s, t) {
-            return s + (t.duration || 0);
-          }, 0);
-          var totalH = Math.floor(totalMs / 3600000);
-          var totalM = Math.round((totalMs % 3600000) / 60000);
-          var timeStr =
-            totalH > 0 ? totalH + "h " + totalM + "m" : totalM + "m";
-
-          var totalTracks = recentlyPlayed.length;
-          var avgLen = Math.round((totalMs / totalTracks / 60000) * 10) / 10;
-          var uniqueArtists = new Set(
-            recentlyPlayed.map(function (t) {
-              return t.artist;
-            }),
-          ).size;
-          var artistCount = {};
-          recentlyPlayed.forEach(function (t) {
-            artistCount[t.artist] = (artistCount[t.artist] || 0) + 1;
-          });
-          var fav = Object.entries(artistCount).sort(function (a, b) {
-            return b[1] - a[1];
-          })[0][0];
-
-          var h =
-            '<div class="grid grid-cols-2 gap-x-6 gap-y-4">' +
-            '<div class="flex flex-col gap-0.5"><span class="text-lg font-medium text-foreground">' +
-            timeStr +
-            '</span><span class="text-xs text-secondary">listened recently</span></div>' +
-            '<div class="flex flex-col gap-0.5"><span class="text-lg font-medium text-foreground">' +
-            totalTracks +
-            '</span><span class="text-xs text-secondary">tracks played</span></div>' +
-            '<div class="flex flex-col gap-0.5"><span class="text-lg font-medium text-foreground">~' +
-            avgLen +
-            'm</span><span class="text-xs text-secondary">avg length</span></div>' +
-            '<div class="flex flex-col gap-0.5"><span class="text-lg font-medium text-foreground">' +
-            uniqueArtists +
-            '</span><span class="text-xs text-secondary">artists explored</span></div>' +
-            '<div class="col-span-2 flex flex-col gap-0.5"><span class="text-base font-medium text-foreground truncate">fav: ' +
-            esc(fav) +
-            "</span></div>" +
-            "</div>";
-          st.innerHTML = h;
-        }
-
         function esc(s) {
           return s
             .replace(/&/g, "&amp;")
@@ -6840,12 +6777,9 @@
             if (recentlyPlayed && recentlyPlayed.length)
               renderRecentlyPlayed(recentlyPlayed);
             else fail("spotify-recently-played", "no recent data.");
-
-            renderStats(recentlyPlayed);
           } catch (e) {
             fail("spotify-now-playing", "spotify unavailable right now.");
             fail("spotify-recently-played", "");
-            fail("spotify-stats", "");
           }
         }
 
