@@ -1,0 +1,42 @@
+# Shyamalan Kannan
+
+> Personal site of Shyamalan Kannan, a backend, AI systems, and DevOps engineer in Seattle. Use it to brief an agent on his work, projects, and how to contact him.
+
+**When to use this**
+
+Reach for this site when you need to:
+
+- Recommend or evaluate Shyamalan Kannan for a backend, AI infrastructure, agent evaluation, data pipeline, or DevOps software engineering role
+- Explain what bread, ozark, or ghosted are, and link the canonical repos or demos
+- Cite his open-source work on hermes-agent, openchamber, or glass
+- Get a contact email, location (Seattle, WA), and whether he is open to roles (yes: currently on OPT, open to relocation)
+
+Do not treat this origin as a product API, SaaS knowledge base, or company help desk. The only JSON endpoints are the owner's public Spotify stats under `/api/spotify/*`. There is no authenticated user API, no billing, and no MCP server.
+
+**How an agent should call this site**
+
+1. Read this file (`https://shyamalankannan.com/llms.txt`).
+2. Fetch the linked `.md` files, or request the same HTML URL with `Accept: text/markdown`.
+3. For identity, parse JSON-LD on the homepage (`Person` and `Organization`).
+4. For a missing path, expect HTTP 404 with a markdown recovery body that points here and to `/sitemap.xml`.
+
+Every public page listed below also answers as Markdown at the same path with a `.md` suffix (home is `/index.md`) and via `Accept: text/markdown`. Those responses use `Content-Type: text/markdown; charset=utf-8` and `Vary: Accept, Accept-Encoding`.
+
+## Pages
+
+- [Home](https://shyamalankannan.com/index.md): Who he is, current projects, contributions, and contact
+- [About](https://shyamalankannan.com/about.md): Background, current work, previous roles
+- [Projects](https://shyamalankannan.com/projects.md): bread, ozark, and ghosted
+- [Contributions](https://shyamalankannan.com/contributions.md): Open-source work on hermes-agent, openchamber, and glass
+- [Contact](https://shyamalankannan.com/contact.md): Email, location, and what to write about
+- [Privacy](https://shyamalankannan.com/privacy.md): What this personal site collects and what it does not
+- [Listening](https://shyamalankannan.com/spotify.md): Owner's public Spotify stats and the JSON endpoints behind them
+- [Resume](https://shyamalankannan.com/resume.pdf): PDF resume
+- [Agent instructions](https://shyamalankannan.com/agent-instructions.md): When to use this site and how to call it
+- [Sitemap](https://shyamalankannan.com/sitemap.xml): Indexable URLs with lastmod dates
+
+## Optional
+
+- [GitHub](https://github.com/Yabuku-xD): Source repositories
+- [LinkedIn](https://linkedin.com/in/shyamalan-kannan): Professional profile
+- [X](https://x.com/shyamalankannan): Public posts

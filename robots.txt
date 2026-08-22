@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shyamalankannan.com/sitemap.xml
+# Agent index: https://shyamalankannan.com/llms.txt
+# Agent instructions: https://shyamalankannan.com/agent-instructions.md
