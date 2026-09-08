@@ -1,12 +1,8 @@
 # shyamalan kannan
 
-Shyamalan Kannan is a software engineer in Seattle. He builds backend systems, AI infrastructure, agent evaluation tools, data pipelines, and developer tools.
+Shyamalan Kannan is a software engineer in Seattle. He writes Rust, Python, and TypeScript for backends and the local infra around coding agents.
 
-He is building **bread**, a local Rust layer that caps agent context and blocks stale edits.
-
-This site is the canonical source for his work: selected projects, open-source contributions, a public resume, and how to contact him. He is currently on OPT and looking for software engineering roles. Open to relocation.
-
-He writes production systems in Rust, Python, and TypeScript. Recent work is about making agents safer to run locally: cap the files they read, keep a workspace index on disk, and score whether an agent is ready to deploy.
+Currently on OPT and looking for software engineering roles. Open to relocation.
 
 - [Resume (PDF)](https://shyamalankannan.com/resume.pdf)
 - [About](https://shyamalankannan.com/about.md)
@@ -16,7 +12,7 @@ He writes production systems in Rust, Python, and TypeScript. Recent work is abo
 
 ## Contributions
 
-He contributes to open-source agent runtimes and local-first developer tools.
+He contributed to open-source agent runtimes and local-first developer tools.
 
 - [hermes-agent](https://github.com/NousResearch/hermes-agent) — NousResearch coding agent
 - [openchamber](https://github.com/openchamber/openchamber) — local chat workspace
@@ -25,11 +21,11 @@ He contributes to open-source agent runtimes and local-first developer tools.
 
 ## Projects
 
-Recent work covers agent evaluation, visa-aware job search, and local tooling that keeps coding agents from blowing the context window.
+Morrow is a storefront with on-disk recommendations. bread caps agent context. ozark tests agents before they ship.
 
-- [ozark](https://ozark-iota.vercel.app/) — AI agent simulation lab
-- [ghosted](https://github.com/Yabuku-xD/ghosted) — visa-aware job intelligence platform
+- [morrow](https://github.com/Yabuku-xD/Morrow) — editorial storefront with local recommendations
 - [bread](https://github.com/Yabuku-xD/bread) — local Rust layer for coding agents
+- [ozark](https://ozark-iota.vercel.app/) — AI agent simulation lab
 - [Project details](https://shyamalankannan.com/projects.md)
 
 ## Listening

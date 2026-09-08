@@ -2,18 +2,18 @@
 
 Last updated: 21 August 2026
 
-shyamalankannan.com is a personal portfolio. It describes Shyamalan Kannan's work, open-source contributions, and how to email him. It is not a product, store, or account system. You cannot create a login, pay for anything, or submit a form that stores your data on this origin.
+This is a personal site. No accounts, no payments, no forms that store your data.
 
-He does not run advertising networks, first-party analytics dashboards, or marketing pixels on these pages. He does not sell personal information. He does not build visitor profiles.
+Shyamalan Kannan does not run ads or analytics. He does not sell personal information or build visitor profiles.
 
 ## What is collected
 
-The hosting and CDN provider (Cloudflare) may receive standard request logs: IP address, user agent, requested path, and timestamp. Those logs exist to operate the site and respond to abuse. They are not used to target ads.
+Cloudflare may log IP address, user agent, path, and time. Those logs run the site and stop abuse.
 
-The listening page fetches the site owner's own Spotify listening stats through a Cloudflare Worker that uses his refresh token. That API returns his public-facing listening data, not yours. Visiting the page does not connect your Spotify account.
+The listening page fetches his Spotify stats through a Cloudflare Worker that uses his refresh token. That is his listening data, not yours. Visiting does not connect your account.
 
-If you email him, he receives whatever you put in the message, including your email address. Correspondence is kept only as long as needed to reply. Outbound links go to GitHub, LinkedIn, X, Spotify, and other third-party sites that have their own policies.
+If you email him, he receives the message. He keeps it until he has replied. Links off this site follow those sites' rules.
 
 ## Requests
 
-To ask a privacy question, or to request that an email you sent be deleted, write to [shyamalankannan@gmail.com](mailto:shyamalankannan@gmail.com) with the subject "privacy". More contact options are on [contact](https://shyamalankannan.com/contact.md).
+Privacy questions, or a request to delete an email you sent, go to [shyamalankannan@gmail.com](mailto:shyamalankannan@gmail.com) with the subject "privacy". More on [contact](https://shyamalankannan.com/contact.md).

@@ -1,4 +1,6 @@
 const SITE = "https://shyamalankannan.com";
+const SPOTIFY_API = "https://api.spotify.com/v1";
+const SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token";
 const PRODUCES = ["text/html", "text/markdown"];
 const PAGE_ALIASES = {
   "/about": "/about-me.html",
@@ -8,18 +10,26 @@ const PAGE_ALIASES = {
 const STATIC_EXT =
   /\.(?:css|js|mjs|map|png|jpe?g|webp|gif|svg|avif|ico|woff2?|ttf|otf|eot|json|pdf|mp4|webm|mp3|wav|ogg|zip)$/i;
 
+function toUrl(value) {
+  try {
+    return new URL(value);
+  } catch {
+    return null;
+  }
+}
+
 export default {
   async fetch(request, env) {
-    const url = new URL(request.url);
+    const url = toUrl(request.url);
+    if (!url) return new Response("Bad Request", { status: 400 });
 
     if (url.pathname.startsWith("/api/spotify")) {
       return handleSpotify(request, env);
     }
 
     if (url.pathname.length > 1 && url.pathname.endsWith("/")) {
-      const redirected = new URL(url);
-      redirected.pathname = url.pathname.slice(0, -1);
-      return Response.redirect(redirected.toString(), 308);
+      url.pathname = url.pathname.slice(0, -1);
+      return Response.redirect(url.toString(), 308);
     }
 
     const pathname = canonicalPath(url.pathname);
@@ -44,7 +54,9 @@ export default {
     }
 
     if (pathname.endsWith(".md") || chosen === "text/markdown") {
-      const mdPath = pathname.endsWith(".md") ? pathname : markdownPath(pathname);
+      const mdPath = pathname.endsWith(".md")
+        ? pathname
+        : markdownPath(pathname);
       const mdRes = await env.ASSETS.fetch(assetRequest(request, mdPath));
       if (mdRes.status === 200) {
         return markdownResponse(mdRes, mdPath);
@@ -60,7 +72,9 @@ export default {
       if (chosen === "text/markdown") {
         return notFound(url.pathname, "markdown");
       }
-      const fallback = await env.ASSETS.fetch(assetRequest(request, "/404.html"));
+      const fallback = await env.ASSETS.fetch(
+        assetRequest(request, "/404.html"),
+      );
       if (fallback.status === 200) {
         const res = new Response(fallback.body, {
           status: 404,
@@ -100,7 +114,12 @@ function markdownPath(pathname) {
 }
 
 function assetRequest(request, pathname) {
-  const url = new URL(request.url);
+  const url = toUrl(request.url);
+  if (!url) {
+    return new Request(request, {
+      method: request.method === "HEAD" ? "HEAD" : "GET",
+    });
+  }
   url.pathname = pathname;
   return new Request(url.toString(), {
     method: request.method === "HEAD" ? "HEAD" : "GET",
@@ -112,7 +131,10 @@ function parseAccept(header) {
   return header
     .split(",")
     .map((raw) => {
-      const parts = raw.trim().split(";").map((s) => s.trim());
+      const parts = raw
+        .trim()
+        .split(";")
+        .map((s) => s.trim());
       const type = (parts[0] || "").toLowerCase();
       if (!type) return null;
       let q = 1;
@@ -123,7 +145,9 @@ function parseAccept(header) {
           if (!Number.isNaN(parsed)) q = Math.max(0, Math.min(1, parsed));
         }
       }
-      const specificity = type === "*/*" ? 0 : type.endsWith("/*") ? 1 : 2;
+      let specificity = 2;
+      if (type === "*/*") specificity = 0;
+      else if (type.endsWith("/*")) specificity = 1;
       return { type, q, specificity };
     })
     .filter(Boolean);
@@ -300,7 +324,8 @@ function escapeHtml(value) {
 }
 
 async function handleSpotify(request, env) {
-  const url = new URL(request.url);
+  const url = toUrl(request.url);
+  if (!url) return new Response("Bad Request", { status: 400 });
   const headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
@@ -308,13 +333,12 @@ async function handleSpotify(request, env) {
   const token = await getAccessToken(env);
 
   if (url.pathname === "/api/spotify/now-playing") {
-    const res = await fetch(
-      "https://api.spotify.com/v1/me/player/currently-playing",
-      { headers: { Authorization: `Bearer ${token}` } },
-    );
+    const res = await fetch(`${SPOTIFY_API}/me/player/currently-playing`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     if (res.status === 204) {
       const recent = await fetch(
-        "https://api.spotify.com/v1/me/player/recently-played?limit=1",
+        `${SPOTIFY_API}/me/player/recently-played?limit=1`,
         { headers: { Authorization: `Bearer ${token}` } },
       );
       const data = await recent.json();
@@ -346,7 +370,7 @@ async function handleSpotify(request, env) {
   if (url.pathname === "/api/spotify/top-tracks") {
     const range = url.searchParams.get("range") || "short_term";
     const res = await fetch(
-      `https://api.spotify.com/v1/me/top/tracks?limit=10&time_range=${range}`,
+      `${SPOTIFY_API}/me/top/tracks?limit=10&time_range=${range}`,
       { headers: { Authorization: `Bearer ${token}` } },
     );
     const data = await res.json();
@@ -365,7 +389,7 @@ async function handleSpotify(request, env) {
   if (url.pathname === "/api/spotify/top-artists") {
     const range = url.searchParams.get("range") || "short_term";
     const res = await fetch(
-      `https://api.spotify.com/v1/me/top/artists?limit=9&time_range=${range}`,
+      `${SPOTIFY_API}/me/top/artists?limit=9&time_range=${range}`,
       { headers: { Authorization: `Bearer ${token}` } },
     );
     const data = await res.json();
@@ -382,7 +406,7 @@ async function handleSpotify(request, env) {
 
   if (url.pathname === "/api/spotify/recently-played") {
     const res = await fetch(
-      "https://api.spotify.com/v1/me/player/recently-played?limit=50",
+      `${SPOTIFY_API}/me/player/recently-played?limit=50`,
       { headers: { Authorization: `Bearer ${token}` } },
     );
     const data = await res.json();
@@ -403,7 +427,7 @@ async function handleSpotify(request, env) {
 
 async function getAccessToken(env) {
   const basic = btoa(`${env.SPOTIFY_CLIENT_ID}:${env.SPOTIFY_CLIENT_SECRET}`);
-  const res = await fetch("https://accounts.spotify.com/api/token", {
+  const res = await fetch(SPOTIFY_TOKEN_URL, {
     method: "POST",
     headers: {
       Authorization: `Basic ${basic}`,

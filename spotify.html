@@ -100,12 +100,7 @@
                 fetchpriority="high"
                 width="3276"
                 height="2184"
-                class="hero-crop w-full object-cover"
-                style="
-                  color: transparent;
-                  height: 120px;
-                  object-position: center 65%;
-                "
+                class="hero-crop hero-crop-spotify w-full object-cover"
                 src="assets/man.jpg"
               />
             </div>
@@ -212,67 +207,121 @@
 
     <script>
       (function () {
-        var np = document.getElementById("spotify-now-playing");
-        var rp = document.getElementById("spotify-recently-played");
+        var np = document.querySelector("#spotify-now-playing");
+        var rp = document.querySelector("#spotify-recently-played");
 
-        function msToMin(ms) {
-          var m = Math.floor(ms / 60000);
-          var s = Math.floor((ms % 60000) / 1000);
-          return m + ":" + (s < 10 ? "0" : "") + s;
+        function el(tag, className, text) {
+          var node = document.createElement(tag);
+          if (className) node.className = className;
+          if (text != null) node.textContent = text;
+          return node;
         }
 
+        function httpUrl(url) {
+          try {
+            var u = new URL(url);
+            if (u.protocol === "https:" || u.protocol === "http:") return u.href;
+          } catch (e) {}
+          return "";
+        }
+
+
         function renderNowPlaying(data) {
-          var indicator = data.isPlaying
-            ? '<span class="inline-flex items-center gap-1.5 text-xs text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span><span style="animation:blink 1.8s ease-in-out infinite">now playing</span></span>'
-            : '<span class="text-xs text-secondary">last played</span>';
-          np.innerHTML =
-            '<a href="' +
-            data.songUrl +
-            '" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 hover:opacity-80 transition-opacity group">' +
-            '<img decoding="async" src="' +
-            data.albumArt +
-            '" alt="" width="64" height="64" class="w-16 h-16 flex-shrink-0 rounded object-cover group-hover:scale-105 transition-transform" loading="lazy" />' +
-            '<div class="min-w-0"><div class="text-sm font-medium text-foreground truncate">' +
-            esc(data.title) +
-            "</div>" +
-            '<div class="flex items-center gap-2 text-xs text-secondary truncate mt-0.5"><span>' +
-            esc(data.artist) +
-            "</span>" +
-            indicator +
-            "</div></div></a>";
+          var link = el(
+            "a",
+            "flex items-center gap-4 hover:opacity-80 transition-opacity group",
+          );
+          var href = httpUrl(data.songUrl);
+          if (href) {
+            link.href = href;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+          }
+          var img = el(
+            "img",
+            "w-16 h-16 flex-shrink-0 rounded object-cover group-hover:scale-105 transition-transform",
+          );
+          img.decoding = "async";
+          img.loading = "lazy";
+          img.width = 64;
+          img.height = 64;
+          img.alt = "";
+          var src = httpUrl(data.albumArt);
+          if (src) img.src = src;
+          var meta = el("div", "min-w-0");
+          meta.append(
+            el(
+              "div",
+              "text-sm font-medium text-foreground truncate",
+              data.title,
+            ),
+          );
+          var row = el(
+            "div",
+            "flex items-center gap-2 text-xs text-secondary truncate mt-0.5",
+          );
+          row.append(el("span", null, data.artist));
+          if (data.isPlaying) {
+            var indicator = el(
+              "span",
+              "inline-flex items-center gap-1.5 text-xs text-emerald-600",
+            );
+            indicator.append(
+              el("span", "w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"),
+            );
+            var label = el("span", null, "now playing");
+            label.style.animation = "blink 1.8s ease-in-out infinite";
+            indicator.append(label);
+            row.append(indicator);
+          } else {
+            row.append(el("span", "text-xs text-secondary", "last played"));
+          }
+          meta.append(row);
+          link.append(img, meta);
+          np.replaceChildren(link);
         }
 
         function renderRecentlyPlayed(tracks) {
-          var h = "";
+          var frag = document.createDocumentFragment();
           tracks.slice(0, 8).forEach(function (t) {
-            h +=
-              '<a href="' +
-              t.url +
-              '" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 py-2.5 hover:opacity-80 transition-opacity">' +
-              '<img decoding="async" src="' +
-              t.albumArt +
-              '" alt="" width="40" height="40" class="w-10 h-10 flex-shrink-0 rounded object-cover" loading="lazy" />' +
-              '<div class="min-w-0 flex-1"><div class="text-sm text-foreground truncate">' +
-              esc(t.name) +
-              "</div>" +
-              '<div class="text-xs text-secondary truncate mt-0.5">' +
-              esc(t.artist) +
-              "</div></div></a>" +
-              '<div class="border-b border-border border-dashed"></div>';
+            var link = el(
+              "a",
+              "flex items-center gap-3 py-2.5 hover:opacity-80 transition-opacity",
+            );
+            var href = httpUrl(t.url);
+            if (href) {
+              link.href = href;
+              link.target = "_blank";
+              link.rel = "noopener noreferrer";
+            }
+            var img = el(
+              "img",
+              "w-10 h-10 flex-shrink-0 rounded object-cover",
+            );
+            img.decoding = "async";
+            img.loading = "lazy";
+            img.width = 40;
+            img.height = 40;
+            img.alt = "";
+            var src = httpUrl(t.albumArt);
+            if (src) img.src = src;
+            var meta = el("div", "min-w-0 flex-1");
+            meta.append(
+              el("div", "text-sm text-foreground truncate", t.name),
+              el("div", "text-xs text-secondary truncate mt-0.5", t.artist),
+            );
+            link.append(img, meta);
+            frag.append(
+              link,
+              el("div", "border-b border-border border-dashed"),
+            );
           });
-          rp.innerHTML = h;
+          rp.replaceChildren(frag);
         }
 
-        function esc(s) {
-          return s
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;");
-        }
         function fail(id, msg) {
-          document.getElementById(id).innerHTML =
-            '<div class="text-sm text-secondary">' + msg + "</div>";
+          var node = document.querySelector("#" + id);
+          node.replaceChildren(el("div", "text-sm text-secondary", msg));
         }
 
         async function loadSpotifyData() {

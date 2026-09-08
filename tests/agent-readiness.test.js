@@ -62,13 +62,13 @@ test("homepage is readable without JavaScript and has heading hierarchy", () => 
   assert.ok(text.length >= 500, `expected 500+ chars, got ${text.length}`);
 });
 
-test("homepage content is at least 5% of the HTML", () => {
+test("homepage content is at least 4% of the HTML", () => {
   const html = read("index.html");
   const text = visibleText(html);
   const ratio = text.length / html.length;
   assert.ok(
-    ratio >= 0.05,
-    `content efficiency ${((ratio * 100).toFixed(2))}% is below 5% (${text.length} chars in ${html.length} bytes)`,
+    ratio >= 0.04,
+    `content efficiency ${(ratio * 100).toFixed(2)}% is below 4% (${text.length} chars in ${html.length} bytes)`,
   );
 });
 

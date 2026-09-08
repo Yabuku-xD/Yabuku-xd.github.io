@@ -1,6 +1,14 @@
 # Selected projects
 
-Backend systems, agent evaluation tools, data platforms, and full-stack products by Shyamalan Kannan.
+Editorial storefronts, agent evaluation tools, and local middleware by Shyamalan Kannan.
+
+## morrow: storefront with local recommendations
+
+Aug 2026. An editorial ecommerce storefront. A local ranker shapes Picks from browsing behavior. No LLM API and no hosted recommendation service.
+
+Stack: React · TypeScript · FastAPI · SQLite WAL · sparse NMF
+
+- [GitHub](https://github.com/Yabuku-xD/Morrow)
 
 ## bread: local middleware for coding agents
 

@@ -37,7 +37,19 @@
 .page-main .hero-crop {
   display: block;
   width: 100%;
+  height: 120px;
   margin-inline: auto;
+  object-fit: cover;
+  object-position: center center;
+  color: transparent;
+}
+
+.hero-crop-projects {
+  object-position: center 70%;
+}
+
+.hero-crop-spotify {
+  object-position: center 65%;
 }
 
 /* Mobile layout — keeps the existing theme, fixes small-screen usability */
@@ -98,7 +110,7 @@
 
   /* Spotify artist avatars */
   #spotify-top-artists {
-    display: grid !important;
+    display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 0.5rem;
     justify-items: center;
@@ -114,8 +126,9 @@
   }
 
   /* Project rows: full-width descriptions on narrow screens */
-  .project-desc {
-    padding-left: 0 !important;
+  .page-main .project-desc,
+  body .project-desc {
+    padding-left: 0;
     text-align: left;
   }
 
@@ -133,7 +146,7 @@
 
   /* Hero crops breathe a bit more on phones */
   .hero-crop {
-    height: 9.5rem !important;
+    height: 9.5rem;
   }
 
   /* Contribution PR links: easier to tap */

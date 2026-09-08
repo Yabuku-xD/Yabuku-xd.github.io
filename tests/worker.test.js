@@ -197,6 +197,22 @@ test("/about, /contact, and /privacy resolve", async () => {
   assert.match(await privacy.text(), /privacy/i);
 });
 
+test("invalid request URLs return HTTP 400", async () => {
+  const response = await worker.fetch(
+    {
+      url: "not-a-url",
+      method: "GET",
+      headers: {
+        get() {
+          return null;
+        },
+      },
+    },
+    createEnv(),
+  );
+  assert.equal(response.status, 400);
+});
+
 test("trailing slashes redirect so relative assets keep working", async () => {
   const response = await fetchSite("/about/");
   assert.equal(response.status, 308);

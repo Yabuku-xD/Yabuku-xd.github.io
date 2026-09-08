@@ -4,5 +4,8 @@
   "type": "module",
   "scripts": {
     "test": "node --test tests/*.test.js"
+  },
+  "knip": {
+    "entry": ["worker.js", "assets/js/*.js", "tests/*.test.js"]
   }
 }

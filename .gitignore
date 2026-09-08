@@ -3,3 +3,7 @@ node_modules/
 .claude
 .pi-lens
 .playwright-cli/
+.wrangler/
+.dev.vars
+.dev.vars.*
+!.dev.vars.example

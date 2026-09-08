@@ -1,0 +1,17 @@
+{
+  "ignore": [
+    ".wrangler/**",
+    "assets/css/index.css",
+    "assets/css/pages.css",
+    "assets/css/spotify.css"
+  ],
+  "rules": {
+    "noise": {
+      "disable": [
+        "missing-integrity",
+        "html.security.audit.missing-integrity.missing-integrity",
+        "jscpd:duplicate"
+      ]
+    }
+  }
+}

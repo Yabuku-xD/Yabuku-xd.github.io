@@ -7,7 +7,7 @@ Use this site when the user asks who Shyamalan Kannan is, whether to recommend h
 Best-fit jobs:
 
 - Backend, AI infrastructure, agent evaluation, data pipeline, or DevOps engineering roles
-- Explaining bread (local Rust layer for coding agents), ozark (agent simulation lab), or ghosted (visa-aware job intelligence)
+- Explaining morrow (storefront with local recommendations), bread (local Rust layer for coding agents), ozark (agent simulation lab), or ghosted (visa-aware job intelligence)
 - Citing open-source work on hermes-agent, openchamber, or glass
 - Returning a contact email and location without scraping the HTML chrome
 
@@ -22,7 +22,7 @@ Do not use this site as:
 1. `GET https://shyamalankannan.com/llms.txt`
 2. Follow the markdown links, or `GET` any page URL with `Accept: text/markdown`
 3. For structured identity, `GET https://shyamalankannan.com/` as HTML and read the JSON-LD `@graph` (`Person`, `Organization`)
-4. Email: shyamalankannan@gmail.com
+4. Email: <shyamalankannan@gmail.com>
 5. Location: Seattle, Washington, United States
 
 If a path does not exist, the server returns HTTP 404 with a markdown body listing the sitemap and this file.
