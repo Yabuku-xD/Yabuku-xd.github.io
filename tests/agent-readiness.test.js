@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, statSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
@@ -31,6 +31,28 @@ test("homepage has complete metadata signals", () => {
   );
   assert.match(html, /property="og:image"/);
   assert.match(html, /property="og:type"/);
+});
+
+test("every page's social card exists and fits preview size limits", () => {
+  for (const file of [
+    "index.html",
+    "about-me.html",
+    "projects.html",
+    "contributions.html",
+    "contact.html",
+    "spotify.html",
+    "privacy.html",
+  ]) {
+    const html = read(file);
+    const src = html.match(/property="og:image"\s+content="https:\/\/shyamalankannan\.com\/([^"]+)"/);
+    assert.ok(src, `${file} has no og:image`);
+    const twitter = html.match(/name="twitter:image"\s+content="https:\/\/shyamalankannan\.com\/([^"]+)"/);
+    assert.equal(twitter?.[1], src[1], `${file} twitter:image differs from og:image`);
+    assert.match(html, /property="og:image:alt" content="[^"]{20,}"/, `${file} needs og:image:alt`);
+    // WhatsApp drops previews over about 300 KB.
+    const kb = statSync(join(ROOT, src[1])).size / 1024;
+    assert.ok(kb <= 300, `${src[1]} is ${Math.round(kb)} KB, over 300 KB`);
+  }
 });
 
 test("homepage JSON-LD includes Person and Organization identity", () => {
@@ -111,7 +133,7 @@ test("sitemap.xml lists indexable URLs with lastmod", () => {
   ]) {
     assert.ok(xml.includes(`<loc>${loc}</loc>`), `missing ${loc}`);
   }
-  assert.match(xml, /<lastmod>2026-08-21<\/lastmod>/);
+  assert.match(xml, /<lastmod>2026-09-24<\/lastmod>/);
 });
 
 test("markdown twins exist for public pages", () => {

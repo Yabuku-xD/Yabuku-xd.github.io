@@ -1,16 +1,16 @@
 # Contact Shyamalan Kannan
 
-Email [shyamalankannan@gmail.com](mailto:shyamalankannan@gmail.com). He reads every message.
+Email [shyamalankannan@gmail.com](mailto:shyamalankannan@gmail.com). That's the inbox he checks.
 
-He is in Seattle, on OPT, looking for software engineering roles. Open to relocation. If you want to meet, send a few times that work in Pacific Time.
+He lives in Seattle, is on OPT, and is looking for a software engineering job. He can relocate. For a call, send two or three times that work in Pacific time.
 
-Put the role and company in the subject, or the name of a project. Include a link. Replies usually arrive within a few days.
+Put the role and company in the subject line, or the name of the project you're writing about. A link helps. He usually answers within a few days.
 
-## Other channels
+## Elsewhere
 
 - GitHub: [github.com/Yabuku-xD](https://github.com/Yabuku-xD)
 - LinkedIn: [linkedin.com/in/shyamalan-kannan](https://linkedin.com/in/shyamalan-kannan)
 - X: [x.com/shyamalankannan](https://x.com/shyamalankannan)
 - Resume: [resume.pdf](https://shyamalankannan.com/resume.pdf)
 
-He does not offer paid support or a phone number. For data handling see [privacy](https://shyamalankannan.com/privacy.md). For background see [about](https://shyamalankannan.com/about.md).
+No phone number and no paid support. What the site logs: [privacy](https://shyamalankannan.com/privacy.md). Background: [about](https://shyamalankannan.com/about.md).

@@ -54,26 +54,7 @@
 
 /* Mobile layout — keeps the existing theme, fixes small-screen usability */
 
-@keyframes fadeRevealMobile {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @media (max-width: 639px) {
-  html.js section.reveal,
-  html.js hr.reveal,
-  html.js article.reveal {
-    animation-name: fadeRevealMobile;
-    animation-duration: 0.5s;
-  }
-
   body {
     padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
@@ -100,12 +81,13 @@
     min-height: 44px;
     padding: 0.5rem;
     border-radius: var(--radius, 0.625rem);
-    transition: opacity 200ms ease-out;
+    transition:
+      opacity 150ms ease-out,
+      scale 160ms ease-out;
   }
 
   .mobile-logo-row a:active {
-    opacity: 0.8;
-    transform: scale(0.98);
+    scale: 0.97;
   }
 
   /* Spotify artist avatars */

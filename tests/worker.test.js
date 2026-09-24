@@ -158,7 +158,7 @@ test("Accept: text/markdown serves homepage markdown with Vary: Accept", async (
   );
   assert.match(response.headers.get("vary") || "", /Accept/i);
   assert.match(response.headers.get("vary") || "", /Accept-Encoding/i);
-  assert.match(body, /^# shyamalan kannan/m);
+  assert.match(body, /^# shyamalan kannan/im);
   assert.doesNotMatch(body, /<html/i);
 });
 

@@ -1,0 +1,435 @@
+/*
+ * Shared interaction and typography layer. Loaded after the compiled
+ * Tailwind bundle and mobile.css on every page, so equal-specificity
+ * selectors here win.
+ */
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --duration-hover: 150ms;
+  --duration-press: 160ms;
+  --duration-enter: 420ms;
+  --color-text-muted: var(--secondary);
+  --color-image-outline: rgb(0 0 0 / 0.08);
+  --shadow-chip:
+    0 0 0 1px rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06),
+    0 2px 4px rgb(0 0 0 / 0.04);
+  --shadow-chip-hover:
+    0 0 0 1px rgb(0 0 0 / 0.14), 0 1px 2px -1px rgb(0 0 0 / 0.08),
+    0 3px 6px rgb(0 0 0 / 0.06);
+}
+
+/* Copy is written in normal case; the lowercase look is presentation only. */
+body {
+  text-transform: lowercase;
+}
+
+code,
+.keep-case,
+input,
+textarea {
+  text-transform: none;
+}
+
+code {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+main {
+  overflow-wrap: break-word;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* ---------- Page shell: one width on every subpage ---------- */
+
+.page-shell {
+  max-width: none;
+  margin-inline: 0;
+}
+
+.page-main {
+  max-width: 42rem;
+}
+
+.page-main .prose-left,
+.page-main .prose-left p {
+  text-align: left;
+}
+
+/* ---------- Site nav ---------- */
+
+.site-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: auto;
+  margin-right: -0.5rem;
+}
+
+.site-nav-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding-inline: 0.5rem;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  transition: color var(--duration-hover) ease-out;
+}
+
+.site-nav-links a[aria-current="page"] {
+  color: var(--foreground);
+}
+
+@media (hover: hover) {
+  .site-nav-links a:hover {
+    color: var(--foreground);
+  }
+}
+
+/* ---------- Inline text links ---------- */
+
+.ulink {
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+.ulink-text {
+  padding-bottom: 1px;
+  border-bottom: 1px dotted var(--color-text-muted);
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 calc(100% + 1px);
+  background-size: 0% 1px;
+  transition: background-size 220ms var(--ease-out);
+}
+
+.ulink-icon {
+  display: inline-block;
+  width: 0.875rem;
+  height: 0.875rem;
+  margin-left: 0.25rem;
+  vertical-align: -0.125em;
+  color: var(--color-text-muted);
+  transition:
+    color var(--duration-hover) ease-out,
+    transform 200ms var(--ease-out);
+}
+
+.ulink-logo {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 0.25rem;
+  vertical-align: -0.125em;
+  object-fit: contain;
+}
+
+.ulink:focus-visible .ulink-text {
+  background-size: 100% 1px;
+}
+
+@media (hover: hover) {
+  .ulink:hover .ulink-text {
+    background-size: 100% 1px;
+  }
+
+  .ulink:hover .ulink-icon {
+    color: var(--foreground);
+    transform: translateX(2px);
+  }
+
+  .ulink[target="_blank"]:hover .ulink-icon {
+    transform: translate(1.5px, -1.5px);
+  }
+}
+
+/* ---------- Section call-to-action links ("More about me ->") ---------- */
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 40px;
+  padding-inline: 0.5rem 0.375rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+  transition:
+    opacity var(--duration-hover) ease-out,
+    scale var(--duration-press) ease-out;
+}
+
+.cta svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  transition: transform 200ms var(--ease-out);
+}
+
+.cta:active {
+  scale: 0.97;
+}
+
+.cta:focus-visible svg {
+  transform: translateX(3px);
+}
+
+@media (hover: hover) {
+  .cta:hover {
+    opacity: 0.7;
+  }
+
+  .cta:hover svg {
+    transform: translateX(3px);
+  }
+}
+
+/* ---------- Chips (project repo / site links) ---------- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-height: 28px;
+  padding: 0.25rem 0.375rem 0.25rem 0.5rem;
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  color: var(--foreground);
+  background: #fff;
+  box-shadow: var(--shadow-chip);
+  transition:
+    box-shadow var(--duration-hover) ease-out,
+    scale var(--duration-press) ease-out;
+}
+
+.chip svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--color-text-muted);
+  transition:
+    color var(--duration-hover) ease-out,
+    transform 200ms var(--ease-out);
+}
+
+.chip:active {
+  scale: 0.97;
+}
+
+@media (hover: hover) {
+  .chip:hover {
+    box-shadow: var(--shadow-chip-hover);
+  }
+
+  .chip:hover svg {
+    color: var(--foreground);
+    transform: translateX(2px);
+  }
+}
+
+/* Project titles: show the arrow on hover and on keyboard focus. */
+.project-title svg {
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity var(--duration-hover) ease-out,
+    transform 200ms var(--ease-out);
+}
+
+.project-title:focus-visible svg {
+  opacity: 1;
+  transform: none;
+}
+
+@media (hover: hover) {
+  .project-title:hover svg {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Rows that are entire links (projects on the home page, PRs, tracks). */
+.row-link {
+  transition: opacity var(--duration-hover) ease-out;
+}
+
+@media (hover: hover) {
+  .row-link:hover {
+    opacity: 0.7;
+  }
+}
+
+/* Small icon-only link next to a heading: give it a real hit area. */
+.icon-link {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  color: var(--color-text-muted);
+  transition: color var(--duration-hover) ease-out;
+}
+
+.icon-link svg {
+  width: 12px;
+  height: 12px;
+}
+
+@media (hover: hover) {
+  .icon-link:hover {
+    color: var(--foreground);
+  }
+}
+
+/* ---------- Copy email button with icon swap ---------- */
+
+.copy-btn {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-left: 0.125rem;
+  vertical-align: middle;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: 6px;
+  transition:
+    color var(--duration-hover) ease-out,
+    background-color var(--duration-hover) ease-out,
+    scale var(--duration-press) ease-out;
+}
+
+html:not(.js) .copy-btn {
+  display: none;
+}
+
+.copy-btn:active {
+  scale: 0.96;
+}
+
+.copy-btn svg {
+  grid-area: 1 / 1;
+  width: 14px;
+  height: 14px;
+  transition:
+    opacity 200ms var(--ease-out),
+    scale 200ms var(--ease-out),
+    filter 200ms var(--ease-out);
+}
+
+.copy-btn .icon-done,
+.copy-btn[data-copied] .icon-idle {
+  opacity: 0;
+  scale: 0.25;
+  filter: blur(4px);
+}
+
+.copy-btn[data-copied] .icon-done {
+  opacity: 1;
+  scale: 1;
+  filter: blur(0);
+}
+
+.copy-btn[data-copied] {
+  color: var(--foreground);
+}
+
+@media (hover: hover) {
+  .copy-btn:hover {
+    color: var(--foreground);
+    background-color: rgb(0 0 0 / 0.05);
+  }
+}
+
+/* ---------- Images ---------- */
+
+img.object-cover {
+  outline: 1px solid var(--color-image-outline);
+  outline-offset: -1px;
+}
+
+/* ---------- Scroll reveal ---------- */
+
+/* Static by default; only hide content when motion is welcome and JS runs. */
+html.js section.reveal,
+html.js hr.reveal,
+html.js article.reveal {
+  opacity: 1;
+  animation: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js section.reveal,
+  html.js hr.reveal,
+  html.js article.reveal {
+    opacity: 0;
+  }
+
+  html.js section.reveal.visible,
+  html.js article.reveal.visible {
+    animation: reveal-in var(--duration-enter) var(--ease-out)
+      var(--reveal-delay, 0ms) both;
+  }
+
+  html.js hr.reveal.visible {
+    animation: reveal-fade var(--duration-enter) ease-out
+      var(--reveal-delay, 0ms) both;
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------- Spotify widgets ---------- */
+
+.live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #16a34a;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .live-dot {
+    animation: live-pulse 2s ease-in-out infinite;
+  }
+}
+
+@keyframes live-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.fade-img {
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+
+.fade-img[data-loaded] {
+  opacity: 1;
+}

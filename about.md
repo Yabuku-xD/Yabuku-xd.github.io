@@ -1,40 +1,38 @@
 # About Shyamalan Kannan
 
-Backend, AI systems, and DevOps engineer in Seattle. Currently on OPT and looking for software engineering roles. Open to relocation.
+Software engineer in Seattle. He writes backend code and the plumbing around it: CI pipelines, data jobs, auth flows, and lately tooling for coding agents. On OPT, looking for a software engineering job, able to relocate.
 
 Canonical HTML: [https://shyamalankannan.com/about](https://shyamalankannan.com/about)
 
-## Currently
+## What he looks for in the next job
 
-Builds agent evaluation tools, data pipelines, auth flows, and desktop/web apps. Patterns he keeps coming back to:
-
-- Products with real moving parts: background jobs, OAuth flows, data sync, evaluation harnesses, and interfaces people can keep open all day.
-- Hard technical problems with clear product stakes.
-- People who trade context, reviews, and mentorship without ego.
+- Software with moving parts: background jobs, OAuth handshakes, data that has to sync, tools people leave open all day.
+- Hard problems that matter to someone. He picks the difficult version if a user is waiting on it.
+- A team that reviews code honestly and shares what it knows.
 
 Related pages: [Spotify](https://shyamalankannan.com/spotify.md), [contributions](https://shyamalankannan.com/contributions.md).
 
 ## Previously
 
-### Software engineer @ Seattle University · Apr 2025 – Mar 2026
+### Software engineer at Seattle University · Apr 2025–Mar 2026
 
-- Designed CI/CD pipelines and pre-deployment security scans, cutting C# application release cycles by 20%.
-- Automated AWS, TypeScript, and shell build pipelines, cutting manual delivery from weeks to hours.
-- Worked with research, IT, and operations teams on deployment strategy and wrote 12+ infrastructure runbooks.
+- Built CI/CD pipelines that run security scans before every deploy. Release cycles for the C# apps got 20% shorter.
+- Automated build pipelines across AWS, TypeScript, and shell scripts. Delivery that took weeks of manual steps now takes hours.
+- Planned deployments with research, IT, and operations staff, and wrote 12+ infrastructure runbooks.
 
-### Software engineer intern @ Finkey Consultancy Ltd · Jul 2023 – Oct 2023
+### Software engineer intern at Finkey Consultancy · Jul–Oct 2023
 
-- Architected a Python/FastAPI financial data pipeline on AWS Glue, Athena, Redshift, and S3 for 50k+ records across 15+ data sources, improving retrieval efficiency by 45%.
-- Developed PyTorch anomaly detection and volatility forecasting models with OpenAI API summaries, cutting analyst review time by 40%.
-- Designed REST API endpoints and ETL orchestration for distributed financial data ingestion and querying.
+- Built a Python and FastAPI pipeline on AWS Glue, Athena, Redshift, and S3 that pulls 50k+ financial records from 15+ sources. Retrieval got 45% more efficient.
+- Trained PyTorch models for anomaly detection and volatility forecasting, with OpenAI API summaries on top. Analysts spent 40% less time reviewing.
+- Designed the REST endpoints and ETL jobs that load and query that data.
 
 ## Occasionally
 
-Plays video games, watches anime, plays table tennis, and builds small tools that save clicks.
+Video games, anime, table tennis, and small scripts that save a few clicks a day.
 
 ## Links
 
-- [CV](https://shyamalankannan.com/resume.pdf)
+- [Resume](https://shyamalankannan.com/resume.pdf)
 - [GitHub](https://github.com/Yabuku-xD)
 - [X](https://x.com/Yabuku_xD)
 - [LinkedIn](https://linkedin.com/in/shyamalan-kannan)

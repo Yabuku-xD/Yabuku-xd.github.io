@@ -275,7 +275,7 @@ function notFound(pathname, format) {
 function notFoundMarkdown(pathname) {
   return `# 404: page not found
 
-\`${pathname}\` does not exist on shyamalankannan.com. Nothing was moved silently: this path has no page, and retrying it will return this document again.
+\`${pathname}\` isn't a page on shyamalankannan.com. Retrying returns this same 404.
 
 ## Where to look next
 
@@ -284,7 +284,7 @@ function notFoundMarkdown(pathname) {
 - [llms.txt](${SITE}/llms.txt): Agent index with a Markdown twin behind every entry
 - [About](${SITE}/about): Background and previous roles
 - [Contact](${SITE}/contact): Email and how to write
-- [Projects](${SITE}/projects.html): bread, ozark, and ghosted
+- [Projects](${SITE}/projects.html): omfx, bread, ozark, and ghosted
 
 Every public page also answers with Markdown: append \`.md\` to its path, or send \`Accept: text/markdown\`.
 `;
@@ -295,20 +295,20 @@ function notFoundHtml(pathname) {
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>not found | shyamalan kannan</title>
+    <title>Page not found · Shyamalan Kannan</title>
     <meta name="robots" content="noindex" />
   </head>
   <body>
     <main>
-      <h1>not found</h1>
-      <p><code>${escapeHtml(pathname)}</code> does not exist on shyamalankannan.com.</p>
-      <h2>where to look next</h2>
+      <h1>Page not found</h1>
+      <p><code>${escapeHtml(pathname)}</code> isn't a page on shyamalankannan.com.</p>
+      <h2>Try one of these</h2>
       <ul>
-        <li><a href="/">home</a></li>
-        <li><a href="/sitemap.xml">sitemap</a></li>
+        <li><a href="/">Home page</a></li>
+        <li><a href="/sitemap.xml">Every page (sitemap)</a></li>
         <li><a href="/llms.txt">llms.txt</a></li>
-        <li><a href="/about">about</a></li>
-        <li><a href="/contact">contact</a></li>
+        <li><a href="/about">About me</a></li>
+        <li><a href="/contact">Contact</a></li>
       </ul>
     </main>
   </body>

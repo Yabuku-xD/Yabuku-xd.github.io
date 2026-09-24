@@ -10,6 +10,7 @@
       "disable": [
         "missing-integrity",
         "html.security.audit.missing-integrity.missing-integrity",
+        "opengrep:html.security.audit.missing-integrity.missing-integrity",
         "jscpd:duplicate"
       ]
     }

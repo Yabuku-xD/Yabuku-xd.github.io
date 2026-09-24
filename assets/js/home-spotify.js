@@ -21,12 +21,18 @@
     return "";
   }
 
+  function showWhenLoaded(img) {
+    const done = () => img.setAttribute("data-loaded", "");
+    img.addEventListener("load", done, { once: true });
+    img.addEventListener("error", done, { once: true });
+  }
+
   function renderArtists(artists) {
     const frag = document.createDocumentFragment();
     for (const artist of artists.slice(0, 5)) {
       const link = el(
         "a",
-        "flex flex-col items-center gap-1 group hover:opacity-80 transition-opacity shrink-0",
+        "row-link flex flex-col items-center gap-1 shrink-0",
       );
       const href = httpUrl(artist.url);
       if (href) {
@@ -36,23 +42,23 @@
       }
       const img = el(
         "img",
-        "w-9 h-9 rounded-full object-cover group-hover:scale-105 transition-transform",
+        "fade-img w-9 h-9 rounded-full object-cover",
       );
       img.decoding = "async";
       img.loading = "lazy";
       img.width = 36;
       img.height = 36;
       img.alt = "";
+      showWhenLoaded(img);
       const src = httpUrl(artist.image);
       if (src) img.src = src;
-      link.append(
-        img,
-        el(
-          "span",
-          "text-[10px] text-foreground text-center max-w-[48px] truncate leading-tight",
-          artist.name,
-        ),
+      const name = el(
+        "span",
+        "text-[10px] text-foreground text-center max-w-[48px] truncate leading-tight",
+        artist.name,
       );
+      name.title = artist.name;
+      link.append(img, name);
       frag.append(link);
     }
     ta.replaceChildren(frag);
@@ -63,7 +69,7 @@
     tracks.slice(0, 5).forEach((track, i) => {
       const link = el(
         "a",
-        "flex items-center gap-2 py-1.5 hover:opacity-80 transition-opacity",
+        "row-link flex items-center gap-2 py-1.5",
       );
       const href = httpUrl(track.url);
       if (href) {
@@ -71,18 +77,22 @@
         link.target = "_blank";
         link.rel = "noopener noreferrer";
       }
+      const title = el("span", "text-sm text-foreground truncate", track.name);
+      title.title = track.name;
+      const artist = el(
+        "span",
+        "text-xs text-secondary ml-auto shrink-0 truncate max-w-[45%]",
+        track.artist,
+      );
+      artist.title = track.artist;
       link.append(
         el(
           "span",
           "text-xs text-secondary w-4 shrink-0 text-right font-mono",
           String(i + 1),
         ),
-        el("span", "text-sm text-foreground truncate", track.name),
-        el(
-          "span",
-          "text-xs text-secondary ml-auto shrink-0 truncate max-w-[45%]",
-          track.artist,
-        ),
+        title,
+        artist,
       );
       frag.append(
         link,
@@ -109,12 +119,12 @@
       ]);
 
       if (topArtists && topArtists.length) renderArtists(topArtists);
-      else fail("spotify-top-artists", "unavailable");
+      else fail("spotify-top-artists", "No artists to show right now.");
 
       if (topTracks && topTracks.length) renderTracks(topTracks);
-      else fail("spotify-top-tracks", "unavailable");
+      else fail("spotify-top-tracks", "No tracks to show right now.");
     } catch {
-      fail("spotify-top-artists", "spotify unavailable");
+      fail("spotify-top-artists", "Spotify didn’t answer. Try again in a bit.");
       fail("spotify-top-tracks", "");
     }
   }

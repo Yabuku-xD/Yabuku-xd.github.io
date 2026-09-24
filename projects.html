@@ -4,11 +4,11 @@
     <script>document.documentElement.classList.add("js");</script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#ffffff" />
-    <title>projects | shyamalan kannan</title>
+    <meta name="theme-color" content="#e2e3d8" />
+    <title>Projects · Shyamalan Kannan</title>
     <meta
       name="description"
-      content="backend systems, agent evaluation tools, data platforms, and full-stack products."
+      content="omfx, a coding agent written in Zig. Bread, Rust guardrails for coding agents. Ozark, a test lab for AI agents. Ghosted, H-1B job data for visa holders."
     />
     <meta name="robots" content="index, follow" />
     <meta
@@ -22,28 +22,37 @@
       href="https://shyamalankannan.com/projects.md"
     />
     <link rel="describedby" href="https://shyamalankannan.com/llms.txt" />
-    <meta property="og:title" content="projects | shyamalan kannan" />
+    <meta property="og:title" content="Projects · Shyamalan Kannan" />
     <meta
       property="og:description"
-      content="backend systems, agent evaluation tools, data platforms, and full-stack products."
+      content="A coding agent in Zig, Rust guardrails for coding agents, a test lab for AI agents, and an H-1B job search tool."
     />
     <meta property="og:url" content="https://shyamalankannan.com/projects.html" />
+    <meta property="og:site_name" content="Shyamalan Kannan" />
     <meta property="og:type" content="website" />
     <meta
       property="og:image"
-      content="https://shyamalankannan.com/assets/og-projects.png"
+      content="https://shyamalankannan.com/assets/og-projects.jpg"
     />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Projects by Shyamalan Kannan: omfx, bread, ozark, and ghosted." />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:image"
-      content="https://shyamalankannan.com/assets/og-projects.png"
+      content="https://shyamalankannan.com/assets/og-projects.jpg"
     />
-    <meta name="twitter:title" content="projects | shyamalan kannan" />
+    <meta name="twitter:image:alt" content="Projects by Shyamalan Kannan: omfx, bread, ozark, and ghosted." />
+    <meta name="twitter:title" content="Projects · Shyamalan Kannan" />
     <meta
       name="twitter:description"
-      content="backend systems, agent evaluation tools, data platforms, and full-stack products."
+      content="A coding agent in Zig, Rust guardrails for coding agents, a test lab for AI agents, and an H-1B job search tool."
     />
     <link rel="icon" href="favicon.ico" type="image/x-icon" sizes="16x16" />
+    <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://shyamalankannan.com/projects.html#page","url":"https://shyamalankannan.com/projects.html","name":"Projects by Shyamalan Kannan","author":{"@id":"https://shyamalankannan.com/#person"},"mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"SoftwareSourceCode","name":"omfx","description":"Coding agent CLI written in Zig","url":"https://github.com/Yabuku-xD/omfx","codeRepository":"https://github.com/Yabuku-xD/omfx","programmingLanguage":"Zig","license":"https://opensource.org/licenses/MIT","author":{"@id":"https://shyamalankannan.com/#person"}}},{"@type":"ListItem","position":2,"item":{"@type":"SoftwareSourceCode","name":"Bread","url":"https://github.com/Yabuku-xD/bread","codeRepository":"https://github.com/Yabuku-xD/bread","programmingLanguage":"Rust","author":{"@id":"https://shyamalankannan.com/#person"}}},{"@type":"ListItem","position":3,"item":{"@type":"SoftwareApplication","name":"Ozark","url":"https://ozark-iota.vercel.app/","applicationCategory":"DeveloperApplication","author":{"@id":"https://shyamalankannan.com/#person"}}},{"@type":"ListItem","position":4,"item":{"@type":"SoftwareSourceCode","name":"Ghosted","url":"https://github.com/Yabuku-xD/Ghosted","codeRepository":"https://github.com/Yabuku-xD/Ghosted","programmingLanguage":["Python","TypeScript"],"author":{"@id":"https://shyamalankannan.com/#person"}}}]},"breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://shyamalankannan.com/"},{"@type":"ListItem","position":2,"name":"Projects","item":"https://shyamalankannan.com/projects.html"}]}}
+    </script>
 
     <link rel="stylesheet" href="assets/css/pages.css" />
     <link
@@ -61,362 +70,172 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="assets/mobile.css" />
+    <link rel="stylesheet" href="assets/css/site.css" />
   </head>
 
   <body class="antialiased mt-14">
-    <a class="skip-link" href="#main-content">skip to main content</a>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <nav
-      aria-label="site"
+      aria-label="Site"
       class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-border"
     >
       <div class="flex items-center h-14 px-5 md:px-7">
-        <a
-          href="index.html"
-          class="flex items-center gap-2 text-foreground font-medium text-sm hover:text-foreground/70 transition-colors"
-        >
-          <img
-            decoding="async"
-            src="favicon.ico"
-            alt=""
-            width="18"
-            height="18"
-            class="object-contain"
-          />
-          <span>s.k</span>
+        <a href="index.html" class="flex items-center gap-2 text-foreground font-medium text-sm">
+          <img decoding="async" src="favicon.ico" alt="" width="18" height="18" class="object-contain" />
+          <span>s.k<span class="sr-only"> (home)</span></span>
         </a>
+        <div class="site-nav-links">
+          <a href="about-me.html">About</a>
+          <a href="projects.html" aria-current="page">Projects</a>
+          <a href="contact.html">Contact</a>
+        </div>
       </div>
     </nav>
 
     <div class="page-shell w-full p-4 sm:p-5 md:p-7">
       <main id="main-content" class="page-main flex flex-col gap-8 w-full">
         <section class="reveal">
-          <div class="hero-wrap w-full">
-            <div class="text-muted-foreground w-full overflow-hidden">
-              <img
-                decoding="async"
-                alt=""
-                loading="eager"
-                fetchpriority="high"
-                width="3276"
-                height="2331"
-                class="hero-crop hero-crop-projects w-full object-cover"
-                src="assets/svg/cool.jpeg"
-              />
+          <div class="flex flex-col gap-4">
+            <div class="w-full overflow-hidden">
+              <picture>
+                <source type="image/avif" srcset="assets/opt/cool-1280.avif" />
+                <source type="image/webp" srcset="assets/opt/cool-1280.webp" />
+                <img decoding="async" alt="" loading="eager" fetchpriority="high" width="1280" height="910" class="hero-crop hero-crop-projects w-full object-cover" src="assets/svg/cool.jpeg" />
+              </picture>
             </div>
-          </div>
-        </section>
-        <section class="reveal">
-          <div class="flex flex-col gap-3 items-center">
             <div class="flex flex-col gap-1">
-              <h1 class="text-foreground font-medium text-base">
-                selected projects
-              </h1>
+              <h1 class="text-foreground font-medium text-lg">Selected projects</h1>
               <p class="text-secondary text-sm">
-                editorial storefronts, agent evaluation tools, and local
-                middleware.
+                Four things I built on my own time. Most of them came from
+                something that annoyed me.
               </p>
             </div>
           </div>
         </section>
-        <section class="reveal">
-          <article class="py-5 flex flex-col gap-2">
-            <div class="flex items-center gap-3 mb-1">
-              <span
-                class="font-mono text-[10px] tracking-[0.2em] text-secondary"
-                >001</span
-              >
+
+        <section class="reveal" aria-label="Projects">
+          <article class="py-5 flex flex-col gap-2" aria-labelledby="p-omfx">
+            <div class="flex items-center gap-3 mb-1" aria-hidden="true">
+              <span class="font-mono text-[10px] tracking-[0.2em] text-secondary">001</span>
               <div class="flex-1 border-t border-border"></div>
             </div>
-            <a
-              class="group inline-flex items-center gap-2 w-fit"
-              href="https://github.com/Yabuku-xD/Morrow"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h2
-                class="text-base font-medium text-foreground group-hover:text-foreground/70 transition-colors"
-              >
-                morrow: storefront with local recommendations
-              </h2>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-arrow-right w-4 h-4 text-secondary opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
+            <a class="project-title group inline-flex items-center gap-2 w-fit" href="https://github.com/Yabuku-xD/omfx" target="_blank" rel="noopener noreferrer">
+              <h2 id="p-omfx" class="text-base font-medium text-foreground"><span class="keep-case">omfx</span>: a coding agent in Zig</h2>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-secondary shrink-0" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
             </a>
-            <div
-              class="text-secondary font-mono text-xs flex items-center gap-2"
-            >
-              <time>aug 2026</time>
-            </div>
+            <div class="text-secondary font-mono text-xs"><time datetime="2026-08">Aug 2026</time></div>
             <p class="text-foreground/70 text-sm">
-              i built an editorial ecommerce storefront. a local ranker shapes
-              picks from browsing, with no llm api.
+              My own coding agent CLI, about 3 MB. After every write it parses
+              the file, and if the edit broke the syntax it rolls it back
+              before the model is told it worked. That check covers 36
+              languages.
             </p>
             <p class="text-foreground/70 text-sm">
-              react · typescript · fastapi · sqlite wal · sparse nmf
+              When the context window fills, older turns get compacted on
+              your machine, not rewritten by an LLM, and the dropped text stays
+              around as citations you can open. It talks to 9 model providers
+              and ships 27 built-in tools.
+            </p>
+            <p class="text-foreground/70 text-sm">
+              Zig · Python · shell
             </p>
             <div class="flex flex-wrap gap-1.5 mt-1">
-              <a
-                class="inline-flex items-center justify-center rounded-none text-xs select-none whitespace-nowrap transition-colors ring-1 ring-transparent px-2 py-0.5 cursor-pointer suppress-row-hover hover:ring-zinc-400 hover:text-zinc-900 focus:ring-zinc-500 active:scale-95 active:ring-zinc-600 bg-white text-zinc-800 active:bg-zinc-100 hover:bg-zinc-300 active:bg-zinc-400"
-                href="https://github.com/Yabuku-xD/Morrow"
-                target="_blank"
-                rel="noopener noreferrer"
-                ><span>github</span
-                ><span class="whitespace-nowrap">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    data-slot="icon"
-                    class="inline h-3.5 w-3.5 text-secondary"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z"
-                      clip-rule="evenodd"
-                    ></path></svg></span
+              <a class="chip" href="https://github.com/Yabuku-xD/omfx" target="_blank" rel="noopener noreferrer"
+                ><span>Source on GitHub</span
+                ><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"></path></svg
               ></a>
             </div>
           </article>
-          <article class="py-5 flex flex-col gap-2">
-            <div class="flex items-center gap-3 mb-1">
-              <span
-                class="font-mono text-[10px] tracking-[0.2em] text-secondary"
-                >002</span
-              >
+
+          <article class="py-5 flex flex-col gap-2" aria-labelledby="p-bread">
+            <div class="flex items-center gap-3 mb-1" aria-hidden="true">
+              <span class="font-mono text-[10px] tracking-[0.2em] text-secondary">002</span>
               <div class="flex-1 border-t border-border"></div>
             </div>
-            <a
-              class="group inline-flex items-center gap-2 w-fit"
-              href="https://github.com/Yabuku-xD/bread"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h2
-                class="text-base font-medium text-foreground group-hover:text-foreground/70 transition-colors"
-              >
-                bread: local middleware for coding agents
-              </h2>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-arrow-right w-4 h-4 text-secondary opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
+            <a class="project-title group inline-flex items-center gap-2 w-fit" href="https://github.com/Yabuku-xD/bread" target="_blank" rel="noopener noreferrer">
+              <h2 id="p-bread" class="text-base font-medium text-foreground">Bread: guardrails for coding agents</h2>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-secondary shrink-0" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
             </a>
-            <div
-              class="text-secondary font-mono text-xs flex items-center gap-2"
-            >
-              <time>ongoing</time>
-            </div>
+            <div class="text-secondary font-mono text-xs">Ongoing</div>
             <p class="text-foreground/70 text-sm">
-              i built a local rust layer for coding agents that caps file reads
-              and search results, tracks provenance, and blocks stale edits.
+              A Rust layer that sits between a coding agent and your repo. It
+              caps how much a single file read or search can return, records
+              where every piece of context came from, and refuses an edit if
+              the file changed since the agent last read it.
             </p>
             <p class="text-foreground/70 text-sm">
-              i built a workspace-local index for lexical and structural
-              retrieval. i keep code, indexes, and optional vectors on disk.
+              It also keeps a search index inside the workspace, for plain
+              text and for code structure. The code, the index, and any
+              optional vectors never leave your disk.
             </p>
             <p class="text-foreground/70 text-sm">
-              rust · codex cli · tree-sitter · ripgrep-compatible search
+              Rust · Codex CLI · tree-sitter · ripgrep-style search
             </p>
             <div class="flex flex-wrap gap-1.5 mt-1">
-              <a
-                class="inline-flex items-center justify-center rounded-none text-xs select-none whitespace-nowrap transition-colors ring-1 ring-transparent px-2 py-0.5 cursor-pointer suppress-row-hover hover:ring-zinc-400 hover:text-zinc-900 focus:ring-zinc-500 active:scale-95 active:ring-zinc-600 bg-white text-zinc-800 active:bg-zinc-100 hover:bg-zinc-300 active:bg-zinc-400"
-                href="https://github.com/Yabuku-xD/bread"
-                target="_blank"
-                rel="noopener noreferrer"
-                ><span>github</span
-                ><span class="whitespace-nowrap">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    data-slot="icon"
-                    class="inline h-3.5 w-3.5 text-secondary"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z"
-                      clip-rule="evenodd"
-                    ></path></svg></span
+              <a class="chip" href="https://github.com/Yabuku-xD/bread" target="_blank" rel="noopener noreferrer"
+                ><span>Source on GitHub</span
+                ><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"></path></svg
               ></a>
             </div>
           </article>
-          <article class="py-5 flex flex-col gap-2">
-            <div class="flex items-center gap-3 mb-1">
-              <span
-                class="font-mono text-[10px] tracking-[0.2em] text-secondary"
-                >003</span
-              >
+
+          <article class="py-5 flex flex-col gap-2" aria-labelledby="p-ozark">
+            <div class="flex items-center gap-3 mb-1" aria-hidden="true">
+              <span class="font-mono text-[10px] tracking-[0.2em] text-secondary">003</span>
               <div class="flex-1 border-t border-border"></div>
             </div>
-            <a
-              class="group inline-flex items-center gap-2 w-fit"
-              href="https://ozark-iota.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h2
-                class="text-base font-medium text-foreground group-hover:text-foreground/70 transition-colors"
-              >
-                ozark: local-first agent evaluation lab
-              </h2>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-arrow-right w-4 h-4 text-secondary opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
+            <a class="project-title group inline-flex items-center gap-2 w-fit" href="https://ozark-iota.vercel.app/" target="_blank" rel="noopener noreferrer">
+              <h2 id="p-ozark" class="text-base font-medium text-foreground">Ozark: test lab for AI agents</h2>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-secondary shrink-0" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
             </a>
-            <div
-              class="text-secondary font-mono text-xs flex items-center gap-2"
-            >
-              <time>may 2026</time>
-            </div>
+            <div class="text-secondary font-mono text-xs"><time datetime="2026-05">May 2026</time></div>
             <p class="text-foreground/70 text-sm">
-              i built a local-first simulation lab for ai agents. i run
-              adversarial scenarios and score five deployment-readiness dimensions.
+              Runs an agent through adversarial scenarios on your own machine
+              and scores it on five things you’d want to know before
+              deploying it.
             </p>
             <p class="text-foreground/70 text-sm">
-              i wrote a python evaluation framework for trace replay/diffing,
-              guardrail checks, and live http/stdio endpoint tests.
+              The Python side replays and diffs traces, checks guardrails, and
+              tests live agents over HTTP or stdio.
             </p>
             <p class="text-foreground/70 text-sm">
-              python · react 19 · vite · sqlite wal · agent evaluation
+              Python · React 19 · Vite · SQLite (WAL)
             </p>
             <div class="flex flex-wrap gap-1.5 mt-1">
-              <a
-                class="inline-flex items-center justify-center rounded-none text-xs select-none whitespace-nowrap transition-colors ring-1 ring-transparent px-2 py-0.5 cursor-pointer suppress-row-hover hover:ring-zinc-400 hover:text-zinc-900 focus:ring-zinc-500 active:scale-95 active:ring-zinc-600 bg-white text-zinc-800 active:bg-zinc-100 hover:bg-zinc-300 active:bg-zinc-400"
-                href="https://ozark-iota.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                ><span>website</span
-                ><span class="whitespace-nowrap">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    data-slot="icon"
-                    class="inline h-3.5 w-3.5 text-secondary"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z"
-                      clip-rule="evenodd"
-                    ></path></svg></span
+              <a class="chip" href="https://ozark-iota.vercel.app/" target="_blank" rel="noopener noreferrer"
+                ><span>Open the site</span
+                ><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"></path></svg
               ></a>
             </div>
           </article>
-          <article class="py-5 flex flex-col gap-2">
-            <div class="flex items-center gap-3 mb-1">
-              <span
-                class="font-mono text-[10px] tracking-[0.2em] text-secondary"
-                >004</span
-              >
+
+          <article class="py-5 flex flex-col gap-2" aria-labelledby="p-ghosted">
+            <div class="flex items-center gap-3 mb-1" aria-hidden="true">
+              <span class="font-mono text-[10px] tracking-[0.2em] text-secondary">004</span>
               <div class="flex-1 border-t border-border"></div>
             </div>
-            <a
-              class="group inline-flex items-center gap-2 w-fit"
-              href="https://github.com/Yabuku-xD/Ghosted"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h2
-                class="text-base font-medium text-foreground group-hover:text-foreground/70 transition-colors"
-              >
-                ghosted: visa-aware job intelligence platform
-              </h2>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-arrow-right w-4 h-4 text-secondary opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
+            <a class="project-title group inline-flex items-center gap-2 w-fit" href="https://github.com/Yabuku-xD/Ghosted" target="_blank" rel="noopener noreferrer">
+              <h2 id="p-ghosted" class="text-base font-medium text-foreground">Ghosted: job search for visa holders</h2>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-secondary shrink-0" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
             </a>
-            <div
-              class="text-secondary font-mono text-xs flex items-center gap-2"
-            >
-              <time>mar 2026</time>
-            </div>
+            <div class="text-secondary font-mono text-xs"><time datetime="2026-03">Mar 2026</time></div>
             <p class="text-foreground/70 text-sm">
-              i built a visa-aware job intelligence platform serving 119k+ h-1b
-              records, 23k+ company profiles, 9k+ salary entries, and 4.4k+
-              live job listings.
+              I built this while job hunting on a visa. It answers “does this
+              company actually sponsor?” with 119k+ H-1B records, 23k+ company
+              profiles, 9k+ salary entries, and 4.4k+ live listings.
             </p>
             <p class="text-foreground/70 text-sm">
-              i implemented celery + redis jobs for ats ingestion, tf-idf
-              resume matching, deduplication, cached pagination, and pdf reports.
+              Celery and Redis workers pull from applicant tracking systems,
+              drop duplicates, and match listings to your resume with TF-IDF.
+              It also generates PDF reports.
             </p>
             <p class="text-foreground/70 text-sm">
-              django · react · typescript · postgresql · redis · celery
+              Django · React · TypeScript · PostgreSQL · Redis · Celery
             </p>
             <div class="flex flex-wrap gap-1.5 mt-1">
-              <a
-                class="inline-flex items-center justify-center rounded-none text-xs select-none whitespace-nowrap transition-colors ring-1 ring-transparent px-2 py-0.5 cursor-pointer suppress-row-hover hover:ring-zinc-400 hover:text-zinc-900 focus:ring-zinc-500 active:scale-95 active:ring-zinc-600 bg-white text-zinc-800 active:bg-zinc-100 hover:bg-zinc-300 active:bg-zinc-400"
-                href="https://github.com/Yabuku-xD/Ghosted"
-                target="_blank"
-                rel="noopener noreferrer"
-                ><span>github</span
-                ><span class="whitespace-nowrap">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    data-slot="icon"
-                    class="inline h-3.5 w-3.5 text-secondary"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z"
-                      clip-rule="evenodd"
-                    ></path></svg></span
+              <a class="chip" href="https://github.com/Yabuku-xD/Ghosted" target="_blank" rel="noopener noreferrer"
+                ><span>Source on GitHub</span
+                ><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"></path></svg
               ></a>
             </div>
           </article>
@@ -424,38 +243,6 @@
       </main>
     </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var revealEls = Array.prototype.slice.call(
-          document.querySelectorAll(".reveal"),
-        );
-        var reducedMotion =
-          window.matchMedia &&
-          window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-        if (reducedMotion || !("IntersectionObserver" in window)) {
-          revealEls.forEach(function (el) {
-            el.classList.add("visible");
-          });
-          return;
-        }
-
-        var observer = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (entry) {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
-        );
-
-        revealEls.forEach(function (el) {
-          observer.observe(el);
-        });
-      });
-    </script>
+    <script src="assets/js/site.js" defer></script>
   </body>
 </html>

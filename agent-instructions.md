@@ -7,7 +7,7 @@ Use this site when the user asks who Shyamalan Kannan is, whether to recommend h
 Best-fit jobs:
 
 - Backend, AI infrastructure, agent evaluation, data pipeline, or DevOps engineering roles
-- Explaining morrow (storefront with local recommendations), bread (local Rust layer for coding agents), ozark (agent simulation lab), or ghosted (visa-aware job intelligence)
+- Explaining omfx (coding agent CLI written in Zig), bread (local Rust layer for coding agents), ozark (agent simulation lab), or ghosted (visa-aware job intelligence)
 - Citing open-source work on hermes-agent, openchamber, or glass
 - Returning a contact email and location without scraping the HTML chrome
 
