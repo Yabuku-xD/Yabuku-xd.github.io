@@ -5,6 +5,9 @@
  */
 
 :root {
+  /* The compiled bundle's grey (oklch 0.5348 at 85% alpha) is 3.1:1 on the
+     page; this one is 4.8:1, past WCAG AA's 4.5:1 for body text. */
+  --secondary: #616161;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --duration-hover: 150ms;
   --duration-press: 160ms;
