@@ -99,11 +99,7 @@
         <section class="reveal">
           <div class="flex flex-col gap-4">
             <div class="w-full overflow-hidden">
-              <picture>
-                <source type="image/avif" srcset="assets/opt/hand-1280.avif" />
-                <source type="image/webp" srcset="assets/opt/hand-1280.webp" />
-                <img decoding="async" alt="" loading="eager" fetchpriority="high" width="1200" height="670" class="hero-crop w-full object-cover" src="assets/hand.jpeg" />
-              </picture>
+              <div class="hero-crop hero-ascii" data-ascii-scene="confluence" style="background:#0a0705" aria-hidden="true"></div>
             </div>
             <div class="flex flex-col gap-1">
               <h1 class="text-foreground font-medium text-lg">Contributions</h1>
@@ -243,6 +239,7 @@
       </main>
     </div>
 
+    <script type="module" src="assets/js/ascii-hero.js"></script>
     <script src="assets/js/site.js" defer></script>
   </body>
 </html>

@@ -20,8 +20,8 @@ export const cards = [
     title: "Pipelines, data jobs, and agent tooling",
     body: "Two years of backend work at Seattle University and Finkey, and what I want from the next team.",
     chips: ["Seattle University", "Finkey", "Resume PDF"],
-    image: "../../assets/more_sand.jpeg",
-    imagePosition: "50% 50%",
+    scene: "dunes",
+    still: 4,
     alt: "About Shyamalan Kannan: backend work at Seattle University and Finkey.",
   },
   {
@@ -33,8 +33,8 @@ export const cards = [
     chips: ["unimem", "searchx", "omfx", "bread", "ozark", "ghosted"],
     // Six chips at the default padding wrap to a second row.
     compactChips: true,
-    image: "../../assets/svg/cool.jpeg",
-    imagePosition: "70% 50%",
+    scene: "meadow",
+    still: 8,
     alt: "Projects by Shyamalan Kannan: unimem, searchx, omfx, bread, ozark, and ghosted.",
   },
   {
@@ -44,8 +44,8 @@ export const cards = [
     title: "Pull requests to other people’s projects",
     body: "Bug fixes and features, each with a note on what broke and what changed.",
     chips: ["hermes-agent", "openchamber", "babylon.js"],
-    image: "../../assets/hand.jpeg",
-    imagePosition: "50% 50%",
+    scene: "confluence",
+    still: 3,
     alt: "Open-source pull requests to hermes-agent, openchamber, and babylon.js.",
   },
   {
@@ -56,8 +56,8 @@ export const cards = [
     body: "Put the role and company in the subject line. I usually reply within a few days.",
     chips: ["shyamalankannan@gmail.com"],
     keepCaseChips: true,
-    image: "../../assets/woah.jpeg",
-    imagePosition: "50% 50%",
+    scene: "lanterns",
+    still: 11,
     alt: "Contact Shyamalan Kannan at shyamalankannan@gmail.com.",
   },
   {
@@ -68,8 +68,8 @@ export const cards = [
     body: "The song playing right now and my last eight tracks, pulled live from Spotify.",
     chips: ["Live", "Spotify API"],
     liveChip: true,
-    image: "../../assets/man.jpg",
-    imagePosition: "65% 50%",
+    scene: "sunbeams",
+    still: 5,
     alt: "What Shyamalan Kannan is listening to on Spotify right now.",
   },
   {
@@ -79,8 +79,8 @@ export const cards = [
     title: "No analytics, no ads, no tracking cookies",
     body: "Cloudflare keeps request logs to run the site. That’s the whole list.",
     chips: ["Updated 24 Sep 2026"],
-    image: "../../assets/mountain.jpg",
-    imagePosition: "50% 60%",
+    scene: "mist",
+    still: 6,
     alt: "Privacy policy: no analytics, ads, or tracking cookies on shyamalankannan.com.",
   },
 ];

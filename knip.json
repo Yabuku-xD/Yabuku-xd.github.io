@@ -1,5 +1,6 @@
 {
-  "entry": ["worker.js", "assets/js/*.js", "tests/*.test.js"],
+  "entry": ["worker.js", "assets/js/*.js", "tests/*.test.js", "scripts/ascii/build.js", "scripts/og/*.js"],
   "project": ["**/*.js"],
+  "ignore": ["assets/js/ascii-hero.js"],
   "ignoreBinaries": ["sips"]
 }

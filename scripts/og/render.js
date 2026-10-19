@@ -6,6 +6,8 @@ import { existsSync, mkdtempSync, rmSync, statSync, writeFileSync } from "node:f
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { build } from "esbuild";
+import { scenes } from "../ascii/scenes.js";
 import { cards } from "./cards.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -29,6 +31,17 @@ const asset = (path) => pathToFileURL(resolve(here, path)).href;
 
 const escape = (text) =>
   String(text).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+
+// A card's picture is its page's ascii scene, frozen at `still` seconds, or a
+// photo (the home card's portrait).
+const asciiScript = (
+  await build({ entryPoints: [resolve(root, "scripts/ascii/hero.js")], bundle: true, format: "esm", minify: true, write: false })
+).outputFiles[0].text.replace(/<\/script/gi, "<\\/script");
+
+const photo = (card) =>
+  card.scene
+    ? `<div class="photo" style="background:${scenes[card.scene](8, 4).meta.ground}" data-ascii-scene="${card.scene}" data-ascii-still="${card.still}" data-ascii-cell="4"></div>`
+    : `<div class="photo"><img src="${asset(card.image)}" alt="" style="object-position:${card.imagePosition}" /></div>`;
 
 function chip(text, card, index) {
   const dot = card.liveChip && index === 0 ? '<span class="dot"></span>' : "";
@@ -117,7 +130,9 @@ function page(card) {
     box-shadow: var(--shadow-image);
     position: relative;
   }
-  .photo img { width: 100%; height: 100%; object-fit: cover; object-position: ${card.imagePosition}; display: block; }
+  .photo { display: flex; align-items: center; }
+  .photo canvas { flex: none; width: 100%; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .photo::after {
     content: "";
     position: absolute;
@@ -144,8 +159,9 @@ function page(card) {
       </div>
       <div class="${card.compactChips ? "chips compact" : "chips"}">${card.chips.map((c, i) => chip(c, card, i)).join("")}</div>
     </div>
-    <div class="photo"><img src="${asset(card.image)}" alt="" /></div>
+    ${photo(card)}
   </div>
+  <script type="module">${asciiScript}</script>
 </body>
 </html>`;
 }
@@ -165,7 +181,7 @@ try {
         "--hide-scrollbars",
         "--force-device-scale-factor=1",
         "--allow-file-access-from-files",
-        "--virtual-time-budget=4000",
+        "--virtual-time-budget=8000",
         `--window-size=${WIDTH},${HEIGHT}`,
         `--screenshot=${png}`,
         pathToFileURL(html).href,

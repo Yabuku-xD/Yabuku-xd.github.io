@@ -44,14 +44,6 @@
   color: transparent;
 }
 
-.hero-crop-projects {
-  object-position: center 70%;
-}
-
-.hero-crop-spotify {
-  object-position: center 65%;
-}
-
 /* Mobile layout — keeps the existing theme, fixes small-screen usability */
 
 @media (max-width: 639px) {

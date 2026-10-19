@@ -87,11 +87,7 @@
         <section class="reveal">
           <div class="flex flex-col gap-4">
             <div class="w-full overflow-hidden">
-              <picture>
-                <source type="image/avif" srcset="assets/opt/mountain-1280.avif" />
-                <source type="image/webp" srcset="assets/opt/mountain-1280.webp" />
-                <img decoding="async" alt="" loading="eager" fetchpriority="high" width="1280" height="960" class="hero-crop w-full object-cover" src="assets/mountain.jpg" />
-              </picture>
+              <div class="hero-crop hero-ascii" data-ascii-scene="mist" style="background:#0f1411" aria-hidden="true"></div>
             </div>
             <h1 class="text-foreground font-medium text-lg">Privacy</h1>
             <p class="text-secondary text-sm">Last updated <time datetime="2026-09-24">24 September 2026</time></p>
@@ -148,6 +144,7 @@
         </section>
       </main>
     </div>
+    <script type="module" src="assets/js/ascii-hero.js"></script>
     <script src="assets/js/site.js" defer></script>
   </body>
 </html>

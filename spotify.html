@@ -94,11 +94,7 @@
       <main id="main-content" class="page-main flex flex-col gap-8 w-full">
         <section class="reveal">
           <div class="w-full overflow-hidden">
-            <picture>
-              <source type="image/avif" srcset="assets/opt/man-1280.avif" />
-              <source type="image/webp" srcset="assets/opt/man-1280.webp" />
-              <img decoding="async" alt="" loading="eager" fetchpriority="high" width="1280" height="854" class="hero-crop hero-crop-spotify w-full object-cover" src="assets/man.jpg" />
-            </picture>
+            <div class="hero-crop hero-ascii" data-ascii-scene="sunbeams" style="background:#0c0806" aria-hidden="true"></div>
           </div>
         </section>
         <section class="reveal">
@@ -148,6 +144,7 @@
     </div>
 
     <script src="assets/js/spotify-page.js" defer></script>
+    <script type="module" src="assets/js/ascii-hero.js"></script>
     <script src="assets/js/site.js" defer></script>
   </body>
 </html>

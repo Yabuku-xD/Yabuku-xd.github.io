@@ -350,6 +350,22 @@ img.object-cover {
   outline-offset: -1px;
 }
 
+/* Animated ascii scenes in place of hero photos (assets/js/ascii-hero.js).
+   The canvas is sized to whole rows, a little taller than the box, and the
+   box crops it from the middle. */
+.page-main .hero-ascii {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  outline: 1px solid var(--color-image-outline);
+  outline-offset: -1px;
+}
+
+.hero-ascii canvas {
+  flex: none;
+  width: 100%;
+}
+
 /* ---------- Scroll reveal ---------- */
 
 /* Static by default; only hide content when motion is welcome and JS runs. */

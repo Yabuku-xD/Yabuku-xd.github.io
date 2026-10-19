@@ -96,11 +96,7 @@
         <section class="reveal">
           <div class="flex flex-col gap-4">
             <div class="w-full overflow-hidden">
-              <picture>
-                <source type="image/avif" srcset="assets/opt/more_sand-1280.avif" />
-                <source type="image/webp" srcset="assets/opt/more_sand-1280.webp" />
-                <img decoding="async" alt="" loading="eager" fetchpriority="high" width="1200" height="853" class="hero-crop w-full object-cover" src="assets/more_sand.jpeg" />
-              </picture>
+              <div class="hero-crop hero-ascii" data-ascii-scene="dunes" style="background:#0d0807" aria-hidden="true"></div>
             </div>
             <h1 class="text-foreground font-medium text-lg">About me</h1>
           </div>
@@ -240,6 +236,7 @@
         </section>
       </main>
     </div>
+    <script type="module" src="assets/js/ascii-hero.js"></script>
     <script src="assets/js/site.js" defer></script>
   </body>
 </html>

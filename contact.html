@@ -90,11 +90,7 @@
         <section class="reveal">
           <div class="flex flex-col gap-4">
             <div class="w-full overflow-hidden">
-              <picture>
-                <source type="image/avif" srcset="assets/opt/woah-1280.avif" />
-                <source type="image/webp" srcset="assets/opt/woah-1280.webp" />
-                <img decoding="async" alt="" loading="eager" fetchpriority="high" width="1280" height="854" class="hero-crop w-full object-cover" src="assets/woah.jpeg" />
-              </picture>
+              <div class="hero-crop hero-ascii" data-ascii-scene="lanterns" style="background:#06070f" aria-hidden="true"></div>
             </div>
             <h1 class="text-foreground font-medium text-lg">Contact</h1>
           </div>
@@ -162,6 +158,7 @@
         </section>
       </main>
     </div>
+    <script type="module" src="assets/js/ascii-hero.js"></script>
     <script src="assets/js/site.js" defer></script>
   </body>
 </html>
