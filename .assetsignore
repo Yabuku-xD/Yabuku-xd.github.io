@@ -1,0 +1,25 @@
+# Wrangler uploads the whole repo root as static assets (wrangler.toml sets
+# assets.directory = "./"). Anything listed here stays off the public site.
+
+# Version control and tool state
+.git
+.github
+.gitignore
+.DS_Store
+.claude
+.pi
+.pi-lens*
+.playwright-cli
+.sincerely
+.uiwork
+.wrangler
+node_modules
+
+# Source, tests, and config that only the build needs
+worker.js
+wrangler.toml
+package.json
+package-lock.json
+knip.json
+scripts
+tests
