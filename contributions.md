@@ -19,15 +19,14 @@ A desktop app around the OpenCode CLI agent. Repository: [openchamber/openchambe
 - [#1065](https://github.com/openchamber/openchamber/pull/1065) Refresh provider models on OpenCode reload
 - [#1064](https://github.com/openchamber/openchamber/pull/1064) Fix skills empty state centering and terminal toolbar overlap
 - [#1058](https://github.com/openchamber/openchamber/pull/1058) Keep settings sidebar open, center content, fix worktree refresh
-- [#1056](https://github.com/openchamber/openchamber/pull/1056) Add per-agent default thinking variant setting
 - [#1000](https://github.com/openchamber/openchamber/pull/1000) Improve cold start, bundle size, and streaming performance
+- [#999](https://github.com/openchamber/openchamber/pull/999) Update the todo list when task status changes
+- [#997](https://github.com/openchamber/openchamber/pull/997) Lazy-load the Markdown renderer and CodeMirror languages
 
-## glass · Glass HQ
+## babylon.js · BabylonJS
 
-A browser written in Rust on GPUI, the UI framework behind Zed. Repository: [Glass-HQ/Glass](https://github.com/Glass-HQ/Glass)
+An open-source 3D engine for the web, with a GUI system that draws controls inside the 3D scene. Repository: [BabylonJS/Babylon.js](https://github.com/BabylonJS/Babylon.js)
 
-- [#57](https://github.com/Glass-HQ/Glass/pull/57) Virtualize sidebar tab list and pre-collect tab render data
-- [#56](https://github.com/Glass-HQ/Glass/pull/56) Reduce spurious rendering and lock contention
-- [#55](https://github.com/Glass-HQ/Glass/pull/55) Fix path isolation and omnibox URL navigation
+- [#18881](https://github.com/BabylonJS/Babylon.js/pull/18881) Add FlexPanel and em/rem GUI units, a sponsored bounty merged in September 2026
 
 The [HTML page](https://shyamalankannan.com/contributions.html) has a note on each pull request explaining what broke and what changed.

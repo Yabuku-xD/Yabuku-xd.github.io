@@ -12,18 +12,18 @@ He is on OPT and looking for a software engineering job. He can relocate.
 
 ## Contributions
 
-Fixes and features in other people's agent tools.
+Fixes and features in other people's open-source projects.
 
 - [hermes-agent](https://github.com/NousResearch/hermes-agent): Nous Research's agent, used through Discord, Slack, Telegram, or Feishu
 - [openchamber](https://github.com/openchamber/openchamber): desktop app around the OpenCode CLI
-- [glass](https://github.com/Glass-HQ/Glass): browser written in Rust on GPUI, the UI framework behind Zed
+- [Babylon.js](https://github.com/BabylonJS/Babylon.js): open-source 3D engine for the web; he added flexbox layout and em/rem units to its GUI
 - [Every pull request](https://shyamalankannan.com/contributions.md)
 
 ## Projects
 
+- [unimem](https://github.com/Yabuku-xD/unimem): one local memory that Claude Code, Codex, and Cursor share, in a single SQLite file
+- [SearchX](https://github.com/Yabuku-xD/SearchX): 12.6 MB Mac browser on WebKit that blocks ads before they load
 - [omfx](https://github.com/Yabuku-xD/omfx): coding agent CLI in Zig that rolls back edits that break parsing
-- [Bread](https://github.com/Yabuku-xD/bread): Rust layer that stops coding agents from over-reading or editing stale files
-- [Ozark](https://ozark-iota.vercel.app/): runs adversarial scenarios against an AI agent and scores it
 - [Project notes](https://shyamalankannan.com/projects.md)
 
 ## Listening

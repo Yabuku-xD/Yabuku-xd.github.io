@@ -433,3 +433,41 @@ html.js article.reveal {
 .fade-img[data-loaded] {
   opacity: 1;
 }
+
+/* Every artist gets the same width, so the photos sit at even intervals
+   however long each name is. A short last row stays centered. */
+#spotify-top-artists {
+  --artist-gap: 0.5rem;
+  --artist-columns: 5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem var(--artist-gap);
+}
+
+#spotify-top-artists > a {
+  flex: 0 0
+    calc(
+      (100% - (var(--artist-columns) - 1) * var(--artist-gap)) /
+        var(--artist-columns)
+    );
+  min-width: 0;
+}
+
+#spotify-top-artists > a span {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Loading and error messages span the row. */
+#spotify-top-artists > div {
+  flex-basis: 100%;
+}
+
+@media (max-width: 374px) {
+  #spotify-top-artists {
+    --artist-columns: 3;
+  }
+}

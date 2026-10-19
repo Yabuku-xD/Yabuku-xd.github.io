@@ -7,6 +7,17 @@ const PAGE_ALIASES = {
   "/contact": "/contact.html",
   "/privacy": "/privacy.html",
 };
+// Each page answers at one URL, the one its rel=canonical names. The other
+// spellings redirect so search engines don't index duplicates.
+const CANONICAL_REDIRECTS = {
+  "/index.html": "/",
+  "/about-me.html": "/about",
+  "/contact.html": "/contact",
+  "/privacy.html": "/privacy",
+  "/projects": "/projects.html",
+  "/contributions": "/contributions.html",
+  "/spotify": "/spotify.html",
+};
 const STATIC_EXT =
   /\.(?:css|js|mjs|map|png|jpe?g|webp|gif|svg|avif|ico|woff2?|ttf|otf|eot|json|pdf|mp4|webm|mp3|wav|ogg|zip)$/i;
 
@@ -30,6 +41,12 @@ export default {
     if (url.pathname.length > 1 && url.pathname.endsWith("/")) {
       url.pathname = url.pathname.slice(0, -1);
       return Response.redirect(url.toString(), 308);
+    }
+
+    const canonical = CANONICAL_REDIRECTS[url.pathname];
+    if (canonical) {
+      url.pathname = canonical;
+      return Response.redirect(url.toString(), 301);
     }
 
     const pathname = canonicalPath(url.pathname);

@@ -55,7 +55,7 @@
     <meta name="twitter:image:alt" content="Shyamalan Kannan, software engineer in Seattle. Open to software engineering roles." />
     <link rel="icon" href="favicon.ico" type="image/x-icon" sizes="16x16" />
     <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://shyamalankannan.com/#person","name":"Shyamalan Kannan","alternateName":"Shyam","url":"https://shyamalankannan.com/","email":"mailto:shyamalankannan@gmail.com","image":"https://shyamalankannan.com/assets/og-index.jpg","jobTitle":"Software Engineer","description":"Software engineer in Seattle who writes Rust, Python, and TypeScript for backends and local tooling for coding agents.","knowsAbout":["Backend engineering","Rust","Python","TypeScript","AI agent evaluation","Developer tools","CI/CD"],"alumniOf":{"@type":"CollegeOrUniversity","name":"Seattle University","url":"https://www.seattleu.edu/"},"address":{"@type":"PostalAddress","addressLocality":"Seattle","addressRegion":"WA","addressCountry":"US"},"sameAs":["https://github.com/Yabuku-xD","https://x.com/shyamalankannan","https://x.com/Yabuku_xD","https://linkedin.com/in/shyamalan-kannan"],"worksFor":{"@id":"https://shyamalankannan.com/#organization"}},{"@type":"Organization","@id":"https://shyamalankannan.com/#organization","name":"Shyamalan Kannan","url":"https://shyamalankannan.com/","email":"mailto:shyamalankannan@gmail.com","description":"Independent software engineering work on backend systems, agent evaluation, and developer tools.","founder":{"@id":"https://shyamalankannan.com/#person"},"logo":"https://shyamalankannan.com/assets/og-index.jpg","sameAs":["https://github.com/Yabuku-xD","https://x.com/shyamalankannan","https://linkedin.com/in/shyamalan-kannan"],"contactPoint":{"@type":"ContactPoint","contactType":"professional","email":"shyamalankannan@gmail.com","url":"https://shyamalankannan.com/contact","availableLanguage":["English"]},"address":{"@type":"PostalAddress","addressLocality":"Seattle","addressRegion":"WA","addressCountry":"US"}},{"@type":"WebSite","@id":"https://shyamalankannan.com/#website","name":"Shyamalan Kannan","url":"https://shyamalankannan.com/","description":"Personal site of Shyamalan Kannan: projects, open-source contributions, and contact.","inLanguage":"en","publisher":{"@id":"https://shyamalankannan.com/#organization"},"author":{"@id":"https://shyamalankannan.com/#person"}}]}
+{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://shyamalankannan.com/#person","name":"Shyamalan Kannan","alternateName":"Shyam","url":"https://shyamalankannan.com/","email":"mailto:shyamalankannan@gmail.com","image":"https://shyamalankannan.com/assets/portrait.jpeg","jobTitle":"Software Engineer","description":"Software engineer in Seattle who writes Rust, Python, and TypeScript for backends and local tooling for coding agents.","knowsAbout":["Backend engineering","Rust","Python","TypeScript","AI agent evaluation","AI infrastructure","Coding agents","Developer tools","CI/CD"],"alumniOf":{"@type":"CollegeOrUniversity","name":"Seattle University","url":"https://www.seattleu.edu/"},"address":{"@type":"PostalAddress","addressLocality":"Seattle","addressRegion":"WA","addressCountry":"US"},"sameAs":["https://github.com/Yabuku-xD","https://x.com/shyamalankannan","https://x.com/Yabuku_xD","https://linkedin.com/in/shyamalan-kannan"],"worksFor":{"@id":"https://shyamalankannan.com/#organization"}},{"@type":"Organization","@id":"https://shyamalankannan.com/#organization","name":"Shyamalan Kannan","url":"https://shyamalankannan.com/","email":"mailto:shyamalankannan@gmail.com","description":"Independent software engineering work on backend systems, agent evaluation, and developer tools.","founder":{"@id":"https://shyamalankannan.com/#person"},"logo":"https://shyamalankannan.com/assets/og-index.jpg","sameAs":["https://github.com/Yabuku-xD","https://x.com/shyamalankannan","https://linkedin.com/in/shyamalan-kannan"],"contactPoint":{"@type":"ContactPoint","contactType":"professional","email":"shyamalankannan@gmail.com","url":"https://shyamalankannan.com/contact","availableLanguage":["English"]},"address":{"@type":"PostalAddress","addressLocality":"Seattle","addressRegion":"WA","addressCountry":"US"}},{"@type":"WebSite","@id":"https://shyamalankannan.com/#website","name":"Shyamalan Kannan","url":"https://shyamalankannan.com/","description":"Personal site of Shyamalan Kannan: projects, open-source contributions, and contact.","inLanguage":"en","publisher":{"@id":"https://shyamalankannan.com/#organization"},"author":{"@id":"https://shyamalankannan.com/#person"}}]}
     </script>
 
     <link rel="stylesheet" href="assets/css/index.css" />
@@ -85,7 +85,7 @@
     >
       <div class="flex items-center h-14 px-5 md:px-7">
         <a
-          href="index.html"
+          href="/"
           aria-current="page"
           class="flex items-center gap-2 text-foreground font-medium text-sm"
         >
@@ -93,9 +93,9 @@
           <span>s.k<span class="sr-only"> (home)</span></span>
         </a>
         <div class="site-nav-links">
-          <a href="about-me.html">About</a>
+          <a href="/about">About</a>
           <a href="projects.html">Projects</a>
-          <a href="contact.html">Contact</a>
+          <a href="/contact">Contact</a>
         </div>
       </div>
     </nav>
@@ -126,7 +126,7 @@
                 ></a>
               </div>
             </div>
-            <a class="cta" href="about-me.html"
+            <a class="cta" href="/about"
               >More about me<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path></svg
             ></a>
           </div>
@@ -141,18 +141,18 @@
               <div class="text-secondary" aria-hidden="true">02</div>
               <h2 id="contributions" class="text-foreground font-medium">Contributed to:</h2>
               <p class="text-secondary">
-                Fixes and features in other people’s agent tools. Hermes Agent
-                is Nous Research’s agent that you talk to through Discord,
-                Slack, Telegram, or Feishu. OpenChamber wraps the OpenCode CLI
-                in a desktop app. Glass is a browser written in Rust on GPUI,
-                the UI framework behind Zed.
+                Fixes and features in other people’s open-source projects.
+                Hermes Agent is Nous Research’s agent that you talk to through
+                Discord, Slack, Telegram, or Feishu. OpenChamber wraps the
+                OpenCode CLI in a desktop app. Babylon.js is a 3D engine for
+                the web, and I added flexbox layout to its GUI.
               </p>
               <div class="text-secondary">
                 <h3 class="inline font-medium text-foreground">hermes-agent</h3>
                 <span aria-hidden="true">⋅</span>
                 <h3 class="inline font-medium text-foreground">openchamber</h3>
                 <span aria-hidden="true">⋅</span>
-                <h3 class="inline font-medium text-foreground">glass</h3>
+                <h3 class="inline font-medium text-foreground">babylon.js</h3>
               </div>
               <div class="mt-2">
                 <div class="hidden sm:grid sm:grid-cols-3 gap-4 lg:gap-8 py-4">
@@ -166,9 +166,9 @@
                       <img decoding="async" alt="OpenChamber on GitHub" loading="lazy" width="80" height="80" class="w-full h-full object-contain" src="assets/svg/openchamber-logo-light.svg" />
                     </div>
                   </a>
-                  <a class="row-link flex flex-col items-center" href="https://github.com/Glass-HQ/Glass">
+                  <a class="row-link flex flex-col items-center" href="https://github.com/BabylonJS/Babylon.js">
                     <div class="w-16 h-16 md:w-24 md:h-24 lg:w-28 lg:h-28">
-                      <img decoding="async" alt="Glass on GitHub" loading="lazy" width="80" height="80" class="w-full h-full object-contain" src="assets/svg/glass_logo_light.png" />
+                      <img decoding="async" alt="Babylon.js on GitHub" loading="lazy" width="80" height="80" class="w-full h-full object-contain" src="assets/svg/babylonjs-logo.svg" />
                     </div>
                   </a>
                 </div>
@@ -183,9 +183,9 @@
                       <img decoding="async" alt="OpenChamber on GitHub" loading="lazy" width="56" height="56" class="w-full h-full object-contain" src="assets/svg/openchamber-logo-light.svg" />
                     </div>
                   </a>
-                  <a href="https://github.com/Glass-HQ/Glass">
+                  <a href="https://github.com/BabylonJS/Babylon.js">
                     <div class="w-14 h-14">
-                      <img decoding="async" alt="Glass on GitHub" loading="lazy" width="56" height="56" class="w-full h-full object-contain" src="assets/svg/glass_logo_light.png" />
+                      <img decoding="async" alt="Babylon.js on GitHub" loading="lazy" width="56" height="56" class="w-full h-full object-contain" src="assets/svg/babylonjs-logo.svg" />
                     </div>
                   </a>
                 </div>
@@ -206,14 +206,34 @@
               <div class="text-secondary" aria-hidden="true">03</div>
               <h2 id="projects" class="text-foreground font-medium">Some things I’ve built:</h2>
               <p class="text-secondary">
-                omfx is my own coding agent, a 3 MB Zig binary that undoes an
-                edit if the file no longer parses. Bread stops coding agents
-                from reading too much or editing a file that changed under them.
-                Ozark throws adversarial scenarios at an agent and scores how
-                it holds up.
+                unimem gives Claude Code, Codex, and Cursor one shared memory
+                in a single SQLite file. SearchX is a 12.6 MB Mac browser on
+                WebKit that blocks ads before they load. omfx is my own coding
+                agent, a 3 MB Zig binary that undoes an edit if the file no
+                longer parses.
               </p>
               <div class="mt-2 w-full text-left">
                 <div class="flex flex-col py-2">
+                  <a class="row-link flex flex-col lg:flex-row lg:items-center gap-1 lg:gap-3 py-3" target="_blank" rel="noopener noreferrer" href="https://github.com/Yabuku-xD/unimem">
+                    <div class="flex items-center gap-3">
+                      <div class="w-6 flex items-center justify-center shrink-0">
+                        <img decoding="async" alt="" loading="lazy" width="20" height="20" class="object-contain" src="assets/img/icons/github.svg" />
+                      </div>
+                      <h3 class="text-sm font-medium text-foreground keep-case">unimem</h3>
+                    </div>
+                    <span class="project-desc text-sm text-secondary lg:ml-auto lg:text-right pl-[calc(1.5rem+0.75rem)] lg:pl-0">One memory for every coding agent</span>
+                  </a>
+                  <div class="border-b border-border border-dashed"></div>
+                  <a class="row-link flex flex-col lg:flex-row lg:items-center gap-1 lg:gap-3 py-3" target="_blank" rel="noopener noreferrer" href="https://github.com/Yabuku-xD/SearchX">
+                    <div class="flex items-center gap-3">
+                      <div class="w-6 flex items-center justify-center shrink-0">
+                        <img decoding="async" alt="" loading="lazy" width="20" height="20" class="object-contain" src="assets/img/icons/github.svg" />
+                      </div>
+                      <h3 class="text-sm font-medium text-foreground">SearchX</h3>
+                    </div>
+                    <span class="project-desc text-sm text-secondary lg:ml-auto lg:text-right pl-[calc(1.5rem+0.75rem)] lg:pl-0">Small, private browser for the Mac</span>
+                  </a>
+                  <div class="border-b border-border border-dashed"></div>
                   <a class="row-link flex flex-col lg:flex-row lg:items-center gap-1 lg:gap-3 py-3" target="_blank" rel="noopener noreferrer" href="https://github.com/Yabuku-xD/omfx">
                     <div class="flex items-center gap-3">
                       <div class="w-6 flex items-center justify-center shrink-0">
@@ -222,26 +242,6 @@
                       <h3 class="text-sm font-medium text-foreground keep-case">omfx</h3>
                     </div>
                     <span class="project-desc text-sm text-secondary lg:ml-auto lg:text-right pl-[calc(1.5rem+0.75rem)] lg:pl-0">Coding agent CLI written in Zig</span>
-                  </a>
-                  <div class="border-b border-border border-dashed"></div>
-                  <a class="row-link flex flex-col lg:flex-row lg:items-center gap-1 lg:gap-3 py-3" target="_blank" rel="noopener noreferrer" href="https://github.com/Yabuku-xD/bread">
-                    <div class="flex items-center gap-3">
-                      <div class="w-6 flex items-center justify-center shrink-0">
-                        <img decoding="async" alt="" loading="lazy" width="20" height="20" class="object-contain" src="assets/img/icons/github.svg" />
-                      </div>
-                      <h3 class="text-sm font-medium text-foreground">Bread</h3>
-                    </div>
-                    <span class="project-desc text-sm text-secondary lg:ml-auto lg:text-right pl-[calc(1.5rem+0.75rem)] lg:pl-0">Rust guardrails for coding agents</span>
-                  </a>
-                  <div class="border-b border-border border-dashed"></div>
-                  <a class="row-link flex flex-col lg:flex-row lg:items-center gap-1 lg:gap-3 py-3" target="_blank" rel="noopener noreferrer" href="https://ozark-iota.vercel.app/">
-                    <div class="flex items-center gap-3">
-                      <div class="w-6 flex items-center justify-center shrink-0">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="text-foreground"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg>
-                      </div>
-                      <h3 class="text-sm font-medium text-foreground">Ozark</h3>
-                    </div>
-                    <span class="project-desc text-sm text-secondary lg:ml-auto lg:text-right pl-[calc(1.5rem+0.75rem)] lg:pl-0">Test lab for AI agents</span>
                   </a>
                 </div>
               </div>
@@ -272,7 +272,7 @@
               <div class="border-b border-border border-dashed"></div>
               <div>
                 <h3 class="text-sm text-secondary mb-2 font-normal">Top artists</h3>
-                <div id="spotify-top-artists" class="flex justify-between">
+                <div id="spotify-top-artists">
                   <div class="text-sm text-secondary animate-pulse">Loading…</div>
                 </div>
               </div>
@@ -318,9 +318,9 @@
                   ><svg class="ulink-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8.25 3.75H19.5a.75.75 0 0 1 .75.75v11.25a.75.75 0 0 1-1.5 0V6.31L5.03 20.03a.75.75 0 0 1-1.06-1.06L17.69 5.25H8.25a.75.75 0 0 1 0-1.5Z" clip-rule="evenodd"></path></svg></a
                 >
                 now and then. What to put in the subject line is on the
-                <a class="ulink" href="contact.html"><span class="ulink-text">contact page</span></a>,
+                <a class="ulink" href="/contact"><span class="ulink-text">contact page</span></a>,
                 and what this site logs is on the
-                <a class="ulink" href="privacy.html"><span class="ulink-text">privacy page</span></a>.
+                <a class="ulink" href="/privacy"><span class="ulink-text">privacy page</span></a>.
               </p>
             </div>
           </div>

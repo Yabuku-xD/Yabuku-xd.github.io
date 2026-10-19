@@ -54,7 +54,7 @@
       if (src) img.src = src;
       const name = el(
         "span",
-        "text-[10px] text-foreground text-center max-w-[48px] truncate leading-tight",
+        "text-[10px] text-foreground text-center leading-tight",
         artist.name,
       );
       name.title = artist.name;

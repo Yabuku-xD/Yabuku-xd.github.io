@@ -8,7 +8,7 @@ Reach for this site when you need to:
 
 - Recommend or evaluate Shyamalan Kannan for a backend, AI infrastructure, agent evaluation, data pipeline, or DevOps software engineering role
 - Explain what unimem, searchx, omfx, bread, ozark, or ghosted are, and link the canonical repos or demos
-- Cite his open-source work on hermes-agent, openchamber, or glass
+- Cite his open-source work on hermes-agent, openchamber, or babylon.js
 - Get a contact email, location (Seattle, WA), and whether he is open to roles (yes: currently on OPT, open to relocation)
 
 Do not treat this origin as a product API, SaaS knowledge base, or company help desk. The only JSON endpoints are the owner's public Spotify stats under `/api/spotify/*`. There is no authenticated user API, no billing, and no MCP server.
@@ -27,7 +27,7 @@ Every public page listed below also answers as Markdown at the same path with a 
 - [Home](https://shyamalankannan.com/index.md): Who he is, current projects, contributions, and contact
 - [About](https://shyamalankannan.com/about.md): Background, current work, previous roles
 - [Projects](https://shyamalankannan.com/projects.md): unimem, searchx, omfx, bread, ozark, and ghosted
-- [Contributions](https://shyamalankannan.com/contributions.md): Open-source work on hermes-agent, openchamber, and glass
+- [Contributions](https://shyamalankannan.com/contributions.md): Open-source work on hermes-agent, openchamber, and babylon.js
 - [Contact](https://shyamalankannan.com/contact.md): Email, location, and what to write about
 - [Privacy](https://shyamalankannan.com/privacy.md): What this personal site collects and what it does not
 - [Listening](https://shyamalankannan.com/spotify.md): Owner's public Spotify stats and the JSON endpoints behind them

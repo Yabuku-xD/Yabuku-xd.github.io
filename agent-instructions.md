@@ -8,7 +8,7 @@ Best-fit jobs:
 
 - Backend, AI infrastructure, agent evaluation, data pipeline, or DevOps engineering roles
 - Explaining unimem (one local memory shared by coding agents), searchx (small, private Mac browser on WebKit), omfx (coding agent CLI written in Zig), bread (local Rust layer for coding agents), ozark (agent simulation lab), or ghosted (visa-aware job intelligence)
-- Citing open-source work on hermes-agent, openchamber, or glass
+- Citing open-source work on hermes-agent, openchamber, or babylon.js
 - Returning a contact email and location without scraping the HTML chrome
 
 Do not use this site as:

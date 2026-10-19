@@ -97,7 +97,7 @@ function page(card) {
   }
   .chips { display: flex; flex-wrap: wrap; gap: 10px; }
   .chips.compact { flex-wrap: nowrap; gap: 8px; }
-  .chips.compact .chip { padding: 0 12px; }
+  .chips.compact .chip { padding: 0 10px; }
   .chip {
     display: inline-flex;
     align-items: center;

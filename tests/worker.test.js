@@ -222,6 +222,46 @@ test("trailing slashes redirect so relative assets keep working", async () => {
   );
 });
 
+test("duplicate page URLs redirect to the canonical URL", async () => {
+  for (const [from, to] of [
+    ["/index.html", "/"],
+    ["/about-me.html", "/about"],
+    ["/contact.html", "/contact"],
+    ["/privacy.html", "/privacy"],
+    ["/projects", "/projects.html"],
+    ["/contributions", "/contributions.html"],
+    ["/spotify", "/spotify.html"],
+  ]) {
+    const response = await fetchSite(from);
+    assert.equal(response.status, 301, from);
+    assert.equal(
+      response.headers.get("location"),
+      `https://shyamalankannan.com${to}`,
+    );
+  }
+});
+
+test("internal links and the sitemap use canonical URLs", () => {
+  for (const file of [
+    "index.html",
+    "about-me.html",
+    "projects.html",
+    "contributions.html",
+    "contact.html",
+    "privacy.html",
+    "spotify.html",
+  ]) {
+    const html = readFileSync(join(ROOT, file), "utf8");
+    assert.doesNotMatch(
+      html,
+      /href="(?:index|about-me|contact|privacy)\.html"/,
+      `${file} links to a redirecting URL`,
+    );
+  }
+  const sitemap = readFileSync(join(ROOT, "sitemap.xml"), "utf8");
+  assert.doesNotMatch(sitemap, /about-me\.html/);
+});
+
 test("direct .md URLs serve markdown", async () => {
   const response = await fetchSite("/about.md");
   assert.equal(response.status, 200);
