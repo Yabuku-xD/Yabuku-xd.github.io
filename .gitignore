@@ -15,7 +15,6 @@ npm-debug.log*
 # Agent and tool state
 .claude
 .pi
-.pi-lens
 .playwright-cli/
 
 # Cloudflare local dev
