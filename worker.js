@@ -284,7 +284,7 @@ function notFoundMarkdown(pathname) {
 - [llms.txt](${SITE}/llms.txt): Agent index with a Markdown twin behind every entry
 - [About](${SITE}/about): Background and previous roles
 - [Contact](${SITE}/contact): Email and how to write
-- [Projects](${SITE}/projects.html): omfx, bread, ozark, and ghosted
+- [Projects](${SITE}/projects.html): unimem, searchx, omfx, bread, ozark, and ghosted
 
 Every public page also answers with Markdown: append \`.md\` to its path, or send \`Accept: text/markdown\`.
 `;

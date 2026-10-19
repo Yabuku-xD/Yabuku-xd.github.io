@@ -1,6 +1,23 @@
 # Selected projects
 
-Four things Shyamalan Kannan built on his own time.
+Six things Shyamalan Kannan built on his own time.
+
+## unimem: one memory for every coding agent
+
+Oct 2026. One local memory that Claude Code, Codex, Cursor, and other agents share. It lives in a single SQLite file on your machine. An agent looks something up only when it is missing context, and it must give a reason, so a normal turn makes no lookup at all. A correction you give an agent becomes a memory only after you repeat it in a second session. One-off instructions never stick. With no LLM in the loop, it ranks the right conversation in the top 5 for 96% of LongMemEval-S questions. MIT licensed.
+
+Stack: Python standard library · SQLite · MCP
+
+- [Source on GitHub](https://github.com/Yabuku-xD/unimem)
+
+## SearchX: a small, private browser for the Mac
+
+Sep 2026. It runs on WebKit, the engine already inside macOS, so it ships no engine of its own. It is 12.6 MB on disk and opens its first window in 324 ms. A tab you leave alone for 30 minutes goes to sleep and frees its memory. SearchX applies the uBlock Origin filter lists inside the WebKit network layer, so the browser never requests a blocked ad. The WebKit blocker cannot run filters like `:has-text` or `:xpath`, so SearchX runs those itself. The new tab redraws any picture you pick as pixel art. MIT licensed.
+
+Stack: Swift 6 · WebKit · macOS 14+
+
+- [Download for Mac](https://github.com/Yabuku-xD/SearchX/releases/latest)
+- [Source on GitHub](https://github.com/Yabuku-xD/SearchX)
 
 ## omfx: a coding agent in Zig
 

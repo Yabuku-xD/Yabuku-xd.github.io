@@ -96,6 +96,8 @@ function page(card) {
     text-wrap: pretty;
   }
   .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chips.compact { flex-wrap: nowrap; gap: 8px; }
+  .chips.compact .chip { padding: 0 12px; }
   .chip {
     display: inline-flex;
     align-items: center;
@@ -140,7 +142,7 @@ function page(card) {
         <h1>${escape(card.title)}</h1>
         <p>${escape(card.body)}</p>
       </div>
-      <div class="chips">${card.chips.map((c, i) => chip(c, card, i)).join("")}</div>
+      <div class="${card.compactChips ? "chips compact" : "chips"}">${card.chips.map((c, i) => chip(c, card, i)).join("")}</div>
     </div>
     <div class="photo"><img src="${asset(card.image)}" alt="" /></div>
   </div>

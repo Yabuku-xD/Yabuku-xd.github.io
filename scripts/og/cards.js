@@ -29,11 +29,13 @@ export const cards = [
     path: "/projects",
     eyebrow: "Projects",
     title: "Things I built on my own time",
-    body: "A coding agent in Zig, Rust guardrails for agents, an agent test lab, and H-1B job data.",
-    chips: ["omfx", "bread", "ozark", "ghosted"],
+    body: "Shared memory for coding agents, a small Mac browser, a coding agent in Zig, and Rust guardrails.",
+    chips: ["unimem", "searchx", "omfx", "bread", "ozark", "ghosted"],
+    // Six chips at the default padding wrap to a second row.
+    compactChips: true,
     image: "../../assets/svg/cool.jpeg",
     imagePosition: "70% 50%",
-    alt: "Projects by Shyamalan Kannan: omfx, bread, ozark, and ghosted.",
+    alt: "Projects by Shyamalan Kannan: unimem, searchx, omfx, bread, ozark, and ghosted.",
   },
   {
     slug: "contributions",
