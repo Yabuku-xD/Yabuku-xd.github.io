@@ -622,10 +622,10 @@ const mist = scene(
   (W, H) => {
     const layer = canvas(W, H);
     const ranges = [
-      { v: 0.5, amp: 0.3, seed: 1, tone: 0.78, peak: true },
-      { v: 0.6, amp: 0.16, seed: 4, tone: 0.62 },
-      { v: 0.72, amp: 0.14, seed: 7, tone: 0.44 },
-      { v: 0.86, amp: 0.12, seed: 9, tone: 0.24 },
+      { v: 0.5, amp: 0.3, seed: 1, tone: 0.4, peak: true },
+      { v: 0.6, amp: 0.16, seed: 4, tone: 0.31 },
+      { v: 0.72, amp: 0.14, seed: 7, tone: 0.22 },
+      { v: 0.86, amp: 0.12, seed: 9, tone: 0.13 },
     ];
     const ridged = (x, seed) => {
       let s = 0, amp = 0.5, f = 1, n = 0;
@@ -647,7 +647,9 @@ const mist = scene(
         const k = r * W + x;
         const y = r + 0.5;
         const v = y / H;
-        let c = [0.86 - 0.1 * v + 0.06 * (1 - x / W), 0.9 - 0.1 * v + 0.05 * (1 - x / W), 0.88 - 0.1 * v], floor = 0.2, material = AIR;
+        // an overcast sky: dim overhead, paler toward the ridges, a little lighter to the left
+        const air = 0.55 + 0.22 * smooth(0, 0.55, v) + 0.05 * (1 - x / W);
+        let c = [air * 0.9, air, air * 0.95], floor = 0.15, material = AIR;
         for (let i = ranges.length - 1; i >= 0; i--) {
           const t0 = tops[i][x + 1];
           if (y < t0) continue;
@@ -674,7 +676,7 @@ const mist = scene(
       const [d, l] = sample(fog, x + t * (1.2 + (which[k] === 255 ? 0 : which[k]) * 0.4), r);
       const veil = smooth(0.46, 0.66, d) * (0.12 + 0.88 * band);
       if (veil > 0.01) {
-        const b = 0.88 + 0.12 * l;
+        const b = 0.74 + 0.12 * l;
         px.r = mix(px.r, b, veil);
         px.g = mix(px.g, b, veil);
         px.b = mix(px.b, b * 0.98, veil);
