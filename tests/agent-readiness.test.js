@@ -133,7 +133,11 @@ test("sitemap.xml lists indexable URLs with lastmod", () => {
   ]) {
     assert.ok(xml.includes(`<loc>${loc}</loc>`), `missing ${loc}`);
   }
-  assert.match(xml, /<lastmod>2026-09-24<\/lastmod>/);
+  const urls = xml.match(/<url>[\s\S]*?<\/url>/g) ?? [];
+  assert.ok(urls.length > 0, "sitemap has no <url> entries");
+  for (const url of urls) {
+    assert.match(url, /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/, `no lastmod in ${url}`);
+  }
 });
 
 test("markdown twins exist for public pages", () => {
