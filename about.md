@@ -34,6 +34,6 @@ Video games, anime, table tennis, and small scripts that save a few clicks a day
 
 - [Resume](https://shyamalankannan.com/resume.pdf)
 - [GitHub](https://github.com/Yabuku-xD)
-- [X](https://x.com/Yabuku_xD)
+- [X](https://x.com/shyamalankannan)
 - [LinkedIn](https://linkedin.com/in/shyamalan-kannan)
 - [Contact](https://shyamalankannan.com/contact.md)
