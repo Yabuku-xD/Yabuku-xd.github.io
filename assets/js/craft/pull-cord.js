@@ -5,6 +5,8 @@
 // pulled past its length. The bead is the site's copy button, so clicking it,
 // or Enter and Space on it, copies too.
 
+import { damp } from "./damp.js";
+
 const LINKS = 7;
 const LINK = 7; // px
 const STEP = 1 / 120;
@@ -19,11 +21,6 @@ const MAX_STRETCH = 34;
 const REST_EPSILON = 0.015;
 const REST_STEPS = 24;
 const DRAG_SLOP = 4; // px of movement that turns a press into a pull
-
-/** Stretch past `max` flattens out: it slows down instead of hitting a wall. */
-export function damp(distance, max) {
-  return max * (1 - Math.exp(-distance / max));
-}
 
 /** Where a held point may go, and how far down past its length it is pulled. */
 export function reach(anchor, index, x, y) {

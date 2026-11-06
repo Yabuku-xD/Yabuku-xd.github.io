@@ -5,6 +5,8 @@
 // and the ring's ticks swell in a wave as the indicator passes. Arrow keys,
 // Page Up/Down, Home/End and the wheel (only while focused) step it.
 
+import { damp } from "./damp.js";
+
 const SWEEP = 270;
 const START = -135;
 const MAX_OVERSHOOT = 16;
@@ -16,10 +18,6 @@ const DEAD_ZONE = 14;
 const FLICK = 0.4; // stops per second, as a fraction of the range, that counts as a flick
 const WINDOW_MS = 80;
 const COAST = 0.3;
-
-export function damp(distance, max) {
-  return max * (1 - Math.exp(-distance / max));
-}
 
 /** Knob angle in degrees for a raw (unsnapped) position between stops 0..max. */
 export function dialAngle(raw, max) {

@@ -5,7 +5,7 @@
 // the first frame, so a centered heading never shifts while it resolves.
 
 // The hero ramp (· • ●) plus a few marks. In Geist Mono each is one letter wide.
-export const GLYPHS = "·•●:+*=#";
+const GLYPHS = "·•●:+*=#";
 
 /** Split one frame into the settled text, the scrambled tail and the hidden rest. */
 export function scrambleFrame(text, settled, tail, pick) {

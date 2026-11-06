@@ -5,14 +5,12 @@
 // Enter, Space or a tap refreshes too. On touch screens only the grip pulls,
 // so scrolling the page over the card still scrolls.
 
+import { damp } from "./damp.js";
+
 const THRESHOLD = 56; // px of pull that refreshes on release
 const MAX_PULL = 88;
 const HOLD = 40; // px the card stays down while the song loads
 const SLOP = 4;
-
-export function damp(distance, max) {
-  return max * (1 - Math.exp(-distance / max));
-}
 
 /** Visible pull for a finger/pointer travel of `dy` px. */
 export function pullOffset(dy) {
