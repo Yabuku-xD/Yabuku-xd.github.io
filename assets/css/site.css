@@ -32,9 +32,24 @@ body {
   text-transform: lowercase;
 }
 
-/* Anchored sections stop below the fixed nav (3.5rem) with room to spare. */
+/* Anchored sections stop below the fixed nav (3.5rem) with room to spare.
+   This padding is the one landing offset: the base styles also give headings
+   and main a scroll margin, which would add to it, so that is cleared. */
 html {
   scroll-padding-block-start: 5rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+main {
+  scroll-margin-top: 0;
+}
+
+/* A section the ruler moved focus to is a landing spot, not a control. */
+main [data-toc][tabindex="-1"]:focus {
+  outline: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {

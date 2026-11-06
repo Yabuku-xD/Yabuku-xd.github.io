@@ -4,7 +4,7 @@ import { dirname, join } from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { pixelCells } from "../assets/js/craft/pixel-loader.js";
-import { activeIndex, indexLabel, nextActive, proximity, shownIndex } from "../assets/js/craft/ruler.js";
+import { activeIndex, indexLabel, nextActive, proximity, shownIndex, tailRoom } from "../assets/js/craft/ruler.js";
 import { scrambleFrame, stepFor } from "../assets/js/craft/scramble.js";
 import { dialAngle, tickLength } from "../assets/js/craft/detent-dial.js";
 import { linePath, springStep } from "../assets/js/craft/elastic-line.js";
@@ -139,6 +139,15 @@ test("ruler marks a picked section, then the last one at the page bottom", () =>
   // Otherwise the reading line decides.
   assert.equal(shownIndex(-1, false, 1, 3), 1);
   assert.equal(shownIndex(-1, false, -1, 3), -1);
+});
+
+test("ruler adds only the room a short last section needs to reach the landing line", () => {
+  // Content ends 400px below the last section's top in a 900px window:
+  // landing it 80px down needs 900 - 80 - 400 = 420px more.
+  assert.equal(tailRoom(1000, 1400, 900, 80), 420);
+  // A long last section needs none.
+  assert.equal(tailRoom(1000, 3000, 900, 80), 0);
+  assert.equal(tailRoom(1000.2, 1400, 900, 80), 421);
 });
 
 test("pixel loader is a filled circle that ripples from the middle", () => {

@@ -47,6 +47,15 @@ export function shownIndex(picked, atBottom, onLine, count) {
   return onLine;
 }
 
+/**
+ * Empty room the page needs below its content so a section starting at
+ * `top` (page coordinates) can scroll up to `offset` below the top of a
+ * `viewport`-tall window, when the content ends at `end`.
+ */
+export function tailRoom(top, end, viewport, offset) {
+  return Math.max(0, Math.ceil(top - offset + viewport - end));
+}
+
 function targetId(section) {
   return section.id || section.getAttribute("aria-labelledby") || section.querySelector("[id]")?.id || "";
 }
@@ -167,12 +176,44 @@ export function initRuler(label, root = document) {
     },
     { passive: true },
   );
+  // A picked section lands exactly on the landing line, the page's
+  // scroll-padding below the nav: its top, divider included, not its heading.
+  // Short sections at the end could never scroll that far, so the page grows
+  // just enough empty room below them, but only once the ruler is used.
+  const room = document.createElement("div");
+  room.setAttribute("aria-hidden", "true");
+  main.append(room);
+  let roomy = false;
+  const landing = () => parseFloat(getComputedStyle(document.documentElement).scrollPaddingBlockStart) || 0;
+  const fit = () => {
+    if (!roomy) return;
+    const last = items.at(-1).section;
+    const top = last.getBoundingClientRect().top + scrollY;
+    const end = document.documentElement.scrollHeight - room.offsetHeight;
+    room.style.height = `${tailRoom(top, end, innerHeight, landing())}px`;
+  };
+  new ResizeObserver(fit).observe(main);
+  const go = (i, behavior) => {
+    roomy = true;
+    fit();
+    items[i].section.scrollIntoView({ block: "start", behavior });
+    // Move keyboard focus with the reader, as following a link would. The
+    // section takes it, not its heading, which can sit inside a link.
+    const section = items[i].section;
+    if (!section.hasAttribute("tabindex")) section.setAttribute("tabindex", "-1");
+    section.focus({ preventScroll: true });
+  };
   links.forEach((link, i) =>
-    link.addEventListener("click", () => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
       picked = i;
       show();
+      if (location.hash !== `#${items[i].id}`) history.pushState(null, "", `#${items[i].id}`);
+      go(i);
     }),
   );
+  // Opened at a section's address: land it the same way, at once.
+  if (picked >= 0) requestAnimationFrame(() => go(picked, "instant"));
   const release = () => {
     if (picked < 0) return;
     picked = -1;
