@@ -2,7 +2,7 @@
 
 Email [shyamalankannan@gmail.com](mailto:shyamalankannan@gmail.com). That's the inbox he checks.
 
-He lives in Seattle, is on OPT, and is looking for a software engineering job. He can relocate. For a call, send two or three times that work in Pacific time.
+He lives in Seattle and is currently a Software Developer Intern at [Jevan](https://jevan.ai/). He is open to full-time software engineering roles, is on OPT, and can relocate. For a call, send two or three times that work in Pacific time.
 
 Put the role and company in the subject line, or the name of the project you're writing about. A link helps. He usually answers within a few days.
 

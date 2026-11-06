@@ -8,7 +8,7 @@
     <title>About · Shyamalan Kannan</title>
     <meta
       name="description"
-      content="Shyamalan Kannan's background: CI/CD and infrastructure work at Seattle University, a financial data pipeline at Finkey, and what he wants to work on next."
+      content="Shyamalan Kannan's background: Software Developer Intern at Jevan, CI/CD work at Seattle University, a data pipeline at Finkey, and what he wants next."
     />
     <meta name="robots" content="index, follow" />
     <meta
@@ -25,7 +25,7 @@
     <meta property="og:title" content="About · Shyamalan Kannan" />
     <meta
       property="og:description"
-      content="CI/CD and infrastructure at Seattle University, a financial data pipeline at Finkey, and what he wants to work on next."
+      content="Software Developer Intern at Jevan, earlier CI/CD work at Seattle University and a data pipeline at Finkey, and what he wants next."
     />
     <meta property="og:url" content="https://shyamalankannan.com/about" />
     <meta property="og:site_name" content="Shyamalan Kannan" />
@@ -37,17 +37,17 @@
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="About Shyamalan Kannan: backend work at Seattle University and Finkey." />
+    <meta property="og:image:alt" content="About Shyamalan Kannan: intern at Jevan, earlier backend work at Seattle University and Finkey." />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:image"
       content="https://shyamalankannan.com/assets/og-about-me.jpg"
     />
-    <meta name="twitter:image:alt" content="About Shyamalan Kannan: backend work at Seattle University and Finkey." />
+    <meta name="twitter:image:alt" content="About Shyamalan Kannan: intern at Jevan, earlier backend work at Seattle University and Finkey." />
     <meta name="twitter:title" content="About · Shyamalan Kannan" />
     <meta
       name="twitter:description"
-      content="CI/CD and infrastructure at Seattle University, a financial data pipeline at Finkey, and what he wants to work on next."
+      content="Software Developer Intern at Jevan, earlier CI/CD work at Seattle University and a data pipeline at Finkey, and what he wants next."
     />
     <link rel="icon" href="favicon.ico" type="image/x-icon" sizes="16x16" />
     <script type="application/ld+json">
@@ -121,7 +121,38 @@
               >
               to other people’s projects.
             </p>
-            <p>What I look for in the next job:</p>
+          </div>
+          <div class="text-secondary flex flex-col gap-2 prose-left">
+            <h3 class="text-primary font-normal">
+              Software Developer Intern at
+              <a class="ulink nowrap" href="https://jevan.ai/" target="_blank" rel="noopener noreferrer"
+                ><span class="ulink-text">Jevan</span
+                ><svg class="ulink-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8.25 3.75H19.5a.75.75 0 0 1 .75.75v11.25a.75.75 0 0 1-1.5 0V6.31L5.03 20.03a.75.75 0 0 1-1.06-1.06L17.69 5.25H8.25a.75.75 0 0 1 0-1.5Z" clip-rule="evenodd"></path></svg></a
+              >
+              <span class="text-secondary nowrap">· <time datetime="2026-08">Aug 2026</time>–Present</span>
+            </h3>
+            <ul class="list-disc ml-4 space-y-2">
+              <li>
+                Built a restaurant-operations app in TypeScript, Next.js, and
+                PostgreSQL. It reads Toast and Square order data, read-only,
+                for cost, inventory, and labor workflows.
+              </li>
+              <li>
+                Built a recommendation worker that computes menu embeddings in
+                Cloudflare Containers and processes only dish text that
+                changed. Guest rankings come from cached results, so page
+                requests run no model inference.
+              </li>
+              <li>
+                Set up separate Nightly and Stable environments on Cloudflare
+                Workers, each with its own databases, buckets, and queues. A
+                Stable release ships only after a Nightly deploy and smoke
+                check succeed.
+              </li>
+            </ul>
+          </div>
+          <div class="text-secondary flex flex-col gap-3 prose-left">
+            <p>What I look for in a full-time role:</p>
             <ul class="space-y-2 list-disc ml-4">
               <li>
                 Software with moving parts. Background jobs, OAuth handshakes,
@@ -154,7 +185,7 @@
           <div class="text-secondary flex flex-col gap-6 prose-left">
             <div class="flex flex-col gap-2">
               <h3 class="text-primary font-normal">
-                Software engineer at
+                Software Engineer at
                 <a class="ulink nowrap" href="https://www.seattleu.edu/" target="_blank" rel="noopener noreferrer"
                   ><img class="ulink-logo" decoding="async" alt="" loading="lazy" width="14" height="14" src="assets/svg/seattle-university.svg" /><span class="ulink-text">Seattle University</span
                   ><svg class="ulink-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8.25 3.75H19.5a.75.75 0 0 1 .75.75v11.25a.75.75 0 0 1-1.5 0V6.31L5.03 20.03a.75.75 0 0 1-1.06-1.06L17.69 5.25H8.25a.75.75 0 0 1 0-1.5Z" clip-rule="evenodd"></path></svg></a
@@ -163,39 +194,31 @@
               </h3>
               <ul class="list-disc ml-4 space-y-2">
                 <li>
-                  Built CI/CD pipelines that run security scans before every
-                  deploy. Release cycles for the C# apps got 20% shorter.
+                  Built CI/CD pipelines for C# applications that run automated
+                  security scans before deployment.
                 </li>
                 <li>
-                  Automated build pipelines across AWS, TypeScript, and shell
-                  scripts. Delivery that used to take weeks of manual steps now
-                  takes hours.
-                </li>
-                <li>
-                  Planned deployments with research, IT, and operations staff,
-                  and wrote 12+ runbooks for the infrastructure.
+                  Rebuilt release delivery with AWS and TypeScript, which ended
+                  the configuration failures that kept coming back.
                 </li>
               </ul>
             </div>
             <div class="flex flex-col gap-2">
               <h3 class="text-primary font-normal">
-                Software engineer intern at Finkey Consultancy
+                Software Engineer Intern at Finkey Consultancy
                 <span class="text-secondary nowrap">· <time datetime="2023-07">Jul</time>–<time datetime="2023-10">Oct 2023</time></span>
               </h3>
               <ul class="list-disc ml-4 space-y-2">
                 <li>
-                  Built a Python and FastAPI pipeline on AWS Glue, Athena,
-                  Redshift, and S3 that pulls 50k+ financial records from 15+
-                  sources. Retrieval got 45% more efficient.
+                  Built a Python and FastAPI data pipeline on AWS Glue, Athena,
+                  Redshift, and S3 that combines records from several sources
+                  into one retrieval layer.
                 </li>
                 <li>
-                  Trained PyTorch models for anomaly detection and volatility
-                  forecasting, with OpenAI API summaries on top. Analysts spent
-                  40% less time reviewing.
-                </li>
-                <li>
-                  Designed the REST endpoints and ETL jobs that load and query
-                  that data.
+                  Trained PyTorch anomaly and volatility models for real-time
+                  risk classification, wrote the REST endpoints and ETL jobs
+                  that serve their results, and added OpenAI API summaries for
+                  analysts.
                 </li>
               </ul>
             </div>

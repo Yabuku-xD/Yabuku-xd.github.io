@@ -1,8 +1,16 @@
 # About Shyamalan Kannan
 
-Software engineer in Seattle. He writes backend code and the plumbing around it: CI pipelines, data jobs, auth flows, and lately tooling for coding agents. On OPT, looking for a software engineering job, able to relocate.
+Software engineer in Seattle. He writes backend code and the plumbing around it: CI pipelines, data jobs, auth flows, and lately tooling for coding agents. Currently a Software Developer Intern at Jevan. On OPT, open to full-time software engineering roles, able to relocate.
 
-## What he looks for in the next job
+## Currently
+
+### Software Developer Intern at Jevan · Aug 2026–Present
+
+- Built a restaurant-operations app in TypeScript, Next.js, and PostgreSQL. It reads Toast and Square order data, read-only, for cost, inventory, and labor workflows.
+- Built a recommendation worker that computes menu embeddings in Cloudflare Containers and processes only dish text that changed. Guest rankings come from cached results, so page requests run no model inference.
+- Set up separate Nightly and Stable environments on Cloudflare Workers, each with its own databases, buckets, and queues. A Stable release ships only after a Nightly deploy and smoke check succeed.
+
+## What he looks for in a full-time role
 
 - Software with moving parts: background jobs, OAuth handshakes, data that has to sync, tools people leave open all day.
 - Hard problems that matter to someone. He picks the difficult version if a user is waiting on it.
@@ -12,17 +20,15 @@ Related pages: [Spotify](https://shyamalankannan.com/spotify.md), [contributions
 
 ## Previously
 
-### Software engineer at Seattle University · Apr 2025–Mar 2026
+### Software Engineer at Seattle University · Apr 2025–Mar 2026
 
-- Built CI/CD pipelines that run security scans before every deploy. Release cycles for the C# apps got 20% shorter.
-- Automated build pipelines across AWS, TypeScript, and shell scripts. Delivery that took weeks of manual steps now takes hours.
-- Planned deployments with research, IT, and operations staff, and wrote 12+ infrastructure runbooks.
+- Built CI/CD pipelines for C# applications that run automated security scans before deployment.
+- Rebuilt release delivery with AWS and TypeScript, which ended the configuration failures that kept coming back.
 
-### Software engineer intern at Finkey Consultancy · Jul–Oct 2023
+### Software Engineer Intern at Finkey Consultancy · Jul–Oct 2023
 
-- Built a Python and FastAPI pipeline on AWS Glue, Athena, Redshift, and S3 that pulls 50k+ financial records from 15+ sources. Retrieval got 45% more efficient.
-- Trained PyTorch models for anomaly detection and volatility forecasting, with OpenAI API summaries on top. Analysts spent 40% less time reviewing.
-- Designed the REST endpoints and ETL jobs that load and query that data.
+- Built a Python and FastAPI data pipeline on AWS Glue, Athena, Redshift, and S3 that combines records from several sources into one retrieval layer.
+- Trained PyTorch anomaly and volatility models for real-time risk classification, wrote the REST endpoints and ETL jobs that serve their results, and added OpenAI API summaries for analysts.
 
 ## Occasionally
 

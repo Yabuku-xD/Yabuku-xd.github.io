@@ -195,7 +195,7 @@
                 <a class="contrib-link row-link flex flex-col gap-1 py-3" href="https://github.com/openchamber/openchamber/pull/1000" target="_blank" rel="noopener noreferrer">
                   <span class="text-xs font-mono text-secondary tabular-nums">#1000</span>
                   <span class="text-sm text-foreground">Improve cold start, bundle size, and streaming performance</span>
-                  <span class="text-xs text-secondary">Took blocking I/O off the preferences load, so first paint comes 50–200 ms sooner. Split startup into priority phases so heavy modules load after paint. Memoized the chat export path to cut re-renders while a reply streams.</span>
+                  <span class="text-xs text-secondary">Made the preferences load non-blocking, so it no longer holds up first paint. Split startup into priority phases so heavy modules load after paint. Memoized the chat export path to cut re-renders while a reply streams.</span>
                 </a>
               </li>
               <li class="border-t border-border border-dashed">
@@ -209,7 +209,7 @@
                 <a class="contrib-link row-link flex flex-col gap-1 py-3" href="https://github.com/openchamber/openchamber/pull/997" target="_blank" rel="noopener noreferrer">
                   <span class="text-xs font-mono text-secondary tabular-nums">#997</span>
                   <span class="text-sm text-foreground">Lazy-load the Markdown renderer and CodeMirror languages</span>
-                  <span class="text-xs text-secondary">The app loaded marked, Mermaid, syntax highlighting, and KaTeX at startup. They now load on the first message that needs them, and ten rarely used CodeMirror languages load on demand. That takes about 200 KB off the first bundle.</span>
+                  <span class="text-xs text-secondary">The app loaded marked, Mermaid, syntax highlighting, and KaTeX at startup. They now load on the first message that needs them, and rarely used CodeMirror languages load on demand, which keeps them out of the startup bundle.</span>
                 </a>
               </li>
             </ul>
@@ -230,7 +230,7 @@
                 <a class="contrib-link row-link flex flex-col gap-1 py-3" href="https://github.com/BabylonJS/Babylon.js/pull/18881" target="_blank" rel="noopener noreferrer">
                   <span class="text-xs font-mono text-secondary tabular-nums">#18881</span>
                   <span class="text-sm text-foreground">Add FlexPanel and em/rem GUI units</span>
-                  <span class="text-xs text-secondary">The GUI had no flexbox, so every layout was placed by hand. FlexPanel lays controls out in rows or columns with wrapping, gaps, grow, and weighted shrink. Shrink follows the CSS Flexbox spec, and I checked the edge cases against Chrome. Sizes can also use em and rem now. This was a sponsored bounty, and it took 26 files.</span>
+                  <span class="text-xs text-secondary">The GUI had no flexbox, so every layout was placed by hand. FlexPanel lays controls out in rows or columns with wrapping, gaps, grow, and weighted shrink. Shrink follows the CSS Flexbox spec, and I checked the edge cases against Chrome. Sizes can also use em and rem now, so GUI text and spacing can scale from one font size. This was a sponsored bounty.</span>
                 </a>
               </li>
             </ul>
