@@ -7,3 +7,9 @@ keep_vars = true
 directory = "./"
 binding = "ASSETS"
 run_worker_first = true
+
+# Spotify sign-in: refresh token, cached access token and owner ID.
+# Reconnect at /spotify/connect when the 6-month sign-in runs out.
+[[kv_namespaces]]
+binding = "SPOTIFY_KV"
+id = "c59d1baa07d14187a27d120ef3183dae"
