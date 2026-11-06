@@ -270,9 +270,9 @@
               <div class="text-secondary" aria-hidden="true">04</div>
               <h2 id="listening" class="text-foreground font-medium">And here’s what I’m listening to.</h2>
               <p class="text-secondary">
-                Pulled live from my Spotify. Mostly whatever was on while I
-                wrote code over the last few weeks.
+                Pulled live from my Spotify. Turn the dial to go further back.
               </p>
+              <div data-range-dial></div>
               <div class="border-b border-border border-dashed"></div>
               <div>
                 <h3 class="text-sm text-secondary mb-2 font-normal">Top artists</h3>
@@ -309,12 +309,18 @@
               <p class="text-secondary">
                 <a class="ulink" href="mailto:shyamalankannan@gmail.com"
                   ><span class="ulink-text">shyamalankannan@gmail.com</span></a
-                ><button type="button" class="copy-btn" data-copy="shyamalankannan@gmail.com" aria-label="Copy email address"
+                >
+              </p>
+              <!-- Pull the bead down to copy the address (craft/pull-cord.js). The bead is the copy button. -->
+              <div class="pull-cord" data-pull-cord>
+                <svg class="pull-cord-line" aria-hidden="true"><path d="M0 0"></path></svg>
+                <button type="button" class="copy-btn pull-cord-bead" data-copy="shyamalankannan@gmail.com" aria-label="Copy email address"
                   ><svg class="icon-idle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg
                   ><svg class="icon-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg
-                ></button
-                ><span class="sr-only" role="status" data-copy-status></span>
-              </p>
+                ></button>
+                <span class="pull-cord-hint" aria-hidden="true">Pull to copy</span>
+                <span class="sr-only" role="status" data-copy-status></span>
+              </div>
               <p class="text-secondary">
                 I’m in Seattle and open to moving. I post on
                 <a class="ulink nowrap" href="https://x.com/shyamalankannan" target="_blank" rel="noopener noreferrer"

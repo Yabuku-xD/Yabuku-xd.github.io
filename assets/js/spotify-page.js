@@ -1,5 +1,6 @@
 import { copy } from "./craft/copy.js";
 import { cover, httpUrl } from "./craft/cover.js";
+import { initPullRefresh } from "./craft/pull-refresh.js";
 
 const RECENT_LIMIT = 8;
 const nowPlaying = document.querySelector("#spotify-now-playing");
@@ -43,7 +44,28 @@ function renderNowPlaying(data) {
 
   link.append(cover(data.albumArt, "np-cover", 64), meta, status);
   if (link.target) link.append(el("span", "sr-only", `(${copy.spotify.opens})`));
-  nowPlaying.replaceChildren(link);
+  // Swap only the card, so the pull grip above it stays in place.
+  const old = nowPlaying.querySelector(".np-card, .pixel-loader, p");
+  if (old) old.replaceWith(link);
+  else nowPlaying.append(link);
+}
+
+let pullReady = false;
+async function loadNowPlaying() {
+  const now = await getJson("/api/spotify/now-playing");
+  if (now) renderNowPlaying(now);
+  // A failed refresh keeps the card that is already showing.
+  else if (!nowPlaying.querySelector(".np-card")) message(nowPlaying, copy.spotify.error);
+  if (now && !pullReady) {
+    pullReady = true;
+    initPullRefresh(nowPlaying, {
+      label: copy.spotify.refresh,
+      pulling: copy.spotify.pull,
+      release: copy.spotify.letGo,
+      loading: copy.spotify.refreshing,
+      onRefresh: loadNowPlaying,
+    });
+  }
 }
 
 function renderRecent(tracks) {
@@ -76,13 +98,7 @@ async function getJson(path) {
 }
 
 async function load() {
-  const [now, played] = await Promise.all([
-    getJson("/api/spotify/now-playing"),
-    getJson("/api/spotify/recently-played"),
-  ]);
-
-  if (now) renderNowPlaying(now);
-  else message(nowPlaying, copy.spotify.error);
+  const [, played] = await Promise.all([loadNowPlaying(), getJson("/api/spotify/recently-played")]);
 
   if (played == null) message(recent, copy.spotify.error);
   else if (played.length) renderRecent(played);

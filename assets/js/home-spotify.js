@@ -1,5 +1,6 @@
 import { copy } from "./craft/copy.js";
 import { cover, httpUrl } from "./craft/cover.js";
+import { createDial } from "./craft/detent-dial.js";
 
 const TOP_LIMIT = 5;
 const artistsBox = document.querySelector("#spotify-top-artists");
@@ -65,11 +66,19 @@ async function getJson(path) {
   }
 }
 
-async function load() {
+// Spotify's listening ranges, in the order the dial turns through them.
+const RANGES = ["short_term", "medium_term", "long_term"];
+// Each load is numbered so a slow answer for an old range never replaces a
+// newer one.
+let latest = 0;
+
+async function load(range = RANGES[0]) {
+  const ticket = ++latest;
   const [artists, tracks] = await Promise.all([
-    getJson("/api/spotify/top-artists?range=short_term"),
-    getJson("/api/spotify/top-tracks?range=short_term"),
+    getJson(`/api/spotify/top-artists?range=${range}`),
+    getJson(`/api/spotify/top-tracks?range=${range}`),
   ]);
+  if (ticket !== latest) return;
   // One failure message for the section, not two.
   if (artists == null && tracks == null) {
     message(artistsBox, copy.spotify.error);
@@ -80,6 +89,26 @@ async function load() {
   else message(artistsBox, artists == null ? copy.spotify.error : copy.spotify.noArtists);
   if (tracks?.length) renderTracks(tracks);
   else message(tracksBox, tracks == null ? copy.spotify.error : copy.spotify.noTracks);
+}
+
+// The dial switches the range. Turning past several stops quickly asks
+// Spotify once, for where it comes to rest.
+const dialSlot = document.querySelector("[data-range-dial]");
+if (dialSlot) {
+  let wait = 0;
+  createDial(dialSlot, {
+    stops: RANGES.map((value, i) => ({ value, label: copy.spotify.ranges[i] })),
+    label: copy.spotify.range,
+    onChange: (index) => {
+      clearTimeout(wait);
+      wait = setTimeout(() => {
+        for (const box of [artistsBox, tracksBox]) box.setAttribute("aria-busy", "true");
+        load(RANGES[index]).finally(() => {
+          for (const box of [artistsBox, tracksBox]) box.removeAttribute("aria-busy");
+        });
+      }, 250);
+    },
+  });
 }
 
 load();

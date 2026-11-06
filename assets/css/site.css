@@ -399,6 +399,7 @@ html:not(.js) .copy-btn {
   nav[aria-label="Site"] a,
   .cta,
   .project-title,
+  .screensaver-toggle,
   #spotify-top-tracks > a {
     min-height: 44px;
   }
@@ -888,5 +889,306 @@ html.js article.reveal {
   .np-status {
     grid-column: 2;
     justify-self: start;
+  }
+}
+
+/* ---------- Ascii heroes you can stir (scripts/ascii/hero.js) ---------- */
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .hero-ascii {
+    cursor: crosshair;
+  }
+}
+
+/* ---------- Section rules you can pluck (craft/elastic-line.js) ---------- */
+
+/* The rule stays 1px in the page flow; the bend draws in a taller box around
+   it that never takes pointer events. */
+.elastic {
+  position: relative;
+  height: 1px;
+}
+
+.elastic svg {
+  position: absolute;
+  inset-inline: 0;
+  top: -24px;
+  width: 100%;
+  height: 48px;
+  overflow: visible;
+  color: var(--border);
+  pointer-events: none;
+}
+
+.elastic path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+}
+
+/* ---------- Email pull cord (craft/pull-cord.js) ---------- */
+
+.pull-cord {
+  position: relative;
+  align-self: center;
+  width: 9rem;
+  height: 5.5rem;
+}
+
+html:not(.js) .pull-cord {
+  display: none;
+}
+
+.pull-cord-line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.pull-cord-line path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+}
+
+/* The bead hangs at the cord's end: 7 links of 7px. */
+.pull-cord-bead.copy-btn {
+  position: absolute;
+  top: 49px;
+  left: calc(50% - 14px);
+  margin: 0;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: var(--shadow-chip);
+  cursor: grab;
+  touch-action: none;
+}
+
+.pull-cord-bead.copy-btn:active {
+  cursor: grabbing;
+}
+
+.pull-cord-hint {
+  position: absolute;
+  top: 55px;
+  left: calc(50% + 22px);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  color: var(--color-text-muted);
+  transition: opacity var(--duration-hover) ease-out;
+}
+
+/* The cord swings through the hint while held. */
+.pull-cord.is-held .pull-cord-hint {
+  opacity: 0;
+}
+
+/* ---------- Listening range dial (craft/detent-dial.js) ---------- */
+
+.dial {
+  position: relative;
+  width: var(--dial-size);
+  height: var(--dial-size);
+  margin: calc(var(--spacing) * 6) auto calc(var(--spacing) * 2);
+  user-select: none;
+}
+
+.dial svg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.dial line {
+  stroke: var(--tick);
+  stroke-width: 1.5;
+  transition: stroke var(--duration-hover) ease-out;
+}
+
+.dial line.is-lit {
+  stroke: var(--foreground);
+}
+
+.dial line.is-current {
+  stroke: var(--foreground);
+  stroke-width: 2;
+}
+
+.dial-mark {
+  position: absolute;
+  translate: -50% -50%;
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  color: var(--color-text-muted);
+  transition: color var(--duration-hover) ease-out;
+}
+
+.dial-mark.is-current {
+  color: var(--foreground);
+}
+
+.dial-knob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64%;
+  height: 64%;
+  translate: -50% -50%;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.06),
+    0 12px 32px -12px rgb(0 0 0 / 0.25);
+  cursor: grab;
+  touch-action: none;
+}
+
+.dial-knob.is-grabbing {
+  cursor: grabbing;
+}
+
+.dial-knob:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 4px;
+}
+
+.dial-indicator {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.dial-indicator::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 3px;
+  height: 12px;
+  translate: -50% 0;
+  border-radius: 999px;
+  background: var(--foreground);
+}
+
+[aria-busy="true"] {
+  opacity: 0.5;
+  transition: opacity var(--duration-hover) ease-out;
+}
+
+/* ---------- Pull to refresh (craft/pull-refresh.js) ---------- */
+
+/* The pull opens room above the card, so the sections below move down with
+   it instead of sliding under it. */
+.pull-box {
+  position: relative;
+  padding-top: var(--pull, 0px);
+}
+
+.pull-grip {
+  position: relative;
+  display: block;
+  width: 2.5rem;
+  height: 1rem;
+  margin: 0 auto calc(var(--spacing) * 2);
+  cursor: grab;
+  touch-action: none;
+}
+
+.pull-grip::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: 3px;
+  translate: 0 -50%;
+  border-radius: 999px;
+  background: var(--color-text-muted);
+  transition: background-color var(--duration-hover) ease-out;
+}
+
+/* A 44px target around the small grip. */
+.pull-grip::after {
+  content: "";
+  position: absolute;
+  inset: -14px -2px;
+}
+
+@media (hover: hover) {
+  .pull-grip:hover::before {
+    background: var(--foreground);
+  }
+}
+
+.pull-hint {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  font-size: var(--text-xs);
+  text-align: center;
+  color: var(--color-text-muted);
+  opacity: var(--pull-progress, 0);
+  pointer-events: none;
+}
+
+.pull-box.is-loading .pull-hint {
+  opacity: 1;
+}
+
+
+.pull-box.is-settling {
+  transition: padding-top 320ms var(--ease-out);
+}
+
+/* ---------- Bouncing 404 (craft/screensaver.js) ---------- */
+
+.screensaver {
+  position: relative;
+  height: 12rem;
+  overflow: hidden;
+  color: #e9e5d8;
+  background: #0c0806;
+  outline: 1px solid var(--color-image-outline);
+  outline-offset: -1px;
+}
+
+.screensaver-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  font-size: 0.625rem;
+  line-height: 1;
+  text-transform: none;
+}
+
+.screensaver.is-still .screensaver-item {
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+
+.screensaver-toggle {
+  position: absolute;
+  inset-inline-end: calc(var(--spacing) * 2);
+  bottom: calc(var(--spacing) * 2);
+  min-height: 28px;
+  padding-inline: calc(var(--spacing) * 2);
+  font-size: var(--text-xs);
+  color: inherit;
+  text-transform: inherit;
+  background: rgb(255 255 255 / 0.08);
+  border-radius: 4px;
+}
+
+@media (hover: hover) {
+  .screensaver-toggle:hover {
+    background: rgb(255 255 255 / 0.16);
   }
 }
