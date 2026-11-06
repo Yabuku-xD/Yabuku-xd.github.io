@@ -1,6 +1,6 @@
 // A table of contents drawn as a ruler in the left margin. Each [data-toc]
-// section gets a numbered long tick; short ticks after it can count its
-// contents (data-toc-ticks). The tick for the section you are reading is the
+// section gets a numbered long tick, with one short tick between rows. The
+// tick for the section you are reading is the
 // longest, and when a pointer runs down the ruler the ticks near it reach out
 // and their names lean in, falling off across the neighbours. Rebuilt from the
 // public description of Bencho's "Line sidebar".
@@ -47,13 +47,6 @@ export function shownIndex(picked, atBottom, onLine, count) {
   return onLine;
 }
 
-/** data-toc-ticks is a count ("3") or a selector to count inside the section ("li"). */
-export function tickCount(raw, countMatches) {
-  if (!raw) return 1;
-  const n = /^\d+$/.test(raw) ? Number(raw) : countMatches(raw);
-  return Math.min(24, Math.max(1, n));
-}
-
 function targetId(section) {
   return section.id || section.getAttribute("aria-labelledby") || section.querySelector("[id]")?.id || "";
 }
@@ -88,11 +81,11 @@ function build(items, label, pad) {
     text.append(num, name);
     link.append(line, text);
     row.append(link);
-    // Counted ticks carry meaning on every row; plain spacers sit between rows.
-    if (item.counted || i < items.length - 1) {
+    // One short tick between rows keeps the same rhythm on every page.
+    if (i < items.length - 1) {
       const minor = span("ruler-minor");
       minor.setAttribute("aria-hidden", "true");
-      for (let t = 0; t < item.ticks; t++) minor.append(document.createElement("i"));
+      minor.append(document.createElement("i"));
       row.append(minor);
     }
     list.append(row);
@@ -109,8 +102,6 @@ export function initRuler(label, root = document) {
       section,
       id: targetId(section),
       label: section.dataset.toc,
-      ticks: tickCount(section.dataset.tocTicks, (selector) => section.querySelectorAll(selector).length),
-      counted: Boolean(section.dataset.tocTicks),
     }))
     .filter((item) => item.id && item.label);
   // A ruler with one mark tells the reader nothing.
@@ -189,26 +180,39 @@ export function initRuler(label, root = document) {
   };
   for (const type of ["wheel", "touchstart", "keydown"]) addEventListener(type, release, { passive: true });
 
-  // Pointer reach: only for a fine pointer and when motion is welcome.
+  // Pointer reach: only for a fine pointer and when motion is welcome. Every
+  // mark reacts, long ticks and short ones, by its distance in pixels from
+  // the pointer. REACH_PX is about one and a half rows: the mark under the
+  // pointer leads, its neighbours follow at about a quarter, then nothing.
   const fine = matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)");
-  const REACH_ROWS = 2.5;
+  const REACH_PX = 64;
+  const marks = [...rows.map((row) => row.firstElementChild), ...list.querySelectorAll(".ruler-minor i")];
   let centers = [];
-  let rowHeight = 1;
+  let lit = new Set();
   let pointerY = null;
   let pointerFrame = 0;
   const measure = () => {
-    centers = links.map((link) => {
-      const box = link.getBoundingClientRect();
+    centers = marks.map((mark) => {
+      const box = mark.getBoundingClientRect();
       return box.top + box.height / 2;
     });
-    rowHeight = centers.length > 1 ? (centers.at(-1) - centers[0]) / (centers.length - 1) : 1;
   };
+  // Only marks inside the reach are written, plus the ones that just left
+  // it, so a ruler with a thousand ticks costs a handful of writes per frame.
   const paint = () => {
     pointerFrame = 0;
-    rows.forEach((row, i) => {
-      const reach = pointerY == null ? 0 : proximity((pointerY - centers[i]) / rowHeight, REACH_ROWS);
-      row.style.setProperty("--p", reach);
-    });
+    const next = new Set();
+    if (pointerY != null) {
+      centers.forEach((center, i) => {
+        if (Math.abs(pointerY - center) < REACH_PX) next.add(i);
+      });
+    }
+    for (const i of new Set([...lit, ...next])) {
+      const reach = next.has(i) ? proximity(pointerY - centers[i], REACH_PX) : 0;
+      if (reach) marks[i].style.setProperty("--p", reach);
+      else marks[i].style.removeProperty("--p");
+    }
+    lit = next;
   };
   list.addEventListener("pointerenter", (event) => {
     if (!fine.matches || event.pointerType !== "mouse") return;

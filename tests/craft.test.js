@@ -4,7 +4,7 @@ import { dirname, join } from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { pixelCells } from "../assets/js/craft/pixel-loader.js";
-import { activeIndex, indexLabel, nextActive, proximity, shownIndex, tickCount } from "../assets/js/craft/ruler.js";
+import { activeIndex, indexLabel, nextActive, proximity, shownIndex } from "../assets/js/craft/ruler.js";
 import { scrambleFrame, stepFor } from "../assets/js/craft/scramble.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -71,14 +71,6 @@ test("ruler marks a picked section, then the last one at the page bottom", () =>
   // Otherwise the reading line decides.
   assert.equal(shownIndex(-1, false, 1, 3), 1);
   assert.equal(shownIndex(-1, false, -1, 3), -1);
-});
-
-test("ruler tick counts take a number or a selector to count, within 1-24", () => {
-  assert.equal(tickCount(undefined, () => 0), 1);
-  assert.equal(tickCount("3", () => 0), 3);
-  assert.equal(tickCount("li", () => 8), 8);
-  assert.equal(tickCount("li", () => 0), 1);
-  assert.equal(tickCount("li", () => 500), 24);
 });
 
 test("pixel loader is a filled circle that ripples from the middle", () => {

@@ -648,45 +648,60 @@ html.js article.reveal {
   text-align: start;
 }
 
-.ruler-item {
-  --p: 0;
-}
-
+/* Two inputs drive a mark: --p, the pointer's reach (0 to 1, set by
+   craft/ruler.js), and --a, its own state (the section being read, or
+   keyboard focus). The mark shows whichever is larger as --e, so the
+   section being read stays the longest tick while the pointer roams. */
 .ruler-link {
+  --e: max(var(--p, 0), var(--a, 0));
+  --ink: calc(min(var(--e), 1) * 100%);
   display: flex;
   align-items: center;
   gap: calc(var(--spacing) * 3);
-  min-height: 44px;
+  min-height: 2.25rem;
   padding-inline-end: 2rem;
-  color: var(--color-text-muted);
+  color: color-mix(in oklab, var(--foreground) var(--ink), var(--color-text-muted));
   text-decoration: none;
 }
 
-/* The section being read: the longest tick, full ink. */
-.ruler-link[aria-current] {
-  --p: 1.4;
-  color: var(--foreground);
+/* The ruler shows beside the column on wide screens, which can be touch
+   laptops: a finger still gets a 44px row. */
+@media (pointer: coarse) {
+  .ruler-link {
+    min-height: 44px;
+  }
 }
 
+/* The section being read: the longest tick. */
+.ruler-link[aria-current] {
+  --a: 1.4;
+}
+
+/* Keyboard focus: the longer tick, full ink and a solid underline, the same
+   way other links on the site show focus. A ring would be clipped to two
+   bars by the ruler's scroll box. */
 .ruler-link:focus-visible {
-  --p: 1;
+  --a: 1;
+  outline: none;
+}
+
+.ruler-link:focus-visible .ruler-label {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
 }
 
 .ruler-line {
   flex: none;
   width: 1rem;
   height: 1px;
-  background: var(--tick);
+  background: color-mix(in oklab, var(--foreground) var(--ink), var(--tick));
   transform-origin: left center;
-  scale: calc(1 + var(--p) * 1.25) 1;
+  scale: calc(1 + var(--e) * 1.25) 1;
 }
 
 .ruler-link:dir(rtl) .ruler-line {
   transform-origin: right center;
-}
-
-.ruler-link[aria-current] .ruler-line {
-  background: var(--foreground);
 }
 
 /* Number and name sit on one baseline (12px and 14px text would otherwise
@@ -696,11 +711,11 @@ html.js article.reveal {
   align-items: baseline;
   gap: calc(var(--spacing) * 3);
   min-width: 0;
-  translate: calc(var(--p) * 1.25rem) 0;
+  translate: calc(var(--e) * 1.25rem) 0;
 }
 
 .ruler-link:dir(rtl) .ruler-text {
-  translate: calc(var(--p) * -1.25rem) 0;
+  translate: calc(var(--e) * -1.25rem) 0;
 }
 
 .ruler-num {
@@ -715,34 +730,41 @@ html.js article.reveal {
   font-size: var(--text-sm);
   white-space: nowrap;
   text-overflow: ellipsis;
-  color: color-mix(
-    in oklab,
-    var(--foreground) calc(var(--p) * 70%),
-    var(--color-text-muted)
-  );
 }
 
-/* Short ticks between sections; on Contributions there is one per pull request. */
+/* One short tick between rows. It reaches out with the pointer too, at
+   half the ink. */
 .ruler-minor {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
   padding-block: 3px;
 }
 
 .ruler-minor i {
   width: 0.5rem;
   height: 1px;
-  background: var(--tick);
+  background: color-mix(
+    in oklab,
+    var(--foreground) calc(min(var(--p, 0), 1) * 50%),
+    var(--tick)
+  );
+  transform-origin: left center;
+  scale: calc(1 + var(--p, 0) * 1.5) 1;
+}
+
+.ruler-link:dir(rtl) ~ .ruler-minor i {
+  transform-origin: right center;
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .ruler-link,
   .ruler-line,
   .ruler-text,
-  .ruler-label {
+  .ruler-minor i {
     transition:
-      scale 200ms var(--ease-out),
-      translate 200ms var(--ease-out),
+      scale 180ms var(--ease-out),
+      translate 180ms var(--ease-out),
       background-color var(--duration-hover) ease-out,
       color var(--duration-hover) ease-out;
   }
