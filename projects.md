@@ -50,3 +50,5 @@ Mar 2026. Built while job hunting on a visa. It answers "does this company actua
 Stack: Django · React · TypeScript · PostgreSQL · Redis · Celery
 
 - [Source on GitHub](https://github.com/Yabuku-xD/Ghosted)
+
+Open-source pull requests to Hermes Agent, OpenChamber, and Babylon.js: [contributions](https://shyamalankannan.com/contributions.md).

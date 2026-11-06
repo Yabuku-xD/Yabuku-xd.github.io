@@ -10,14 +10,19 @@ const PAGE_ALIASES = {
 // Each page answers at one URL, the one its rel=canonical names. The other
 // spellings redirect so search engines don't index duplicates.
 const CANONICAL_REDIRECTS = {
+  "/index": "/",
   "/index.html": "/",
+  "/about-me": "/about",
   "/about-me.html": "/about",
+  "/about-me.md": "/about.md",
   "/contact.html": "/contact",
   "/privacy.html": "/privacy",
   "/projects": "/projects.html",
   "/contributions": "/contributions.html",
   "/spotify": "/spotify.html",
 };
+// The 404 page is the body of every miss, never a page of its own.
+const ERROR_PAGES = new Set(["/404", "/404.html"]);
 const STATIC_EXT =
   /\.(?:css|js|mjs|map|png|jpe?g|webp|gif|svg|avif|ico|woff2?|ttf|otf|eot|json|pdf|mp4|webm|mp3|wav|ogg|zip)$/i;
 
@@ -29,6 +34,35 @@ const CONNECT_PATH = "/spotify/connect";
 const CALLBACK_PATH = "/callback";
 const SPOTIFY_SCOPES = "user-read-currently-playing user-read-recently-played user-top-read";
 const STATE_COOKIE = "spotify_state";
+// Spotify's listening windows; the range query parameter must be one of them.
+const SPOTIFY_RANGES = new Set(["short_term", "medium_term", "long_term"]);
+
+// Sent with every response. The one inline script on each page adds the "js"
+// class before first paint; its hash is the only inline code the policy runs.
+// Album art and artist photos come from Spotify's image hosts over https.
+const CONTENT_SECURITY_POLICY = [
+  "default-src 'self'",
+  "script-src 'self' 'sha256-WZRJfWvsnNCPcxzZwvyhovnZGqhZaC+8gPGPRbx6wTk='",
+  "style-src 'self'",
+  "style-src-attr 'unsafe-inline'",
+  "img-src 'self' data: https:",
+  "font-src 'self'",
+  "connect-src 'self'",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+  "upgrade-insecure-requests",
+].join("; ");
+const SECURITY_HEADERS = {
+  "Content-Security-Policy": CONTENT_SECURITY_POLICY,
+  "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+  "Cross-Origin-Opener-Policy": "same-origin",
+};
 
 function toUrl(value) {
   try {
@@ -40,102 +74,114 @@ function toUrl(value) {
 
 export default {
   async fetch(request, env) {
-    const url = toUrl(request.url);
-    if (!url) return new Response("Bad Request", { status: 400 });
-
-    if (url.pathname === CONNECT_PATH) return handleConnect(env);
-    if (url.pathname === CALLBACK_PATH) return handleCallback(request, env, url);
-
-    if (url.pathname.startsWith("/api/spotify")) {
-      try {
-        return await handleSpotify(request, env);
-      } catch (error) {
-        // Say why instead of crashing (Cloudflare error 1101), so a broken
-        // token or a Spotify outage shows up in one request.
-        return Response.json(
-          { error: String(error?.message || error) },
-          { status: 502, headers: { "Access-Control-Allow-Origin": "*" } },
-        );
-      }
-    }
-
-    if (url.pathname.length > 1 && url.pathname.endsWith("/")) {
-      url.pathname = url.pathname.slice(0, -1);
-      return Response.redirect(url.toString(), 308);
-    }
-
-    const canonical = CANONICAL_REDIRECTS[url.pathname];
-    if (canonical) {
-      url.pathname = canonical;
-      return Response.redirect(url.toString(), 301);
-    }
-
-    const pathname = canonicalPath(url.pathname);
-    const accept = request.headers.get("accept");
-    const chosen = preferredType(accept, PRODUCES);
-
-    if (STATIC_EXT.test(pathname)) {
-      return env.ASSETS.fetch(request);
-    }
-
-    if (/\.(?:xml|txt)$/i.test(pathname)) {
-      const staticRes = await env.ASSETS.fetch(request);
-      if (staticRes.status !== 404) return staticRes;
-      return notFound(
-        url.pathname,
-        chosen === "text/markdown" ? "markdown" : "html",
-      );
-    }
-
-    if (chosen === null && accept) {
-      return notAcceptable(accept);
-    }
-
-    if (pathname.endsWith(".md") || chosen === "text/markdown") {
-      const mdPath = pathname.endsWith(".md")
-        ? pathname
-        : markdownPath(pathname);
-      const mdRes = await env.ASSETS.fetch(assetRequest(request, mdPath));
-      if (mdRes.status === 200) {
-        return markdownResponse(mdRes, mdPath);
-      }
-      if (pathname.endsWith(".md") || !preferredType(accept, ["text/html"])) {
-        return notFound(pathname, "markdown");
-      }
-    }
-
-    const htmlPath = pathname === "/" ? "/index.html" : pathname;
-    const htmlRes = await env.ASSETS.fetch(assetRequest(request, htmlPath));
-    if (htmlRes.status === 404) {
-      if (chosen === "text/markdown") {
-        return notFound(url.pathname, "markdown");
-      }
-      const fallback = await env.ASSETS.fetch(
-        assetRequest(request, "/404.html"),
-      );
-      if (fallback.status === 200) {
-        const res = new Response(fallback.body, {
-          status: 404,
-          headers: fallback.headers,
-        });
-        applyNegotiationHeaders(res.headers);
-        res.headers.set("Content-Type", "text/html; charset=utf-8");
-        res.headers.set("X-Robots-Tag", "noindex");
-        addLinkHeaders(res.headers, markdownPath(pathname));
-        return res;
-      }
-      return notFound(url.pathname, "html");
-    }
-
-    const res = new Response(htmlRes.body, htmlRes);
-    applyNegotiationHeaders(res.headers);
-    if ((res.headers.get("content-type") || "").includes("text/html")) {
-      res.headers.set("Content-Type", "text/html; charset=utf-8");
-      addLinkHeaders(res.headers, markdownPath(pathname));
-    }
-    return res;
+    return withSecurityHeaders(await route(request, env));
   },
 };
+
+/** A copy of `response` with the security headers it does not already set. */
+function withSecurityHeaders(response) {
+  const res = new Response(response.body, response);
+  for (const [name, value] of Object.entries(SECURITY_HEADERS)) {
+    if (!res.headers.has(name)) res.headers.set(name, value);
+  }
+  return res;
+}
+
+async function route(request, env) {
+  const url = toUrl(request.url);
+  if (!url) return new Response("Bad Request", { status: 400 });
+
+  if (url.pathname === CONNECT_PATH) return handleConnect(env);
+  if (url.pathname === CALLBACK_PATH) return handleCallback(request, env, url);
+
+  if (url.pathname.startsWith("/api/spotify")) {
+    try {
+      return await handleSpotify(request, env);
+    } catch (error) {
+      // Say why instead of crashing (Cloudflare error 1101), so a broken
+      // token or a Spotify outage shows up in one request.
+      return Response.json({ error: String(error?.message || error) }, { status: 502 });
+    }
+  }
+
+  if (url.pathname.length > 1 && url.pathname.endsWith("/")) {
+    url.pathname = url.pathname.slice(0, -1);
+    return Response.redirect(url.toString(), 308);
+  }
+
+  const canonical = CANONICAL_REDIRECTS[url.pathname];
+  if (canonical) {
+    url.pathname = canonical;
+    return Response.redirect(url.toString(), 301);
+  }
+
+  const pathname = canonicalPath(url.pathname);
+  const accept = request.headers.get("accept");
+  const chosen = preferredType(accept, PRODUCES);
+
+  if (STATIC_EXT.test(pathname)) {
+    return env.ASSETS.fetch(request);
+  }
+
+  if (/\.(?:xml|txt)$/i.test(pathname)) {
+    const staticRes = await env.ASSETS.fetch(request);
+    if (staticRes.status !== 404) return staticRes;
+    return notFound(
+      url.pathname,
+      chosen === "text/markdown" ? "markdown" : "html",
+    );
+  }
+
+  if (chosen === null && accept) {
+    return notAcceptable(accept);
+  }
+
+  if (pathname.endsWith(".md") || chosen === "text/markdown") {
+    const mdPath = pathname.endsWith(".md")
+      ? pathname
+      : markdownPath(url.pathname);
+    const mdRes = await env.ASSETS.fetch(assetRequest(request, mdPath));
+    if (mdRes.status === 200) {
+      return markdownResponse(mdRes, mdPath);
+    }
+    if (pathname.endsWith(".md") || !preferredType(accept, ["text/html"])) {
+      return notFound(pathname, "markdown");
+    }
+  }
+
+  const htmlPath = pathname === "/" ? "/index.html" : pathname;
+  const htmlRes = ERROR_PAGES.has(pathname)
+    ? null
+    : await env.ASSETS.fetch(assetRequest(request, htmlPath));
+  if (!htmlRes || htmlRes.status === 404) {
+    if (chosen === "text/markdown") {
+      return notFound(url.pathname, "markdown");
+    }
+    const fallback = await env.ASSETS.fetch(
+      assetRequest(request, "/404.html"),
+    );
+    if (fallback.status === 200) {
+      const res = new Response(fallback.body, {
+        status: 404,
+        headers: fallback.headers,
+      });
+      applyNegotiationHeaders(res.headers);
+      res.headers.set("Content-Type", "text/html; charset=utf-8");
+      res.headers.set("X-Robots-Tag", "noindex");
+      addLinkHeaders(res.headers, markdownPath(url.pathname));
+      return res;
+    }
+    return notFound(url.pathname, "html");
+  }
+
+  const res = new Response(htmlRes.body, htmlRes);
+  applyNegotiationHeaders(res.headers);
+  if ((res.headers.get("content-type") || "").includes("text/html")) {
+    res.headers.set("Content-Type", "text/html; charset=utf-8");
+    addLinkHeaders(res.headers, markdownPath(url.pathname));
+  }
+  return res;
+}
 
 function canonicalPath(pathname) {
   const clean = pathname.replace(/\/$/, "") || "/";
@@ -143,8 +189,9 @@ function canonicalPath(pathname) {
   return PAGE_ALIASES[clean] || clean;
 }
 
+/** The Markdown twin of a page, named after its public URL (/about -> /about.md). */
 function markdownPath(pathname) {
-  const clean = canonicalPath(pathname);
+  const clean = pathname.replace(/\/$/, "") || "/";
   if (clean === "/") return "/index.md";
   if (clean.endsWith(".html")) return `${clean.slice(0, -5)}.md`;
   if (clean.endsWith(".md")) return clean;
@@ -364,10 +411,14 @@ function escapeHtml(value) {
 async function handleSpotify(request, env) {
   const url = toUrl(request.url);
   if (!url) return new Response("Bad Request", { status: 400 });
-  const headers = {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-  };
+  const headers = { "Content-Type": "application/json" };
+  const range = url.searchParams.get("range") || "short_term";
+  if (!SPOTIFY_RANGES.has(range)) {
+    return Response.json(
+      { error: `range must be one of: ${[...SPOTIFY_RANGES].join(", ")}` },
+      { status: 400 },
+    );
+  }
   const token = await getAccessToken(env);
 
   if (url.pathname === "/api/spotify/now-playing") {
@@ -406,7 +457,6 @@ async function handleSpotify(request, env) {
   }
 
   if (url.pathname === "/api/spotify/top-tracks") {
-    const range = url.searchParams.get("range") || "short_term";
     const res = await fetch(
       `${SPOTIFY_API}/me/top/tracks?limit=10&time_range=${range}`,
       { headers: { Authorization: `Bearer ${token}` } },
@@ -425,7 +475,6 @@ async function handleSpotify(request, env) {
   }
 
   if (url.pathname === "/api/spotify/top-artists") {
-    const range = url.searchParams.get("range") || "short_term";
     const res = await fetch(
       `${SPOTIFY_API}/me/top/artists?limit=9&time_range=${range}`,
       { headers: { Authorization: `Bearer ${token}` } },

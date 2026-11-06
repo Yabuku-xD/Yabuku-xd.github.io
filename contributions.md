@@ -30,3 +30,5 @@ An open-source 3D engine for the web, with a GUI system that draws controls insi
 - [#18881](https://github.com/BabylonJS/Babylon.js/pull/18881) Add FlexPanel and em/rem GUI units, a sponsored bounty merged in September 2026
 
 The [HTML page](https://shyamalankannan.com/contributions.html) has a note on each pull request explaining what broke and what changed.
+
+Projects he built on his own time: [projects](https://shyamalankannan.com/projects.md).

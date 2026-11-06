@@ -144,7 +144,6 @@ test("markdown twins exist for public pages", () => {
   for (const file of [
     "index.md",
     "about.md",
-    "about-me.md",
     "contact.md",
     "privacy.md",
     "projects.md",

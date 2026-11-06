@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { test } from "node:test";
@@ -186,7 +187,6 @@ test("a refused Spotify token answers 502 with the reason instead of crashing", 
     for (const path of ["now-playing", "top-tracks", "top-artists", "recently-played"]) {
       const response = await worker.fetch(new Request(`https://example.com/api/spotify/${path}`), createEnv());
       assert.equal(response.status, 502, path);
-      assert.equal(response.headers.get("Access-Control-Allow-Origin"), "*");
       assert.deepEqual(await response.json(), { error: "Spotify sign-in failed: Refresh token revoked" });
     }
   } finally {
@@ -244,7 +244,8 @@ test("returns normalized Spotify top tracks", async () => {
     );
     const body = await response.json();
 
-    assert.equal(response.headers.get("Access-Control-Allow-Origin"), "*");
+    // Only this site reads the API, so it grants no cross-origin access.
+    assert.equal(response.headers.get("Access-Control-Allow-Origin"), null);
     assert.deepEqual(body, [
       {
         name: "Track One",
@@ -367,8 +368,11 @@ test("trailing slashes redirect so relative assets keep working", async () => {
 
 test("duplicate page URLs redirect to the canonical URL", async () => {
   for (const [from, to] of [
+    ["/index", "/"],
     ["/index.html", "/"],
+    ["/about-me", "/about"],
     ["/about-me.html", "/about"],
+    ["/about-me.md", "/about.md"],
     ["/contact.html", "/contact"],
     ["/privacy.html", "/privacy"],
     ["/projects", "/projects.html"],
@@ -393,11 +397,12 @@ test("internal links and the sitemap use canonical URLs", () => {
     "contact.html",
     "privacy.html",
     "spotify.html",
+    "404.html",
   ]) {
     const html = readFileSync(join(ROOT, file), "utf8");
     assert.doesNotMatch(
       html,
-      /href="(?:index|about-me|contact|privacy)\.html"/,
+      /href="\/?(?:index|about-me|contact|privacy)\.html"/,
       `${file} links to a redirecting URL`,
     );
   }
@@ -419,4 +424,71 @@ test("sitemap and llms.txt are served as files", async () => {
   assert.equal(llms.status, 200);
   assert.match(await sitemap.text(), /<urlset/);
   assert.match(await llms.text(), /When to use this/);
+});
+
+test("every response carries the security headers", async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => Response.json({ access_token: "access-token", items: [] });
+  try {
+    for (const path of ["/", "/about", "/about.md", "/assets/css/site.css", "/index.html", "/nope", "/api/spotify/top-tracks"]) {
+      const response = await fetchSite(path);
+      const csp = response.headers.get("content-security-policy") || "";
+      assert.match(csp, /default-src 'self'/, path);
+      assert.match(csp, /frame-ancestors 'none'/, path);
+      assert.match(response.headers.get("strict-transport-security") || "", /max-age=31536000/, path);
+      assert.equal(response.headers.get("x-content-type-options"), "nosniff", path);
+      assert.equal(response.headers.get("x-frame-options"), "DENY", path);
+      assert.equal(response.headers.get("referrer-policy"), "strict-origin-when-cross-origin", path);
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("the CSP allows each page's inline script and nothing else inline", async () => {
+  const policy = (await fetchSite("/")).headers.get("content-security-policy");
+  const allowed = new Set(policy.match(/'sha256-[^']+'/g).map((h) => h.slice(8, -1)));
+  for (const file of ["index.html", "about-me.html", "projects.html", "contributions.html", "contact.html", "privacy.html", "spotify.html", "404.html"]) {
+    const html = readFileSync(join(ROOT, file), "utf8");
+    for (const [, body] of html.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*application\/ld\+json)[^>]*>([\s\S]*?)<\/script>/g)) {
+      const hash = createHash("sha256").update(body).digest("base64");
+      assert.ok(allowed.has(hash), `${file} has an inline script the CSP blocks: ${body.slice(0, 60)}`);
+    }
+    assert.doesNotMatch(html, /\son[a-z]+="/, `${file} has an inline event handler the CSP blocks`);
+  }
+});
+
+test("Spotify ranges outside the three windows are refused before Spotify is asked", async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => {
+    throw new Error("Spotify must not be called for a bad range");
+  };
+  try {
+    for (const range of ["forever", "short_term&limit=50"]) {
+      const response = await fetchSite(`/api/spotify/top-artists?range=${encodeURIComponent(range)}`);
+      assert.equal(response.status, 400, range);
+      assert.match((await response.json()).error, /short_term, medium_term, long_term/);
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("the 404 page is never served as a 200 page of its own", async () => {
+  for (const path of ["/404", "/404.html"]) {
+    const response = await fetchSite(path);
+    assert.equal(response.status, 404, path);
+    assert.equal(response.headers.get("x-robots-tag"), "noindex", path);
+  }
+});
+
+test("each page's Markdown twin is named after its public URL", async () => {
+  for (const [path, heading] of [["/about", /about/i], ["/contact", /contact/i], ["/projects.html", /projects/i]]) {
+    const response = await fetchSite(path, { Accept: "text/markdown" });
+    assert.equal(response.status, 200, path);
+    assert.match(response.headers.get("content-type"), /text\/markdown/, path);
+    assert.match(await response.text(), heading, path);
+  }
+  const about = await fetchSite("/about");
+  assert.match(about.headers.get("link") || "", /<\/about\.md>; rel="alternate"/);
 });
