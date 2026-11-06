@@ -37,7 +37,7 @@ function createEnv(fetchImpl) {
     },
     SPOTIFY_CLIENT_ID: "client-id",
     SPOTIFY_CLIENT_SECRET: "client-secret",
-    SPOTIFY_REFRESH_TOKEN: "refresh-token",
+    SPOTIFY_KV: fakeKv({ refresh_token: "refresh-token" }),
   };
 }
 
@@ -111,6 +111,22 @@ test("Spotify tokens come from KV, new ones are stored, and the access token is 
   assert.match(tokenBodies[0], /refresh_token=kv-refresh/);
   assert.equal(kv.store.get("refresh_token"), "rotated");
   assert.equal(kv.store.get("access_token"), "access-1");
+});
+
+test("with no sign-in in KV the Spotify routes say how to connect", async () => {
+  const env = { ...createEnv(), SPOTIFY_KV: fakeKv() };
+  await withFetch(
+    async () => {
+      throw new Error("Spotify must not be called without a sign-in");
+    },
+    async () => {
+      const response = await worker.fetch(new Request("https://example.com/api/spotify/now-playing"), env);
+      assert.equal(response.status, 502);
+      assert.deepEqual(await response.json(), {
+        error: "Spotify is not connected. Open /spotify/connect to sign in.",
+      });
+    },
+  );
 });
 
 test("/spotify/connect sends the owner to Spotify with a one-time state cookie", async () => {

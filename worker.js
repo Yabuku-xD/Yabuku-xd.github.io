@@ -464,12 +464,13 @@ async function handleSpotify(request, env) {
 }
 
 async function getAccessToken(env) {
-  // The KV store (binding SPOTIFY_KV) holds the newest refresh token and a
-  // cached access token. Without it the worker uses the Cloudflare secret.
+  // The KV store (binding SPOTIFY_KV) holds the refresh token that
+  // /spotify/connect saved, and a cached access token.
   const kv = env.SPOTIFY_KV;
   const cached = await kv?.get(KV_ACCESS);
   if (cached) return cached;
-  const refreshToken = (await kv?.get(KV_REFRESH)) || env.SPOTIFY_REFRESH_TOKEN;
+  const refreshToken = await kv?.get(KV_REFRESH);
+  if (!refreshToken) throw new Error(`Spotify is not connected. Open ${CONNECT_PATH} to sign in.`);
   const data = await spotifyToken(env, { grant_type: "refresh_token", refresh_token: refreshToken });
   await saveTokens(kv, data);
   return data.access_token;
