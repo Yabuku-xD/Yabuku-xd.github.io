@@ -68,6 +68,96 @@ test("falls through to static assets for non-api requests", async () => {
   assert.equal(await response.text(), "asset response");
 });
 
+function fakeKv(initial = {}) {
+  const store = new Map(Object.entries(initial));
+  return {
+    store,
+    get: async (key) => store.get(key) ?? null,
+    put: async (key, value) => void store.set(key, value),
+  };
+}
+
+async function withFetch(impl, run) {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = impl;
+  try {
+    return await run();
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+}
+
+test("Spotify tokens come from KV, new ones are stored, and the access token is cached", async () => {
+  const kv = fakeKv({ refresh_token: "kv-refresh" });
+  const env = { ...createEnv(), SPOTIFY_KV: kv };
+  const tokenBodies = [];
+  await withFetch(
+    async (url, init) => {
+      if (String(url).includes("accounts.spotify.com")) {
+        tokenBodies.push(String(init.body));
+        return Response.json({ access_token: "access-1", expires_in: 3600, refresh_token: "rotated" });
+      }
+      return Response.json({ items: [] });
+    },
+    async () => {
+      for (let i = 0; i < 2; i++) {
+        const response = await worker.fetch(new Request("https://example.com/api/spotify/top-tracks"), env);
+        assert.equal(response.status, 200);
+      }
+    },
+  );
+  // KV's token wins over the Cloudflare secret, and the second request reuses the cached access token.
+  assert.equal(tokenBodies.length, 1);
+  assert.match(tokenBodies[0], /refresh_token=kv-refresh/);
+  assert.equal(kv.store.get("refresh_token"), "rotated");
+  assert.equal(kv.store.get("access_token"), "access-1");
+});
+
+test("/spotify/connect sends the owner to Spotify with a one-time state cookie", async () => {
+  const env = { ...createEnv(), SPOTIFY_KV: fakeKv() };
+  const response = await worker.fetch(new Request("https://shyamalankannan.com/spotify/connect"), env);
+  assert.equal(response.status, 302);
+  const location = new URL(response.headers.get("Location"));
+  assert.equal(location.origin + location.pathname, "https://accounts.spotify.com/authorize");
+  assert.equal(location.searchParams.get("redirect_uri"), "https://shyamalankannan.com/callback");
+  const state = location.searchParams.get("state");
+  assert.ok(state);
+  assert.match(response.headers.get("Set-Cookie"), new RegExp(`spotify_state=${state};.*HttpOnly; Secure`));
+});
+
+test("/callback saves the owner's sign-in and refuses a mismatched state or another account", async () => {
+  const kv = fakeKv();
+  const env = { ...createEnv(), SPOTIFY_KV: kv };
+  let profileId = "owner-id";
+  const callback = (state, cookieState) =>
+    worker.fetch(
+      new Request(`https://shyamalankannan.com/callback?code=abc&state=${state}`, {
+        headers: { Cookie: `spotify_state=${cookieState}` },
+      }),
+      env,
+    );
+  await withFetch(
+    async (url) => {
+      if (String(url).includes("accounts.spotify.com")) {
+        return Response.json({ access_token: "access-new", expires_in: 3600, refresh_token: `refresh-for-${profileId}` });
+      }
+      return Response.json({ id: profileId });
+    },
+    async () => {
+      assert.equal((await callback("forged", "real")).status, 400);
+      assert.equal(kv.store.size, 0);
+
+      assert.equal((await callback("s1", "s1")).status, 200);
+      assert.equal(kv.store.get("owner_id"), "owner-id");
+      assert.equal(kv.store.get("refresh_token"), "refresh-for-owner-id");
+
+      profileId = "someone-else";
+      assert.equal((await callback("s2", "s2")).status, 403);
+      assert.equal(kv.store.get("refresh_token"), "refresh-for-owner-id");
+    },
+  );
+});
+
 test("a refused Spotify token answers 502 with the reason instead of crashing", async () => {
   const originalFetch = globalThis.fetch;
   globalThis.fetch = async (url) => {
