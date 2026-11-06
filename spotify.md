@@ -11,4 +11,4 @@ Live data is served from:
 
 Those endpoints return JSON about the site owner's listening history. They are not a general Spotify proxy.
 
-HTML page: [https://shyamalankannan.com/spotify.html](https://shyamalankannan.com/spotify.html)
+HTML page: [https://shyamalankannan.com/spotify](https://shyamalankannan.com/spotify)

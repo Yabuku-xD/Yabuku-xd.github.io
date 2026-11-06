@@ -6,6 +6,9 @@ const PAGE_ALIASES = {
   "/about": "/about-me.html",
   "/contact": "/contact.html",
   "/privacy": "/privacy.html",
+  "/projects": "/projects.html",
+  "/contributions": "/contributions.html",
+  "/spotify": "/spotify.html",
 };
 // Each page answers at one URL, the one its rel=canonical names. The other
 // spellings redirect so search engines don't index duplicates.
@@ -17,9 +20,9 @@ const CANONICAL_REDIRECTS = {
   "/about-me.md": "/about.md",
   "/contact.html": "/contact",
   "/privacy.html": "/privacy",
-  "/projects": "/projects.html",
-  "/contributions": "/contributions.html",
-  "/spotify": "/spotify.html",
+  "/projects.html": "/projects",
+  "/contributions.html": "/contributions",
+  "/spotify.html": "/spotify",
 };
 // The 404 page is the body of every miss, never a page of its own.
 const ERROR_PAGES = new Set(["/404", "/404.html"]);
@@ -369,7 +372,7 @@ function notFoundMarkdown(pathname) {
 - [llms.txt](${SITE}/llms.txt): Agent index with a Markdown twin behind every entry
 - [About](${SITE}/about): Background and previous roles
 - [Contact](${SITE}/contact): Email and how to write
-- [Projects](${SITE}/projects.html): unimem, searchx, omfx, bread, ozark, and ghosted
+- [Projects](${SITE}/projects): unimem, searchx, omfx, bread, ozark, and ghosted
 
 Every public page also answers with Markdown: append \`.md\` to its path, or send \`Accept: text/markdown\`.
 `;
@@ -557,7 +560,7 @@ async function saveTokens(kv, data) {
 }
 
 function connectPage(title, body, status = 200) {
-  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>${escapeHtml(title)} · Shyamalan Kannan</title><link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/site.css"></head><body class="antialiased"><main class="page-main" style="margin:4rem auto;padding:0 1rem;max-width:32rem;text-align:start"><h1 class="text-foreground font-medium text-lg">${escapeHtml(title)}</h1><p class="text-secondary" style="margin-top:1rem">${escapeHtml(body)}</p><p style="margin-top:1rem"><a class="ulink" href="/spotify.html"><span class="ulink-text">Back to the listening page</span></a></p></main></body></html>`;
+  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>${escapeHtml(title)} · Shyamalan Kannan</title><link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/site.css"></head><body class="antialiased"><main class="page-main" style="margin:4rem auto;padding:0 1rem;max-width:32rem;text-align:start"><h1 class="text-foreground font-medium text-lg">${escapeHtml(title)}</h1><p class="text-secondary" style="margin-top:1rem">${escapeHtml(body)}</p><p style="margin-top:1rem"><a class="ulink" href="/spotify"><span class="ulink-text">Back to the listening page</span></a></p></main></body></html>`;
   return new Response(html, {
     status,
     headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" },

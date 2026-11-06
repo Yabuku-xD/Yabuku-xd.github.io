@@ -15,7 +15,7 @@ He is currently a Software Developer Intern at [Jevan](https://jevan.ai/), build
 - [unimem](https://github.com/Yabuku-xD/unimem): one local memory that Claude Code, Codex, and Cursor share, in a single SQLite file
 - [Bread](https://github.com/Yabuku-xD/bread): local Rust guardrails for coding agents that limit read and search output and refuse edits to files that changed since the agent read them
 - [omfx](https://github.com/Yabuku-xD/omfx): coding agent CLI in Zig that rolls back edits that break parsing
-- [Project notes](https://shyamalankannan.com/projects.md)
+- [Every project](https://shyamalankannan.com/projects.md)
 
 ## Contributions
 

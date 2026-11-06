@@ -129,7 +129,9 @@ test("sitemap.xml lists indexable URLs with lastmod", () => {
     "https://shyamalankannan.com/about",
     "https://shyamalankannan.com/contact",
     "https://shyamalankannan.com/privacy",
-    "https://shyamalankannan.com/projects.html",
+    "https://shyamalankannan.com/projects",
+    "https://shyamalankannan.com/contributions",
+    "https://shyamalankannan.com/spotify",
   ]) {
     assert.ok(xml.includes(`<loc>${loc}</loc>`), `missing ${loc}`);
   }

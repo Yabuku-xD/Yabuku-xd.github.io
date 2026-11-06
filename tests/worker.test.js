@@ -61,7 +61,7 @@ test("falls through to static assets for non-api requests", async () => {
   });
 
   const response = await worker.fetch(
-    new Request("https://example.com/projects.html"),
+    new Request("https://example.com/projects"),
     env,
   );
 
@@ -375,9 +375,9 @@ test("duplicate page URLs redirect to the canonical URL", async () => {
     ["/about-me.md", "/about.md"],
     ["/contact.html", "/contact"],
     ["/privacy.html", "/privacy"],
-    ["/projects", "/projects.html"],
-    ["/contributions", "/contributions.html"],
-    ["/spotify", "/spotify.html"],
+    ["/projects.html", "/projects"],
+    ["/contributions.html", "/contributions"],
+    ["/spotify.html", "/spotify"],
   ]) {
     const response = await fetchSite(from);
     assert.equal(response.status, 301, from);
@@ -402,12 +402,12 @@ test("internal links and the sitemap use canonical URLs", () => {
     const html = readFileSync(join(ROOT, file), "utf8");
     assert.doesNotMatch(
       html,
-      /href="\/?(?:index|about-me|contact|privacy)\.html"/,
+      /href="\/?(?:index|about-me|contact|privacy|projects|contributions|spotify)\.html"/,
       `${file} links to a redirecting URL`,
     );
   }
   const sitemap = readFileSync(join(ROOT, "sitemap.xml"), "utf8");
-  assert.doesNotMatch(sitemap, /about-me\.html/);
+  assert.doesNotMatch(sitemap, /\.html</);
 });
 
 test("direct .md URLs serve markdown", async () => {
@@ -483,7 +483,7 @@ test("the 404 page is never served as a 200 page of its own", async () => {
 });
 
 test("each page's Markdown twin is named after its public URL", async () => {
-  for (const [path, heading] of [["/about", /about/i], ["/contact", /contact/i], ["/projects.html", /projects/i]]) {
+  for (const [path, heading] of [["/about", /about/i], ["/contact", /contact/i], ["/projects", /projects/i], ["/spotify", /listening|spotify/i]]) {
     const response = await fetchSite(path, { Accept: "text/markdown" });
     assert.equal(response.status, 200, path);
     assert.match(response.headers.get("content-type"), /text\/markdown/, path);
@@ -491,4 +491,14 @@ test("each page's Markdown twin is named after its public URL", async () => {
   }
   const about = await fetchSite("/about");
   assert.match(about.headers.get("link") || "", /<\/about\.md>; rel="alternate"/);
+});
+
+test("every indexable page has JSON-LD that names its canonical URL", () => {
+  for (const file of ["about-me.html", "projects.html", "contributions.html", "contact.html", "privacy.html", "spotify.html"]) {
+    const html = readFileSync(join(ROOT, file), "utf8");
+    const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)[1];
+    const block = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+    assert.ok(block, `${file} has no JSON-LD`);
+    assert.equal(JSON.parse(block[1]).url, canonical, `${file} JSON-LD url differs from its canonical`);
+  }
 });
