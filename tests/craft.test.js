@@ -4,7 +4,7 @@ import { dirname, join } from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { pixelCells } from "../assets/js/craft/pixel-loader.js";
-import { activeIndex, indexLabel, nextActive, proximity, tickCount } from "../assets/js/craft/ruler.js";
+import { activeIndex, indexLabel, nextActive, proximity, shownIndex, tickCount } from "../assets/js/craft/ruler.js";
 import { scrambleFrame, stepFor } from "../assets/js/craft/scramble.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -60,6 +60,17 @@ test("ruler hands the mark over as sections cross the reading line", () => {
   assert.equal(nextActive(1, 1, false, false), 1);
   // A section that was not active changes nothing when it leaves.
   assert.equal(nextActive(2, 0, false, true), 2);
+});
+
+test("ruler marks a picked section, then the last one at the page bottom", () => {
+  // A short last section never reaches the reading line; picking it still marks it.
+  assert.equal(shownIndex(2, true, 1, 3), 2);
+  assert.equal(shownIndex(0, true, 1, 3), 0);
+  // At the very bottom with nothing picked, the last section is marked.
+  assert.equal(shownIndex(-1, true, 1, 3), 2);
+  // Otherwise the reading line decides.
+  assert.equal(shownIndex(-1, false, 1, 3), 1);
+  assert.equal(shownIndex(-1, false, -1, 3), -1);
 });
 
 test("ruler tick counts take a number or a selector to count, within 1-24", () => {

@@ -35,6 +35,18 @@ export function nextActive(current, index, entering, below) {
   return current;
 }
 
+/**
+ * The section the ruler marks. A section picked from the ruler wins, so a
+ * short last section is marked when its link is clicked even though its top
+ * never reaches the reading line. At the very bottom of the page the last
+ * section is marked. Otherwise the section on the reading line is.
+ */
+export function shownIndex(picked, atBottom, onLine, count) {
+  if (picked >= 0) return picked;
+  if (atBottom && count > 0) return count - 1;
+  return onLine;
+}
+
 /** data-toc-ticks is a count ("3") or a selector to count inside the section ("li"). */
 export function tickCount(raw, countMatches) {
   if (!raw) return 1;
@@ -129,20 +141,53 @@ export function initRuler(label, root = document) {
       list.scrollTop = Math.max(0, top);
     }
   };
-  setActive(activeIndex(items.map((item) => item.section.getBoundingClientRect().top), innerHeight * 0.4));
+  // Three inputs decide the mark (see shownIndex): the section on the reading
+  // line, whether the page sits at its very bottom, and a section the reader
+  // picked from the ruler, which holds until they scroll by hand.
+  let onLine = activeIndex(items.map((item) => item.section.getBoundingClientRect().top), innerHeight * 0.4);
+  let picked = items.findIndex((item) => `#${item.id}` === location.hash);
+  const atBottom = () => scrollY + innerHeight >= document.documentElement.scrollHeight - 2;
+  const show = () => setActive(shownIndex(picked, atBottom(), onLine, items.length));
+  show();
+
   const index = new Map(items.map((item, i) => [item.section, i]));
   const line = new IntersectionObserver(
     (entries) => {
-      let next = current;
       for (const entry of entries) {
         const below = entry.boundingClientRect.top > entry.rootBounds.top;
-        next = nextActive(next, index.get(entry.target), entry.isIntersecting, below);
+        onLine = nextActive(onLine, index.get(entry.target), entry.isIntersecting, below);
       }
-      setActive(next);
+      show();
     },
     { rootMargin: "-40% 0px -60% 0px" },
   );
   for (const item of items) line.observe(item.section);
+
+  // Reaching or leaving the bottom crosses no line, so check it on scroll:
+  // one comparison per frame, no layout reads.
+  let scrollFrame = 0;
+  addEventListener(
+    "scroll",
+    () => {
+      scrollFrame ||= requestAnimationFrame(() => {
+        scrollFrame = 0;
+        show();
+      });
+    },
+    { passive: true },
+  );
+  links.forEach((link, i) =>
+    link.addEventListener("click", () => {
+      picked = i;
+      show();
+    }),
+  );
+  const release = () => {
+    if (picked < 0) return;
+    picked = -1;
+    show();
+  };
+  for (const type of ["wheel", "touchstart", "keydown"]) addEventListener(type, release, { passive: true });
 
   // Pointer reach: only for a fine pointer and when motion is welcome.
   const fine = matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)");
