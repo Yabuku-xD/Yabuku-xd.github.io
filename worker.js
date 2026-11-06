@@ -35,7 +35,16 @@ export default {
     if (!url) return new Response("Bad Request", { status: 400 });
 
     if (url.pathname.startsWith("/api/spotify")) {
-      return handleSpotify(request, env);
+      try {
+        return await handleSpotify(request, env);
+      } catch (error) {
+        // Say why instead of crashing (Cloudflare error 1101), so a broken
+        // token or a Spotify outage shows up in one request.
+        return Response.json(
+          { error: String(error?.message || error) },
+          { status: 502, headers: { "Access-Control-Allow-Origin": "*" } },
+        );
+      }
     }
 
     if (url.pathname.length > 1 && url.pathname.endsWith("/")) {
@@ -358,7 +367,7 @@ async function handleSpotify(request, env) {
         `${SPOTIFY_API}/me/player/recently-played?limit=1`,
         { headers: { Authorization: `Bearer ${token}` } },
       );
-      const data = await recent.json();
+      const data = await spotifyJson(recent, "recently played");
       const track = data.items[0].track;
       return Response.json(
         {
@@ -371,7 +380,7 @@ async function handleSpotify(request, env) {
         { headers },
       );
     }
-    const song = await res.json();
+    const song = await spotifyJson(res, "currently playing");
     return Response.json(
       {
         isPlaying: song.is_playing,
@@ -390,7 +399,7 @@ async function handleSpotify(request, env) {
       `${SPOTIFY_API}/me/top/tracks?limit=10&time_range=${range}`,
       { headers: { Authorization: `Bearer ${token}` } },
     );
-    const data = await res.json();
+    const data = await spotifyJson(res, "top tracks");
     return Response.json(
       data.items.map((t) => ({
         name: t.name,
@@ -409,7 +418,7 @@ async function handleSpotify(request, env) {
       `${SPOTIFY_API}/me/top/artists?limit=9&time_range=${range}`,
       { headers: { Authorization: `Bearer ${token}` } },
     );
-    const data = await res.json();
+    const data = await spotifyJson(res, "top artists");
     return Response.json(
       data.items.map((a) => ({
         name: a.name,
@@ -426,7 +435,7 @@ async function handleSpotify(request, env) {
       `${SPOTIFY_API}/me/player/recently-played?limit=50`,
       { headers: { Authorization: `Bearer ${token}` } },
     );
-    const data = await res.json();
+    const data = await spotifyJson(res, "recently played");
     return Response.json(
       data.items.map(({ track }) => ({
         name: track.name,
@@ -455,6 +464,20 @@ async function getAccessToken(env) {
       refresh_token: env.SPOTIFY_REFRESH_TOKEN,
     }),
   });
-  const data = await res.json();
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || !data.access_token) {
+    const reason = data.error_description || data.error || `HTTP ${res.status}`;
+    throw new Error(`Spotify sign-in failed: ${reason}`);
+  }
   return data.access_token;
+}
+
+/** The JSON body of a Spotify API answer, or an error naming what failed. */
+async function spotifyJson(res, what) {
+  const data = await res.json().catch(() => null);
+  if (!res.ok || !data) {
+    const reason = data?.error?.message || `HTTP ${res.status}`;
+    throw new Error(`Spotify ${what} failed: ${reason}`);
+  }
+  return data;
 }

@@ -68,6 +68,43 @@ test("falls through to static assets for non-api requests", async () => {
   assert.equal(await response.text(), "asset response");
 });
 
+test("a refused Spotify token answers 502 with the reason instead of crashing", async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async (url) => {
+    if (String(url).includes("accounts.spotify.com")) {
+      return Response.json({ error: "invalid_grant", error_description: "Refresh token revoked" }, { status: 400 });
+    }
+    throw new Error("the API must not be called without a token");
+  };
+  try {
+    for (const path of ["now-playing", "top-tracks", "top-artists", "recently-played"]) {
+      const response = await worker.fetch(new Request(`https://example.com/api/spotify/${path}`), createEnv());
+      assert.equal(response.status, 502, path);
+      assert.equal(response.headers.get("Access-Control-Allow-Origin"), "*");
+      assert.deepEqual(await response.json(), { error: "Spotify sign-in failed: Refresh token revoked" });
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("a failing Spotify API call answers 502 with the reason", async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async (url) => {
+    if (String(url).includes("accounts.spotify.com")) return Response.json({ access_token: "access-token" });
+    return Response.json({ error: { status: 403, message: "User not registered in the Developer Dashboard" } }, { status: 403 });
+  };
+  try {
+    const response = await worker.fetch(new Request("https://example.com/api/spotify/top-artists"), createEnv());
+    assert.equal(response.status, 502);
+    assert.deepEqual(await response.json(), {
+      error: "Spotify top artists failed: User not registered in the Developer Dashboard",
+    });
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
 test("returns normalized Spotify top tracks", async () => {
   const originalFetch = globalThis.fetch;
   const calls = [];
