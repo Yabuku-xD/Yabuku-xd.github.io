@@ -84,7 +84,6 @@ function pluckable(rule) {
     if (!held && inside && Math.abs(dy) < GRAB && !event.buttons) held = true;
     if (!held) return;
     if (!inside || Math.abs(dy) > HEIGHT / 2) {
-      // Let go: the spring carries it back, wobbling.
       held = false;
       run();
       return;

@@ -14,7 +14,6 @@ export const copy = {
     noRecent: "I have not played anything yet. Check back later.",
     noArtists: "No top artists yet. Check back later.",
     noTracks: "No top songs yet. Check back later.",
-    // Spotify's three listening ranges: about 4 weeks, 6 months and 1 year.
     range: "Time range",
     ranges: ["4 weeks", "6 months", "1 year"],
     refresh: "Refresh the song playing now",

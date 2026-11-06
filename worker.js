@@ -29,7 +29,6 @@ const ERROR_PAGES = new Set(["/404", "/404.html"]);
 const STATIC_EXT =
   /\.(?:css|js|mjs|map|png|jpe?g|webp|gif|svg|avif|ico|woff2?|ttf|otf|eot|json|pdf|mp4|webm|mp3|wav|ogg|zip)$/i;
 
-// Spotify sign-in, kept in the SPOTIFY_KV store (see getAccessToken).
 const KV_REFRESH = "refresh_token";
 const KV_ACCESS = "access_token";
 const KV_OWNER = "owner_id";
@@ -37,7 +36,6 @@ const CONNECT_PATH = "/spotify/connect";
 const CALLBACK_PATH = "/callback";
 const SPOTIFY_SCOPES = "user-read-currently-playing user-read-recently-played user-top-read";
 const STATE_COOKIE = "spotify_state";
-// Spotify's listening windows; the range query parameter must be one of them.
 const SPOTIFY_RANGES = new Set(["short_term", "medium_term", "long_term"]);
 
 // Sent with every response. The one inline script on each page adds the "js"
@@ -528,7 +526,6 @@ async function getAccessToken(env) {
   return data.access_token;
 }
 
-/** POST to Spotify's token endpoint with the app's own credentials. */
 async function spotifyToken(env, params) {
   const basic = btoa(`${env.SPOTIFY_CLIENT_ID}:${env.SPOTIFY_CLIENT_SECRET}`);
   const res = await fetch(SPOTIFY_TOKEN_URL, {
@@ -567,7 +564,6 @@ function connectPage(title, body, status = 200) {
   });
 }
 
-/** Start a reconnect: send the owner to Spotify with a one-time state value. */
 function handleConnect(env) {
   if (!env.SPOTIFY_KV) {
     return connectPage("Spotify is not set up here", "The worker has no SPOTIFY_KV store, so it cannot save a new sign-in.", 503);
@@ -634,7 +630,6 @@ async function handleCallback(request, env, url) {
   }
 }
 
-/** The JSON body of a Spotify API answer, or an error naming what failed. */
 async function spotifyJson(res, what) {
   const data = await res.json().catch(() => null);
   if (!res.ok || !data) {
