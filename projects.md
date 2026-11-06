@@ -12,7 +12,7 @@ Stack: Python standard library · SQLite · MCP
 
 ## Bread: guardrails for coding agents
 
-Jul 2026. A local Rust tool between a coding agent and your repo. It caps how much one file read or search can return, and it refuses an edit if the file changed since the agent last read it. It indexes the workspace with tree-sitter, supports ripgrep-compatible search, and tags every piece of context with its source. Code, index, and optional vectors never leave the disk.
+Jul 2026. A local Rust tool between a coding agent and your repo. It caps how much one file read or search can return. It also refuses an edit if the file changed since the agent last read it. It indexes the workspace with tree-sitter, supports ripgrep-compatible search, and tags every piece of context with its source. Code, index, and optional vectors never leave the disk.
 
 Stack: Rust · Codex CLI · tree-sitter · ripgrep-style search
 
@@ -20,7 +20,7 @@ Stack: Rust · Codex CLI · tree-sitter · ripgrep-style search
 
 ## omfx: a coding agent in Zig
 
-Aug 2026. His own coding agent CLI. After every write it checks the file for syntax errors, and if the edit broke the syntax it rolls it back before the model is told it worked. When the context window fills, older turns are compacted locally, not rewritten by an LLM, and dropped text stays available as citations. An allowlist blocks untrusted tool output by default. MIT licensed.
+Aug 2026. His own coding agent CLI. After every write it checks the file for syntax errors. If the edit broke the syntax, it rolls the edit back before the model is told it worked. When the context window fills, older turns are compacted locally instead of rewritten by an LLM. Dropped text stays available as citations. An allowlist blocks untrusted tool output by default. MIT licensed.
 
 Stack: Zig · Python · shell
 

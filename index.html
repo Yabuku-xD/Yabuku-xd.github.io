@@ -106,11 +106,10 @@
           <div class="flex flex-col items-center text-center gap-6 w-full">
             <div class="flex flex-col gap-4 w-full">
               <div class="text-secondary" aria-hidden="true">01</div>
-              <h1 id="intro" class="text-foreground font-medium">Hey! I’m Shyam.</h1>
+              <h1 id="intro" data-scramble class="text-foreground font-medium">Hey! I’m Shyam.</h1>
               <p class="text-secondary">
                 Full name Shyamalan Kannan. I’m a software engineer in Seattle.
-                I build backend systems and tools for coding agents in Python,
-                TypeScript, and Rust.
+                I build backend systems and tools for coding agents (AI programs that write and edit code) in Python, TypeScript, and Rust.
               </p>
               <p class="text-secondary">
                 Right now I’m a Software Developer Intern at
@@ -125,7 +124,7 @@
                 relocate.
               </p>
               <div class="text-secondary">
-                <a class="ulink nowrap" target="_blank" rel="noopener noreferrer" href="resume.pdf"
+                <a class="ulink standalone nowrap" target="_blank" rel="noopener noreferrer" href="resume.pdf"
                   ><span class="ulink-text">Resume (PDF)</span
                   ><svg class="ulink-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8.25 3.75H19.5a.75.75 0 0 1 .75.75v11.25a.75.75 0 0 1-1.5 0V6.31L5.03 20.03a.75.75 0 0 1-1.06-1.06L17.69 5.25H8.25a.75.75 0 0 1 0-1.5Z" clip-rule="evenodd"></path></svg
                 ></a>
@@ -278,14 +277,14 @@
               <div>
                 <h3 class="text-sm text-secondary mb-2 font-normal">Top artists</h3>
                 <div id="spotify-top-artists">
-                  <div class="text-sm text-secondary animate-pulse">Loading…</div>
+                  <div data-pixel-loader></div>
                 </div>
               </div>
               <div class="border-b border-border border-dashed"></div>
               <div>
                 <h3 class="text-sm text-secondary mb-2 font-normal">Top tracks</h3>
                 <div id="spotify-top-tracks" class="flex flex-col text-left w-full">
-                  <div class="text-sm text-secondary animate-pulse">Loading…</div>
+                  <div data-pixel-loader></div>
                 </div>
               </div>
             </div>
@@ -333,7 +332,8 @@
       </section>
     </main>
 
-    <script src="assets/js/home-spotify.js" defer></script>
-    <script src="assets/js/site.js" defer></script>
+    <script type="module" src="assets/js/home-spotify.js"></script>
+    <script type="module" src="assets/js/craft.js"></script>
+    <script type="module" src="assets/js/site.js"></script>
   </body>
 </html>

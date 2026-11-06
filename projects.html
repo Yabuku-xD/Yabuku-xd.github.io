@@ -25,7 +25,7 @@
     <meta property="og:title" content="Projects · Shyamalan Kannan" />
     <meta
       property="og:description"
-      content="Shared memory for coding agents, Rust guardrails for coding agents, a coding agent in Zig, a small Mac browser, a test lab for AI agents, and an H-1B job search tool."
+      content="Six side projects, from tools for coding agents to a small Mac browser and an H-1B job search tool."
     />
     <meta property="og:url" content="https://shyamalankannan.com/projects.html" />
     <meta property="og:site_name" content="Shyamalan Kannan" />
@@ -47,7 +47,7 @@
     <meta name="twitter:title" content="Projects · Shyamalan Kannan" />
     <meta
       name="twitter:description"
-      content="Shared memory for coding agents, Rust guardrails for coding agents, a coding agent in Zig, a small Mac browser, a test lab for AI agents, and an H-1B job search tool."
+      content="Six side projects, from tools for coding agents to a small Mac browser and an H-1B job search tool."
     />
     <link rel="icon" href="favicon.ico" type="image/x-icon" sizes="16x16" />
     <script type="application/ld+json">
@@ -93,14 +93,14 @@
     </nav>
 
     <div class="page-shell w-full p-4 sm:p-5 md:p-7">
-      <main id="main-content" class="page-main flex flex-col gap-8 w-full">
+      <main id="main-content" data-toc-pad="3" class="page-main flex flex-col gap-8 w-full">
         <section class="reveal">
           <div class="flex flex-col gap-4">
             <div class="w-full overflow-hidden">
               <div class="hero-crop hero-ascii" data-ascii-scene="meadow" style="background:#0b1a24" aria-hidden="true"></div>
             </div>
             <div class="flex flex-col gap-1">
-              <h1 class="text-foreground font-medium text-lg">Selected projects</h1>
+              <h1 data-scramble class="text-foreground font-medium text-lg">Selected projects</h1>
               <p class="text-secondary text-sm">
                 Six things I built on my own time. Most of them came from
                 something that annoyed me.
@@ -110,7 +110,7 @@
         </section>
 
         <section class="reveal" aria-label="Projects">
-          <article class="py-5 flex flex-col gap-2" aria-labelledby="p-unimem">
+          <article class="py-5 flex flex-col gap-2" aria-labelledby="p-unimem" data-toc="unimem">
             <div class="flex items-center gap-3 mb-1" aria-hidden="true">
               <span class="font-mono text-[10px] tracking-[0.2em] text-secondary">001</span>
               <div class="flex-1 border-t border-border"></div>
@@ -144,7 +144,7 @@
             </div>
           </article>
 
-          <article class="py-5 flex flex-col gap-2" aria-labelledby="p-bread">
+          <article class="py-5 flex flex-col gap-2" aria-labelledby="p-bread" data-toc="Bread">
             <div class="flex items-center gap-3 mb-1" aria-hidden="true">
               <span class="font-mono text-[10px] tracking-[0.2em] text-secondary">002</span>
               <div class="flex-1 border-t border-border"></div>
@@ -156,8 +156,7 @@
             <div class="text-secondary font-mono text-xs"><time datetime="2026-07">Jul 2026</time></div>
             <p class="text-foreground/70 text-sm">
               A local Rust tool that sits between a coding agent and your repo.
-              It caps how much a single file read or search can return, and it
-              refuses an edit if the file changed since the agent last read it.
+              It caps how much a single file read or search can return. It also refuses an edit if the file changed since the agent last read it.
             </p>
             <p class="text-foreground/70 text-sm">
               It indexes the workspace with tree-sitter, supports
@@ -176,7 +175,7 @@
             </div>
           </article>
 
-          <article class="py-5 flex flex-col gap-2" aria-labelledby="p-omfx">
+          <article class="py-5 flex flex-col gap-2" aria-labelledby="p-omfx" data-toc="omfx">
             <div class="flex items-center gap-3 mb-1" aria-hidden="true">
               <span class="font-mono text-[10px] tracking-[0.2em] text-secondary">003</span>
               <div class="flex-1 border-t border-border"></div>
@@ -187,14 +186,10 @@
             </a>
             <div class="text-secondary font-mono text-xs"><time datetime="2026-08">Aug 2026</time></div>
             <p class="text-foreground/70 text-sm">
-              My own coding agent CLI. After every write it checks the file
-              for syntax errors, and if the edit broke the syntax it rolls it
-              back before the model is told it worked.
+              My own coding agent CLI. After every write it checks the file for syntax errors. If the edit broke the syntax, it rolls the edit back before the model is told it worked.
             </p>
             <p class="text-foreground/70 text-sm">
-              When the context window fills, older turns get compacted on
-              your machine, not rewritten by an LLM, and the dropped text stays
-              around as citations you can open. An allowlist blocks untrusted
+              When the context window fills, older turns get compacted on your machine instead of rewritten by an LLM. The dropped text stays around as citations you can open. An allowlist blocks untrusted
               tool output by default.
             </p>
             <p class="text-foreground/70 text-sm">
@@ -208,7 +203,7 @@
             </div>
           </article>
 
-          <article class="py-5 flex flex-col gap-2" aria-labelledby="p-searchx">
+          <article class="py-5 flex flex-col gap-2" aria-labelledby="p-searchx" data-toc="SearchX">
             <div class="flex items-center gap-3 mb-1" aria-hidden="true">
               <span class="font-mono text-[10px] tracking-[0.2em] text-secondary">004</span>
               <div class="flex-1 border-t border-border"></div>
@@ -245,7 +240,7 @@
             </div>
           </article>
 
-          <article class="py-5 flex flex-col gap-2" aria-labelledby="p-ozark">
+          <article class="py-5 flex flex-col gap-2" aria-labelledby="p-ozark" data-toc="Ozark">
             <div class="flex items-center gap-3 mb-1" aria-hidden="true">
               <span class="font-mono text-[10px] tracking-[0.2em] text-secondary">005</span>
               <div class="flex-1 border-t border-border"></div>
@@ -274,7 +269,7 @@
             </div>
           </article>
 
-          <article class="py-5 flex flex-col gap-2" aria-labelledby="p-ghosted">
+          <article class="py-5 flex flex-col gap-2" aria-labelledby="p-ghosted" data-toc="Ghosted">
             <div class="flex items-center gap-3 mb-1" aria-hidden="true">
               <span class="font-mono text-[10px] tracking-[0.2em] text-secondary">006</span>
               <div class="flex-1 border-t border-border"></div>
@@ -309,6 +304,7 @@
     </div>
 
     <script type="module" src="assets/js/ascii-hero.js"></script>
-    <script src="assets/js/site.js" defer></script>
+    <script type="module" src="assets/js/craft.js"></script>
+    <script type="module" src="assets/js/site.js"></script>
   </body>
 </html>

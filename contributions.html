@@ -102,7 +102,7 @@
               <div class="hero-crop hero-ascii" data-ascii-scene="confluence" style="background:#0a0705" aria-hidden="true"></div>
             </div>
             <div class="flex flex-col gap-1">
-              <h1 class="text-foreground font-medium text-lg">Contributions</h1>
+              <h1 data-scramble class="text-foreground font-medium text-lg">Contributions</h1>
               <p class="text-secondary text-sm">
                 Pull requests I’ve sent to other people’s projects. Most began
                 as a bug I hit while using the tool.
@@ -111,7 +111,7 @@
           </div>
         </section>
 
-        <section class="reveal" aria-labelledby="hermes-agent">
+        <section class="reveal" aria-labelledby="hermes-agent" data-toc="hermes-agent" data-toc-ticks="li">
           <div class="flex flex-col gap-4">
             <div class="flex items-center justify-center gap-2">
               <h2 id="hermes-agent" class="font-mono font-semibold text-primary text-sm">hermes-agent</h2>
@@ -146,7 +146,7 @@
           </div>
         </section>
         <hr class="border-px reveal" />
-        <section class="reveal" aria-labelledby="openchamber">
+        <section class="reveal" aria-labelledby="openchamber" data-toc="openchamber" data-toc-ticks="li">
           <div class="flex flex-col gap-4">
             <div class="flex items-center justify-center gap-2">
               <h2 id="openchamber" class="font-mono font-semibold text-primary text-sm">openchamber</h2>
@@ -160,7 +160,7 @@
                 <a class="contrib-link row-link flex flex-col gap-1 py-3" href="https://github.com/openchamber/openchamber/pull/1079" target="_blank" rel="noopener noreferrer">
                   <span class="text-xs font-mono text-secondary tabular-nums">#1079</span>
                   <span class="text-sm text-foreground">Add Behavior settings page for global <code>AGENTS.md</code></span>
-                  <span class="text-xs text-secondary">A new settings page where you write one global <code>AGENTS.md</code>. It saves to disk through GET and PUT endpoints, caps the file at 1 MB, and wins over any project-level copy for every provider and session.</span>
+                  <span class="text-xs text-secondary">A new settings page where you write one global <code>AGENTS.md</code>. It saves to disk through GET and PUT endpoints and caps the file at 1 MB. It wins over any project-level copy, for every provider and session.</span>
                 </a>
               </li>
               <li class="border-t border-border border-dashed">
@@ -209,14 +209,14 @@
                 <a class="contrib-link row-link flex flex-col gap-1 py-3" href="https://github.com/openchamber/openchamber/pull/997" target="_blank" rel="noopener noreferrer">
                   <span class="text-xs font-mono text-secondary tabular-nums">#997</span>
                   <span class="text-sm text-foreground">Lazy-load the Markdown renderer and CodeMirror languages</span>
-                  <span class="text-xs text-secondary">The app loaded marked, Mermaid, syntax highlighting, and KaTeX at startup. They now load on the first message that needs them, and rarely used CodeMirror languages load on demand, which keeps them out of the startup bundle.</span>
+                  <span class="text-xs text-secondary">The app loaded marked, Mermaid, syntax highlighting, and KaTeX at startup. They now load on the first message that needs them. Rarely used CodeMirror languages load on demand, so they stay out of the startup bundle.</span>
                 </a>
               </li>
             </ul>
           </div>
         </section>
         <hr class="border-px reveal" />
-        <section class="reveal" aria-labelledby="babylonjs">
+        <section class="reveal" aria-labelledby="babylonjs" data-toc="babylon.js" data-toc-ticks="li">
           <div class="flex flex-col gap-4">
             <div class="flex items-center justify-center gap-2">
               <h2 id="babylonjs" class="font-mono font-semibold text-primary text-sm">babylon.js</h2>
@@ -240,6 +240,7 @@
     </div>
 
     <script type="module" src="assets/js/ascii-hero.js"></script>
-    <script src="assets/js/site.js" defer></script>
+    <script type="module" src="assets/js/craft.js"></script>
+    <script type="module" src="assets/js/site.js"></script>
   </body>
 </html>

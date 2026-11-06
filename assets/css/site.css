@@ -20,11 +20,27 @@
   --shadow-chip-hover:
     0 0 0 1px rgb(0 0 0 / 0.14), 0 1px 2px -1px rgb(0 0 0 / 0.08),
     0 3px 6px rgb(0 0 0 / 0.06);
+  /* Fancy Components' underline timing: 0.4s with motion's "easeInOut". */
+  --ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
+  --duration-underline: 400ms;
+  /* Ruler ticks: decoration, so below the 3:1 a control would need. */
+  --tick: #9c9d95;
 }
 
 /* Copy is written in normal case; the lowercase look is presentation only. */
 body {
   text-transform: lowercase;
+}
+
+/* Anchored sections stop below the fixed nav (3.5rem) with room to spare. */
+html {
+  scroll-padding-block-start: 5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 code,
@@ -100,14 +116,31 @@ main {
   text-decoration: none;
 }
 
+/* The underline comes in from the start of the text and leaves past its end
+   (Fancy Components' "comes in, goes out" underline, done with a background
+   so it follows a link across line breaks). At rest the anchor sits on the
+   end; on hover it jumps to the start while the line has no width, so the
+   line always grows forward and shrinks forward. */
 .ulink-text {
   padding-bottom: 1px;
   border-bottom: 1px dotted var(--color-text-muted);
   background-image: linear-gradient(currentColor, currentColor);
   background-repeat: no-repeat;
-  background-position: 0 calc(100% + 1px);
+  background-position: 100% calc(100% + 1px);
   background-size: 0% 1px;
-  transition: background-size 220ms var(--ease-out);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size var(--duration-underline) var(--ease-in-out);
+}
+
+.ulink:dir(rtl) .ulink-text {
+  background-position: 0 calc(100% + 1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ulink-text {
+    transition-duration: 0ms;
+  }
 }
 
 .ulink-icon {
@@ -132,12 +165,22 @@ main {
 }
 
 .ulink:focus-visible .ulink-text {
+  background-position: 0 calc(100% + 1px);
   background-size: 100% 1px;
+}
+
+.ulink:dir(rtl):focus-visible .ulink-text {
+  background-position: 100% calc(100% + 1px);
 }
 
 @media (hover: hover) {
   .ulink:hover .ulink-text {
+    background-position: 0 calc(100% + 1px);
     background-size: 100% 1px;
+  }
+
+  .ulink:dir(rtl):hover .ulink-text {
+    background-position: 100% calc(100% + 1px);
   }
 
   .ulink:hover .ulink-icon {
@@ -346,6 +389,69 @@ html:not(.js) .copy-btn {
   }
 }
 
+/* ---------- Touch targets ---------- */
+
+/* On touch screens every control that stands on its own gets a 44px target.
+   Links inside a sentence keep their line height (WCAG 2.5.8 exempts inline
+   links), since a taller box would cover the lines above and below. Small
+   controls grow an invisible target instead of a bigger look. */
+@media (pointer: coarse) {
+  nav[aria-label="Site"] a,
+  .cta,
+  .project-title,
+  #spotify-top-tracks > a {
+    min-height: 44px;
+  }
+
+  .link-list .ulink,
+  .ulink.standalone {
+    display: inline-block;
+    min-inline-size: 44px;
+    padding-block: 13px;
+    text-align: center;
+  }
+
+  .chip,
+  .icon-link,
+  .copy-btn {
+    position: relative;
+  }
+
+  .chip::after,
+  .icon-link::after,
+  .copy-btn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    translate: -50% -50%;
+  }
+
+  /* Room for the copy button's wider target, so it never covers the address. */
+  .copy-btn {
+    margin-inline-start: 0.5rem;
+  }
+}
+
+/* ---------- Missing cover art ---------- */
+
+.cover-missing {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  color: var(--color-text-muted);
+  background: rgb(0 0 0 / 0.05);
+  outline: 1px solid var(--color-image-outline);
+  outline-offset: -1px;
+}
+
+.cover-missing svg {
+  width: 45%;
+  height: 45%;
+}
+
 /* ---------- Images ---------- */
 
 img.object-cover {
@@ -488,5 +594,277 @@ html.js article.reveal {
 @media (max-width: 374px) {
   #spotify-top-artists {
     --artist-columns: 3;
+  }
+}
+
+/* ---------- Page titles settling out of ascii glyphs (craft/scramble.js) ---------- */
+
+/* The rest of the title is laid out but hidden, so a centered heading keeps
+   its place while the letters resolve. */
+.scramble {
+  white-space: pre-wrap;
+}
+
+.scramble-glyphs {
+  color: var(--color-text-muted);
+}
+
+.scramble-rest {
+  visibility: hidden;
+}
+
+/* ---------- Margin ruler on long pages (craft/ruler.js) ---------- */
+
+/* It lives in the left margin, so it only appears once the margin can hold
+   it beside the 42rem column; the page's own headings carry narrower screens. */
+.ruler {
+  display: none;
+}
+
+@media (min-width: 76rem) {
+  .ruler {
+    position: fixed;
+    z-index: 40;
+    top: 50%;
+    inset-inline-start: max(
+      calc(var(--spacing) * 6),
+      calc((100% - 42rem) / 2 - 15rem)
+    );
+    display: block;
+    width: 13rem;
+    translate: 0 -50%;
+  }
+}
+
+.ruler-list {
+  max-height: calc(100dvh - 3.5rem - 4rem);
+  margin: 0;
+  padding: calc(var(--spacing) * 2) 0;
+  overflow: hidden auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--tick) transparent;
+  list-style: none;
+  text-align: start;
+}
+
+.ruler-item {
+  --p: 0;
+}
+
+.ruler-link {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--spacing) * 3);
+  min-height: 44px;
+  padding-inline-end: 2rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+/* The section being read: the longest tick, full ink. */
+.ruler-link[aria-current] {
+  --p: 1.4;
+  color: var(--foreground);
+}
+
+.ruler-link:focus-visible {
+  --p: 1;
+}
+
+.ruler-line {
+  flex: none;
+  width: 1rem;
+  height: 1px;
+  background: var(--tick);
+  transform-origin: left center;
+  scale: calc(1 + var(--p) * 1.25) 1;
+}
+
+.ruler-link:dir(rtl) .ruler-line {
+  transform-origin: right center;
+}
+
+.ruler-link[aria-current] .ruler-line {
+  background: var(--foreground);
+}
+
+/* Number and name sit on one baseline (12px and 14px text would otherwise
+   centre 1.5px apart) and lean in together. */
+.ruler-text {
+  display: flex;
+  align-items: baseline;
+  gap: calc(var(--spacing) * 3);
+  min-width: 0;
+  translate: calc(var(--p) * 1.25rem) 0;
+}
+
+.ruler-link:dir(rtl) .ruler-text {
+  translate: calc(var(--p) * -1.25rem) 0;
+}
+
+.ruler-num {
+  flex: none;
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.ruler-label {
+  min-width: 0;
+  overflow: hidden;
+  font-size: var(--text-sm);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: color-mix(
+    in oklab,
+    var(--foreground) calc(var(--p) * 70%),
+    var(--color-text-muted)
+  );
+}
+
+/* Short ticks between sections; on Contributions there is one per pull request. */
+.ruler-minor {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-block: 3px;
+}
+
+.ruler-minor i {
+  width: 0.5rem;
+  height: 1px;
+  background: var(--tick);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ruler-line,
+  .ruler-text,
+  .ruler-label {
+    transition:
+      scale 200ms var(--ease-out),
+      translate 200ms var(--ease-out),
+      background-color var(--duration-hover) ease-out,
+      color var(--duration-hover) ease-out;
+  }
+}
+
+/* ---------- Pixel loader (craft/pixel-loader.js) ---------- */
+
+.pixel-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 4rem;
+  color: var(--foreground);
+}
+
+.pixel-loader-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--pixels), 2px);
+  grid-auto-rows: 2px;
+  gap: 2px;
+}
+
+/* Still, it reads as a soft dot: bright middle, fading edge. */
+.pixel-loader-grid > span {
+  background: currentColor;
+  opacity: calc(0.85 - var(--d) * 0.6);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pixel-loader-grid > span {
+    opacity: 0.12;
+    animation: pixel-ripple 1.2s var(--ease-in-out) calc(var(--d) * 600ms)
+      infinite both;
+  }
+
+  .pixel-loader[data-paused] .pixel-loader-grid > span {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes pixel-ripple {
+  0%,
+  100% {
+    opacity: 0.12;
+  }
+
+  35% {
+    opacity: 1;
+  }
+}
+
+/* ---------- Now playing card (spotify-page.js) ---------- */
+
+#spotify-now-playing {
+  container-type: inline-size;
+}
+
+.np-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: calc(var(--spacing) * 4);
+  padding: calc(var(--spacing) * 3);
+  color: var(--foreground);
+  text-align: start;
+  text-decoration: none;
+  background: #fff;
+  box-shadow: var(--shadow-chip);
+  transition: box-shadow var(--duration-hover) ease-out;
+}
+
+@media (hover: hover) {
+  .np-card:hover {
+    box-shadow: var(--shadow-chip-hover);
+  }
+}
+
+.np-cover {
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+  border-radius: 4px;
+  outline: 1px solid var(--color-image-outline);
+  outline-offset: -1px;
+}
+
+.np-meta {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 1.5);
+  min-width: 0;
+}
+
+.np-title {
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}
+
+.np-artist {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.np-status {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--spacing) * 1.5);
+  align-self: start;
+  padding: calc(var(--spacing) * 0.5) calc(var(--spacing) * 1.5);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+/* Narrow cards put the status under the song instead of squeezing the title. */
+@container (max-width: 26rem) {
+  .np-card {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .np-status {
+    grid-column: 2;
+    justify-self: start;
   }
 }

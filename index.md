@@ -1,6 +1,6 @@
 # Shyamalan Kannan
 
-Shyamalan (Shyam) Kannan is a software engineer in Seattle. He builds backend systems and tools for coding agents in Python, TypeScript, and Rust.
+Shyamalan (Shyam) Kannan is a software engineer in Seattle. He builds backend systems and tools for coding agents (AI programs that write and edit code) in Python, TypeScript, and Rust.
 
 He is currently a Software Developer Intern at [Jevan](https://jevan.ai/), building restaurant-operations software with Next.js, PostgreSQL, and Cloudflare. He is on OPT, open to full-time backend and agent-tooling roles, and can relocate.
 

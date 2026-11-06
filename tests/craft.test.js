@@ -1,0 +1,97 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { test } from "node:test";
+import { fileURLToPath } from "node:url";
+import { pixelCells } from "../assets/js/craft/pixel-loader.js";
+import { activeIndex, indexLabel, nextActive, proximity, tickCount } from "../assets/js/craft/ruler.js";
+import { scrambleFrame, stepFor } from "../assets/js/craft/scramble.js";
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+
+test("scramble frames keep the title's length and spaces", () => {
+  const pick = () => "#";
+  assert.deepEqual(scrambleFrame("About me", 0, 2, pick), ["", "##", "out me"]);
+  assert.deepEqual(scrambleFrame("About me", 4, 2, pick), ["Abou", "# ", "me"]);
+  assert.deepEqual(scrambleFrame("About me", 7, 2, pick), ["About m", "#", ""]);
+  for (let settled = 0; settled <= 8; settled++) {
+    assert.equal(scrambleFrame("About me", settled, 2, pick).join("").length, 8);
+  }
+  // Characters outside the BMP count as one letter, not two halves.
+  assert.deepEqual(scrambleFrame("a☕b", 1, 1, pick), ["a", "#", "b"]);
+});
+
+test("scramble speed stays at 50ms for short titles and caps long ones", () => {
+  assert.equal(stepFor(7), 50);
+  assert.equal(stepFor(100), 16);
+  assert.ok(stepFor(28) * 28 <= 700);
+});
+
+test("ruler reach is strongest under the pointer and gone past the reach", () => {
+  assert.equal(proximity(0, 2.5), 1);
+  assert.equal(proximity(2.5, 2.5), 0);
+  assert.equal(proximity(10, 2.5), 0);
+  assert.equal(proximity(-1, 2.5), proximity(1, 2.5));
+  assert.ok(proximity(1, 2.5) > proximity(2, 2.5));
+  assert.equal(proximity(1, 0), 0);
+});
+
+test("ruler numbers pad to the page's own style and grow with the count", () => {
+  assert.equal(indexLabel(0, 6, 3), "001");
+  assert.equal(indexLabel(2, 3), "03");
+  assert.equal(indexLabel(99, 120), "100");
+  assert.equal(indexLabel(4, 1000), "0005");
+});
+
+test("ruler marks the last section whose top passed the reading line", () => {
+  assert.equal(activeIndex([], 400), -1);
+  assert.equal(activeIndex([500, 900], 400), -1);
+  assert.equal(activeIndex([-300, 200, 900], 400), 1);
+  assert.equal(activeIndex([-900, -500, -100], 400), 2);
+});
+
+test("ruler hands the mark over as sections cross the reading line", () => {
+  assert.equal(nextActive(-1, 0, true, false), 0);
+  assert.equal(nextActive(0, 1, true, false), 1);
+  // Scrolling up: the active section drops below the line, the one before takes over.
+  assert.equal(nextActive(1, 1, false, true), 0);
+  assert.equal(nextActive(0, 0, false, true), -1);
+  // Scrolling down: leaving upward keeps the mark until the next one enters.
+  assert.equal(nextActive(1, 1, false, false), 1);
+  // A section that was not active changes nothing when it leaves.
+  assert.equal(nextActive(2, 0, false, true), 2);
+});
+
+test("ruler tick counts take a number or a selector to count, within 1-24", () => {
+  assert.equal(tickCount(undefined, () => 0), 1);
+  assert.equal(tickCount("3", () => 0), 3);
+  assert.equal(tickCount("li", () => 8), 8);
+  assert.equal(tickCount("li", () => 0), 1);
+  assert.equal(tickCount("li", () => 500), 24);
+});
+
+test("pixel loader is a filled circle that ripples from the middle", () => {
+  const cells = pixelCells(9);
+  const middle = cells.find((c) => c.x === 4 && c.y === 4);
+  assert.equal(middle.d, 0);
+  assert.ok(cells.every((c) => c.d >= 0 && c.d <= 1));
+  // Corners fall outside the circle, edge midpoints stay in.
+  assert.ok(!cells.some((c) => c.x === 0 && c.y === 0));
+  assert.ok(cells.some((c) => c.x === 0 && c.y === 4));
+  assert.equal(new Set(cells.map((c) => `${c.x},${c.y}`)).size, cells.length);
+});
+
+test("every page title scrambles in and pages load the craft module once", () => {
+  for (const file of ["index.html", "about-me.html", "projects.html", "contributions.html", "contact.html", "privacy.html", "spotify.html", "404.html"]) {
+    const html = readFileSync(join(ROOT, file), "utf8");
+    assert.match(html, /<h1[^>]*\bdata-scramble\b/, `${file} title`);
+    assert.equal(html.match(/src="\/?assets\/js\/craft\.js"/g)?.length, 1, `${file} craft.js`);
+  }
+});
+
+test("long pages mark at least two sections for the ruler", () => {
+  for (const file of ["about-me.html", "projects.html", "contributions.html"]) {
+    const html = readFileSync(join(ROOT, file), "utf8");
+    assert.ok((html.match(/\bdata-toc="/g) ?? []).length >= 2, file);
+  }
+});

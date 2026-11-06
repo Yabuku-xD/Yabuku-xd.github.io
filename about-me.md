@@ -1,6 +1,6 @@
 # About Shyamalan Kannan
 
-Software engineer in Seattle. He writes backend code and the plumbing around it: CI pipelines, data jobs, auth flows, and lately tooling for coding agents. Currently a Software Developer Intern at Jevan. On OPT, open to full-time software engineering roles, able to relocate.
+Software engineer in Seattle. He writes backend code and the plumbing around it: CI pipelines, data jobs, auth flows, and lately tooling for coding agents. Those are AI programs that write and edit code. Currently a Software Developer Intern at Jevan. On OPT, open to full-time software engineering roles, able to relocate.
 
 ## Currently
 
@@ -28,7 +28,7 @@ Related pages: [Spotify](https://shyamalankannan.com/spotify.md), [contributions
 ### Software Engineer Intern at Finkey Consultancy · Jul–Oct 2023
 
 - Built a Python and FastAPI data pipeline on AWS Glue, Athena, Redshift, and S3 that combines records from several sources into one retrieval layer.
-- Trained PyTorch anomaly and volatility models for real-time risk classification, wrote the REST endpoints and ETL jobs that serve their results, and added OpenAI API summaries for analysts.
+- Trained PyTorch anomaly and volatility models for real-time risk classification. Wrote the REST endpoints and ETL jobs that serve their results, and added OpenAI API summaries for analysts.
 
 ## Occasionally
 
