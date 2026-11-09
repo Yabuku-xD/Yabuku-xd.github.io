@@ -246,6 +246,7 @@ test("returns normalized Spotify top tracks", async () => {
 
     // Only this site reads the API, so it grants no cross-origin access.
     assert.equal(response.headers.get("Access-Control-Allow-Origin"), null);
+    assert.equal(response.headers.get("X-Robots-Tag"), "noindex");
     assert.deepEqual(body, [
       {
         name: "Track One",
@@ -378,6 +379,7 @@ test("duplicate page URLs redirect to the canonical URL", async () => {
     ["/projects.html", "/projects"],
     ["/contributions.html", "/contributions"],
     ["/spotify.html", "/spotify"],
+    ["/Shyamalan_Kannan_Resume_SDE.pdf", "/resume.pdf"],
   ]) {
     const response = await fetchSite(from);
     assert.equal(response.status, 301, from);

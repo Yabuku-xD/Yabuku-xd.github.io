@@ -23,6 +23,7 @@ const CANONICAL_REDIRECTS = {
   "/projects.html": "/projects",
   "/contributions.html": "/contributions",
   "/spotify.html": "/spotify",
+  "/Shyamalan_Kannan_Resume_SDE.pdf": "/resume.pdf",
 };
 // The 404 page is the body of every miss, never a page of its own.
 const ERROR_PAGES = new Set(["/404", "/404.html"]);
@@ -96,13 +97,17 @@ async function route(request, env) {
   if (url.pathname === CALLBACK_PATH) return handleCallback(request, env, url);
 
   if (url.pathname.startsWith("/api/spotify")) {
+    let res;
     try {
-      return await handleSpotify(request, env);
+      res = await handleSpotify(request, env);
     } catch (error) {
       // Say why instead of crashing (Cloudflare error 1101), so a broken
       // token or a Spotify outage shows up in one request.
-      return Response.json({ error: String(error?.message || error) }, { status: 502 });
+      res = Response.json({ error: String(error?.message || error) }, { status: 502 });
     }
+    // Pages read this JSON; it is not a page of its own for search results.
+    res.headers.set("X-Robots-Tag", "noindex");
+    return res;
   }
 
   if (url.pathname.length > 1 && url.pathname.endsWith("/")) {
