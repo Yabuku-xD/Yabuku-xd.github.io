@@ -501,6 +501,9 @@ test("every indexable page has JSON-LD that names its canonical URL", () => {
     const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)[1];
     const block = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
     assert.ok(block, `${file} has no JSON-LD`);
-    assert.equal(JSON.parse(block[1]).url, canonical, `${file} JSON-LD url differs from its canonical`);
+    const data = JSON.parse(block[1]);
+      assert.equal(data.url, canonical, `${file} JSON-LD url differs from its canonical`);
+    // Google does not follow an @id to another page, so a bare reference has no type.
+    if (data.mainEntity) assert.ok(data.mainEntity["@type"], `${file} mainEntity has no @type`);
   }
 });
